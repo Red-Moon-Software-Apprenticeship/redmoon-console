@@ -1,4 +1,5 @@
 # redmoon-console
+# redmoon-console
 The marketing site, customer relationship management, and apprentice management software for Red Moon
 
 ## Project vision
@@ -20,10 +21,9 @@ Employers should be able to save details about their current needs to their prof
 
 2. serve as a place to manage subscribed employers
 
-Need a way to see all subscribed employers, what kind of help their looking for, any additional requirements (like only a certain geographic area) and what apprentices they've reached out to.
+Need a way to see all subscribed employers, what kind of help they're looking for, any additional requirements (like only a certain geographic area) and what apprentices they've reached out to.
 
 
 3. serve as a place to manage apprentices
 
-Will need to be able to fill out the information on apprentices that employer's will see, manage what small team their on, tracking what Level they're on what training they've done, etc.
-
+Will need to be able to fill out the information on apprentices that employers will see, manage what small team they're on, tracking what Level they're on, what training they've done, etc.
