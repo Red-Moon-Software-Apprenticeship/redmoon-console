@@ -1,0 +1,39 @@
+1. Create Website with these features
+    - Owners' view
+        - Of all subscribed Employers
+            - What they're looking for
+                - geographic location, etc
+                - Apprentices they've contacted
+        - Of Apprentices
+            - complete information for apprentices
+            - manage teams, levels, training, etc
+    - Employer view
+        - account
+            - authentication
+                - Auth0?
+            - login
+            - subscription Fx
+                - Requires-
+                    - Payment processor
+                        -Stripe?
+                - Allows
+                    - view apprentices
+                        - Fx's
+                            - Sort by
+                                - geographic location
+                                - tech stack
+                                - apprentice level >= 2
+                        - reach out to apprentices
+                            - generates template email
+                                -contains employer's contact info
+        - access marketing copy
+
+Questions-
+    What tack stack for-
+        Front End
+        Back End
+        Security concerns?
+        What services do we want to use?
+            - Oath0, Stripe, etc
+    Desired timeline for MVP
+    Assigning tasks to apprentices
