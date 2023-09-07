@@ -27,3 +27,44 @@ Need a way to see all subscribed employers, what kind of help their looking for,
 
 Will need to be able to fill out the information on apprentices that employer's will see, manage what small team their on, tracking what Level they're on what training they've done, etc.
 
+## Getting setup
+
+1. Run:
+
+```bash
+npm install
+```
+
+2. Setting up the database
+
+The redmoon console uses Prisma to manage its Postgresql database. 
+
+First, in /prisma create a .env file, inside copy-paste the following:
+
+```bash
+DATABASE_URL="postgresql://<johndoe>:<randompassword>@localhost:5432/redmoon?schema=public"
+```
+Of course, replace johndoe and randompassword with your Postgresql username and password
+
+In the root folder, run the following:
+
+```bash
+prisma db push  # This will create the initial table
+prisma generate # This will set up the Prisma client, which will allow us to do basic interactions with the database.
+```
+
+For hosting, we want to run migrations so that the live database stays in sync with database changes, Prisma provides the following command
+
+```bash
+prisma migrate dev --name <name>
+
+```
+Where name here is the name of the migration.
+
+4. Running the development server:
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
