@@ -1,0 +1,72 @@
+// schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model User {
+  id              Int           @id @default(autoincrement())
+  type            String    
+  state           String
+  city            String
+  techStack       String
+  bio             String
+  adminCols       Admin[]       @relation("ColsOfAdmin")
+  apprenticeCols  Apprentice[]  @relation("ColsOfApprentice")
+  companyCols     Company[]     @relation("ColsOfCompany")
+}
+
+//The following three tables will need left joins in order to be accessed appropriately.
+model Admin {
+  id        Int       @id @default(autoincrement())
+  userId    Int
+  firstName String
+  lastName  String
+  user      User      @relation("ColsOfAdmin", fields: [userId], references: [id])
+}
+
+model Apprentice {
+  id                     Int            @id @default(autoincrement())
+  userId                 Int
+  firstName              String
+  lastName               String
+  level                  Int
+  apprenticeSubscription Subscription[] @relation("SubscribedToApprentice")
+  user                   User           @relation("ColsOfApprentice", fields: [userId], references: [id])
+
+}
+
+model Company{
+  id                   Int            @id @default(autoincrement())
+  userId               Int
+  address              String
+  employerSubscription Subscription[] @relation("SubscribedEmployer")
+  companyIssue         Issue[]        @relation("IssuedCompany")
+  user                 User           @relation("ColsOfCompany", fields: [userId], references: [id])
+
+}
+
+model Issue {
+  id          Int       @id @default(autoincrement())
+  companyId   Int
+  title       String
+  description String
+  techStack   String[]
+  company     Company   @relation("IssuedCompany", fields: [companyId], references: [id])
+}
+
+model Subscription {
+  id                Int            @id @default(autoincrement())
+  employerId        Int
+  apprenticeId      Int
+  startDate         DateTime
+  endDate           DateTime
+  cost              Float          @map("numeric(10, 2)")
+  employer          Company        @relation("SubscribedEmployer", fields: [employerId], references: [id])
+  apprentice        Apprentice     @relation("SubscribedToApprentice", fields: [apprenticeId], references: [id])
+}
