@@ -46,21 +46,24 @@ Will need to be able to fill out the information on apprentices that employers w
 
 ### For Prospective Apprentices
 
-As you know, contributing to a Redmoon Apprenticeship program is one way of applying to the Redmoon Apprenticeship. This is your chance to show us what your capable of. Here are some ways to contribute:
+As you know, contributing to the Red Moon Apprenticeship program is one way of applying to the Redmoon Apprenticeship. This is your chance to show us what your capable of. Here are some ways to contribute:
 
 1. Tackle an open issue:
 2. Submit your own issue:
-3. Refactor existing code:
+3. Improve an existing feature:
 4. Write tests for an existing feature(s):
 
-### Domain specific
+If you're looking for ideas, please consult the issues tab.
+
+### Domain Specific Guidelines
 
 #### Frontend Design
 
+Please consult existing style sheets and designs before submitting a pull request.
+
 #### User Auth and Payments
 
-Tests are necessary for code that deals with User Authentication and payment processing:
-
+Any features that look to edit any tables responsible for user authentication, or that deal with payments must have tests written for them before being merged onto the project. You can collaborate with other contributors to write tests (one person writes tests, another writes the feature, etc). In some cases, we might suggest a test for you to write.
 
 ## Getting setup
 
