@@ -4,7 +4,7 @@ The marketing site, customer relationship management, and apprentice management 
 # Table of Contents
 
 1. [redmoon-console](#redmoon-console)
-2. [Getting ]
+2. [Contributing to this Project](#contributing)
 3. [Project vision](#project-vision)
    1. [Marketing Site and Employer Management](#1-marketing-site-and-employer-management)
    2. [Subscribed Employers Management](#2-subscribed-employers-management)
@@ -41,6 +41,26 @@ Need a way to see all subscribed employers, what kind of help they're looking fo
 3. serve as a place to manage apprentices
 
 Will need to be able to fill out the information on apprentices that employers will see, manage what small team they're on, tracking what Level they're on, what training they've done, etc.
+
+## Contributing
+
+### For Prospective Apprentices
+
+As you know, contributing to a Redmoon Apprenticeship program is one way of applying to the Redmoon Apprenticeship. This is your chance to show us what your capable of. Here are some ways to contribute:
+
+1. Tackle an open issue:
+2. Submit your own issue:
+3. Refactor existing code:
+4. Write tests for an existing feature(s):
+
+### Domain specific
+
+#### Frontend Design
+
+#### User Auth and Payments
+
+Tests are necessary for code that deals with User Authentication and payment processing:
+
 
 ## Getting setup
 
