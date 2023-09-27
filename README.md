@@ -1,6 +1,20 @@
 # redmoon-console
-# redmoon-console
 The marketing site, customer relationship management, and apprentice management software for Red Moon
+
+# Table of Contents
+
+1. [redmoon-console](#redmoon-console)
+2. [Getting ]
+3. [Project vision](#project-vision)
+   1. [Marketing Site and Employer Management](#1-marketing-site-and-employer-management)
+   2. [Subscribed Employers Management](#2-subscribed-employers-management)
+   3. [Apprentices Management](#3-apprentices-management)
+
+4. [Getting Setup](#getting-setup)
+   1. [Install Dependencies](#1-run-npm-install)
+   2. [Setting Up the Database and Prisma](#2-setting-up-the-database-and-prisma)
+   3. [Running the Development Server](#3-running-the-development-server)
+
 
 ## Project vision
 
@@ -36,9 +50,16 @@ Will need to be able to fill out the information on apprentices that employers w
 npm install
 ```
 
-2. Setting up the database
+2. Setting up the database and Prisma
 
-The redmoon console uses Prisma to manage its Postgresql database. 
+The redmoon console uses Prisma ORM to manage its Postgresql database. 
+
+It is highly recommended that you install Prisma globally:
+
+```bash
+npm install -g prisma
+
+```
 
 First, in /prisma create a .env file, inside copy-paste the following:
 
@@ -50,15 +71,14 @@ Of course, replace johndoe and randompassword with your Postgresql username and 
 In the root folder, run the following:
 
 ```bash
-prisma db push  # This will create the initial table
-prisma generate # This will set up the Prisma client, which will allow us to do basic interactions with the database.
+npx prisma db push  # This will create the initial table
+npx prisma generate # This will set up the Prisma client, which will allow us to do basic interactions with the database.
 ```
 
 For hosting, we want to run migrations so that the live database stays in sync with database changes, Prisma provides the following command
 
 ```bash
-prisma migrate dev --name <name>
-
+npx prisma migrate dev --name <name>
 ```
 Where name here is the name of the migration.
 
