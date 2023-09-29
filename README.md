@@ -111,7 +111,7 @@ Where name here is the name of the migration.
 
 If you want to test features specific to Google and Github OAuth, refer to the below instructions, else feel free to skip this section.
 
-Navigate to "./src/app/api/auth/" and create an .env file. Inside the .env file should look like this:
+Create a .env file in project root. Inside the .env file should look like this:
 
 ```bash
 GOOGLE_CLIENT_ID=<YOUR KEY>

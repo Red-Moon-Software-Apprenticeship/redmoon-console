@@ -44,6 +44,8 @@ const handler = NextAuth({
           }
         }
       }),
+
+      //The code below functions correctly, but the feature doesn't work because of other 
       GoogleProvider({
           clientId: process.env.GOOGLE_CLIENT_ID,
           clientSecret: process.env.GOOGLE_CLIENT_SECRET
