@@ -36,19 +36,18 @@ model Session {
 }
 
 model User {
-// NextAuth boilerplate
-  id             String       @id @default(cuid())
-  name           String?
-  email          String?      @unique
-  emailVerified  DateTime?
-  image          String?
-  createdAt      DateTime     @default(now())
-  updatedAt      DateTime     @updatedAt
-  accounts       Account[]
-  sessions       Session[]
+  // NextAuth boilerplate
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  accounts      Account[]
+  sessions      Session[]
 
-
-//Added for Red Moons purposes 
+  //Added for Red Moons purposes 
   type           String
   state          String
   city           String
@@ -57,7 +56,6 @@ model User {
   adminCols      Admin[]      @relation("ColsOfAdmin")
   apprenticeCols Apprentice[] @relation("ColsOfApprentice")
   companyCols    Company[]    @relation("ColsOfCompany")
-  
 }
 
 model VerificationRequest {
@@ -91,7 +89,7 @@ model Apprentice {
 }
 
 model Company {
-  id                   String            @id @default(cuid())
+  id                   String         @id @default(cuid())
   userId               String
   address              String
   employerSubscription Subscription[] @relation("SubscribedEmployer")
@@ -100,7 +98,7 @@ model Company {
 }
 
 model Issue {
-  id          String      @id @default(cuid())
+  id          String   @id @default(cuid())
   companyId   String
   title       String
   description String
@@ -109,7 +107,7 @@ model Issue {
 }
 
 model Subscription {
-  id           String        @id @default(cuid())
+  id           String     @id @default(cuid())
   employerId   String
   apprenticeId String
   startDate    DateTime
