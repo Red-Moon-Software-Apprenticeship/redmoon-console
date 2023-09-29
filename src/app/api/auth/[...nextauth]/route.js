@@ -1,11 +1,11 @@
-import {prisma } from '@/db'
+import {prisma } from '@/database/db'
 import NextAuth from 'next-auth/next'
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
 
 const handler = NextAuth({
     adapter: PrismaAdapter(prisma),
     providers: [
-      
+
     ],
     callbacks: {
       session: async ({ session, token }) => {

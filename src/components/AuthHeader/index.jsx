@@ -1,11 +1,12 @@
+"use client"
 import React from 'react';
-import {useSession} from 'next-auth';
+import {useSession} from 'next-auth/react';
 import LoggedIn from './LoggedIn'; 
 import LoggedOut from './LoggedOut';
 
-const Login = () => {
-  const {data: session} = useSession()
 
+const AuthHeader = () => {
+  const {data: session} = useSession()
 
   return (
     <div id='' className=''>
@@ -14,4 +15,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default AuthHeader;
