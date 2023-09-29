@@ -15,7 +15,7 @@ model Account {
   userId            String
   type              String
   provider          String
-  providerAccountId String  @map("provider_account_id")
+  providerAccountId String  
   refreshToken      String? @db.Text
   accessToken       String? @db.Text
   expiresAt         Int?

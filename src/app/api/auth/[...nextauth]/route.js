@@ -45,7 +45,8 @@ const handler = NextAuth({
         }
       }),
 
-      //The code below functions correctly, but the feature doesn't work because of other 
+      //The code below functions correctly, but the feature doesn't work because of other non-null constraints on the User's table. 
+      // Logic needs to be provided in order to get this to work, or users can only be allowed to sign in with an account they signed up with.
       GoogleProvider({
           clientId: process.env.GOOGLE_CLIENT_ID,
           clientSecret: process.env.GOOGLE_CLIENT_SECRET
