@@ -8,8 +8,9 @@ import LoggedOut from './LoggedOut';
 const AuthHeader = () => {
   const {data: session} = useSession()
 
+  console.log(session)
   return (
-    <div id='' className=''>
+    <div>
         {(session && session.user) ? <LoggedIn/> : <LoggedOut/>}      
     </div>
   );

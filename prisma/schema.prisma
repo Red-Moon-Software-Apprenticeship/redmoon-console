@@ -8,6 +8,8 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+//For Account, Session, and User, Verification Request tables explanation, see here:  https://next-auth.js.org/v3/adapters/prisma
+
 model Account {
   id                 String    @id @default(cuid())
   userId             String
@@ -37,22 +39,23 @@ model Session {
 
 model User {
   // NextAuth boilerplate
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  accounts      Account[]
-  sessions      Session[]
+  id             String    @id @default(cuid())
+  name           String?
+  email          String?   @unique
+  emailVerified  DateTime?
+  image          String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  accounts       Account[]
+  sessions       Session[]
 
   //Added for Red Moons purposes 
-  type           String
+  hashedPassword String?   //Temporary password, im not sure what alternative we're going with at the end, if we implement auth0 we can get rid of this
+  role           String
   state          String
   city           String
-  techStack      String
-  bio            String
+  techStack      String[]
+  bio            String?
   adminCols      Admin[]      @relation("ColsOfAdmin")
   apprenticeCols Apprentice[] @relation("ColsOfApprentice")
   companyCols    Company[]    @relation("ColsOfCompany")

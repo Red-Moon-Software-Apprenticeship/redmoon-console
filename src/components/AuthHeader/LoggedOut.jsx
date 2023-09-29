@@ -8,11 +8,11 @@ const LoggedOut = () => {
 
     return (
         <>
-            <button className='btn-lng' onClick={() => signIn()}>
+            <button onClick={() => signIn()}>
                 Sign in
             </button>
-            <button className='btn-lng'>
-                <Link href='/auth/new-user'>
+            <button>
+                <Link href='/auth/new'>
                     Sign up
                 </Link>
             </button>

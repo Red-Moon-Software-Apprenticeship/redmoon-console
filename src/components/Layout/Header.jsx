@@ -7,7 +7,7 @@ const Header = () => {
 
   return (
     <header>
-        <h1>Red Moon Temporary Header</h1>
+        <h1>Red Moon Apprenticeship</h1>
         <AuthProvider>
           <AuthHeader/>
         </AuthProvider>
