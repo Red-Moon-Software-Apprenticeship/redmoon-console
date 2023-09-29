@@ -1,7 +1,9 @@
-import {prisma } from '@/database/db';
+import { prisma } from '@/database/db';
 import NextAuth from 'next-auth/next';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google"
+import GitHubProvider from "next-auth/providers/github"
 import { compare } from 'bcrypt';
 
 const handler = NextAuth({
@@ -39,10 +41,18 @@ const handler = NextAuth({
             name: user.name
           }
         }
-        
+      }),
+      GoogleProvider({
+          clientId: process.env.GOOGLE_CLIENT_ID,
+          clientSecret: process.env.GOOGLE_CLIENT_SECRET
+      }),
+      GitHubProvider({
+        clientId: process.env.GITHUB_ID,
+        clientSecret: process.env.GITHUB_SECRET
       })
     ],
     callbacks: {
+      //Retrieves the user.id from the db and sticks it on the session token, used to access user.id on frontend
       session: async ({ session, token }) => {
         if (session?.user) {
           session.user.id = token.sub;

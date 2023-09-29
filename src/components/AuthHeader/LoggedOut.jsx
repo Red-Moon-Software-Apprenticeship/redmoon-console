@@ -5,7 +5,6 @@ import { signIn } from 'next-auth/react';
 
 const LoggedOut = () => {
 
-
     return (
         <>
             <button onClick={() => signIn()}>
