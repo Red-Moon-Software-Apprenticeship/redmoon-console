@@ -1,8 +1,9 @@
 import { createUser } from "@/database/users/createUser";
 import { hash } from "bcrypt";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { NextResponse } from "next/server";
 
-//Handles user signup
+//Handles user signup, uses bcrypt to hash the pw before entry
 const handler = async(req) =>{
 
      const data = await req.json()
@@ -13,10 +14,22 @@ const handler = async(req) =>{
         return NextResponse.json({msg: newUser}, {status: 201})
 
      } catch (error) {
-        return NextResponse.json(
-            {error: "This is a boilerplate error that can be improved on, point is somethings wrong here lol."},
-            {status: 500}
-        )
+
+         let errorMsg = "An unexpected error occured. Please try again.";
+         let statusCode = 500;
+
+         if (error instanceof PrismaClientKnownRequestError){
+
+            errorMsg = 'A user already exists with that email';
+            statusCode = 409;
+          
+         }
+
+
+         return NextResponse.json(
+            {error: errorMsg},
+            {status: statusCode}
+         )
      }
 
 }

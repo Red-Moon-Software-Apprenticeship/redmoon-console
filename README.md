@@ -13,6 +13,7 @@ The marketing site, customer relationship management, and apprentice management 
 4. [Getting Setup](#getting-setup)
    1. [Install Dependencies](#1-run-npm-install)
    2. [Setting Up the Database and Prisma](#2-setting-up-the-database-and-prisma)
+   3. [Setting Up Google and Github OAuth](#3-setting-up-google-and-github-oauth)
    3. [Running the Development Server](#3-running-the-development-server)
 
 
@@ -104,6 +105,26 @@ For hosting, we want to run migrations so that the live database stays in sync w
 npx prisma migrate dev --name <name>
 ```
 Where name here is the name of the migration.
+
+
+3. Setting Up Google and Github OAuth
+
+If you want to test features specific to Google and Github OAuth, refer to the below instructions, else feel free to skip this section.
+
+Navigate to "./src/app/api/auth/" and create an .env file. Inside the .env file should look like this:
+
+```bash
+GOOGLE_CLIENT_ID=<YOUR KEY>
+GOOGLE_CLIENT_SECRET=<YOUR KEY>
+GITHUB_ID=<YOUR KEY>
+GITHUB_SECRET=<YOUR KEY>
+
+```
+
+You will need a Github account and a Google API account in order to get set up, please refer to the following video for a walkthrough:
+
+![Google API key access](https://youtu.be/MrzCV0och5k?si=6fKEDV-rufPRQLTz&t=114)
+![GitHub API key access](https://youtu.be/MrzCV0och5k?si=hhl05aOBKbTYByMA&t=576)
 
 4. Running the development server:
 

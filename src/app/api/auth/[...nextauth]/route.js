@@ -1,4 +1,5 @@
 import { prisma } from '@/database/db';
+import { findUserByEmail } from '@/database/users/findUserByEmail';
 import NextAuth from 'next-auth/next';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -15,26 +16,27 @@ const handler = NextAuth({
           email: {label: "Email", type: "text", placeholder: "lhovee@redmoon.com"},
           password: {label: "Password", type: "password"}
         },
+        //Login logic, returns null if theres a problem with login
         async authorize(credentials){
+          //Guard clause for if credentials are missing
           if (!credentials?.email || !credentials?.password){
             return null
           }
                     
-          const user = await prisma.user.findUnique({ 
-            where:{
-              email: credentials.email
-            }
-          })
-      
+          const user = await findUserByEmail(credentials.email)
+          
+          //Check if user doesn't exist
           if(!user){
             return null
           }
       
+          //Bcrypt method for handling if the passwords are the same or not,
           const isValidPassword = await compare(credentials.password, user.hashedPassword)
           if (!isValidPassword){
             return null
           }
-      
+          
+          //Valid login
           return {
             id: user.id,
             email: user.email,
