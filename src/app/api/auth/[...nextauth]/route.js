@@ -52,6 +52,7 @@ const handler = NextAuth({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET
     }),
+
     GitHubProvider({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET
@@ -60,7 +61,6 @@ const handler = NextAuth({
   callbacks: {
     //Retrieves the user's role from the user table, sticks it on token. The user argument is the same as the one returned in authentication.
     jwt: async ({ token, user }) => {
-      console.log(user)
       if (user) {
         token.role = user.role
       }
