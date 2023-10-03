@@ -14,7 +14,8 @@ The marketing site, customer relationship management, and apprentice management 
    1. [Install Dependencies](#1-run-npm-install)
    2. [Setting Up the Database and Prisma](#2-setting-up-the-database-and-prisma)
    3. [Setting Up Google and Github OAuth](#3-setting-up-google-and-github-oauth)
-   3. [Running the Development Server](#3-running-the-development-server)
+   4. [Seeding data](#4-seeding-data)
+   5. [Running the Development Server](#3-running-the-development-server)
 
 
 ## Project vision
@@ -126,7 +127,15 @@ You will need a Github account and a Google API account in order to get set up, 
 ![Google API key access](https://youtu.be/MrzCV0och5k?si=6fKEDV-rufPRQLTz&t=114)
 ![GitHub API key access](https://youtu.be/MrzCV0och5k?si=hhl05aOBKbTYByMA&t=576)
 
-4. Running the development server:
+4. Seeding data:
+
+```bash
+npx prisma db seed
+```
+
+As of right now, only seeds three users. Feel free to submit a PR seeding more users.
+
+5. Running the development server:
 
 ```bash
 npm run dev
