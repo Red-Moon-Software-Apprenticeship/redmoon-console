@@ -57,4 +57,5 @@ main(users)
     console.error(e)
     await prisma.$disconnect()
     process.exit(1)
-  })
+  }) 
+  
