@@ -6,7 +6,6 @@ import AuthProvider from '../AuthProvider';
 
 const NavBar = () => {
 
-
   return (
     <nav>
       <ul>
@@ -25,11 +24,7 @@ const NavBar = () => {
             Our Apprentices
           </Link>
         </li>
-        <li>
-          <Link href='/'>
-            Home
-          </Link>
-        </li>
+
         <AuthProvider>
           <RoleLockedNav />
         </AuthProvider>

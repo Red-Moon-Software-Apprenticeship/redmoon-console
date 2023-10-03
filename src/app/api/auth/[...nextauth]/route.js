@@ -7,7 +7,8 @@ import GoogleProvider from "next-auth/providers/google"
 import GitHubProvider from "next-auth/providers/github"
 import { compare } from 'bcrypt';
 
-const handler = NextAuth({
+export const authOptions = {
+  secret : process.env.NEXTAUTH_SECRET,
   adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
@@ -81,7 +82,9 @@ const handler = NextAuth({
     strategy: 'jwt',
   },
 
-});
+}
+
+const handler = NextAuth(authOptions);
 
 
 export { handler as GET, handler as POST }
