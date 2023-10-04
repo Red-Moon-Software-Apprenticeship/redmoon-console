@@ -6,7 +6,9 @@ import Link from 'next/link';
 //Have an apprentice portal that specifically queries all of the apprentices
 //Then have an form for adding a new apprentice
 const AdminPanel = async () => {
+
     await secureAdminServerRoute()
+
     return (
         <Layout>
             <section>
@@ -34,7 +36,7 @@ const AdminPanel = async () => {
 
             </section>
         </Layout>
-    );
+     );
 };
 
 export default AdminPanel;
