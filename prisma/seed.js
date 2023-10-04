@@ -1,8 +1,19 @@
-const { createUser, createUserAndRole } = require('@/database/users/createUser');
 const { PrismaClient } = require('@prisma/client');
 const {hash } = require('bcrypt');
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
+const {generateMockApprs} = require('./fakeApprentice')
 
+
+
+const createUserAndRole = (userData, roleData, relation) => {
+
+  const newData = {...userData};
+  newData[relation] = {create: roleData};
+
+  return prisma.user.create({
+      data: newData
+  })
+}
 
 const users = [{
     userData: {name: "Luke Hovee",
@@ -49,11 +60,13 @@ const users = [{
     roleData:{
       address: "102 Market St 94112"
     }
-  }
+  },
+  ...generateMockApprs(30)
 ]
 
 
 async function main(users){
+ 
 
     for(let user of users){
         const {userData, roleData}  = user;
