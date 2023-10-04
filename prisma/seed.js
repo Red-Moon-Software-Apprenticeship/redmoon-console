@@ -1,36 +1,54 @@
+const { createUser, createUserAndRole } = require('@/database/users/createUser');
 const { PrismaClient } = require('@prisma/client');
 const {hash } = require('bcrypt');
 const prisma = new PrismaClient()
 
 
 const users = [{
-    name: "Luke Hovee",
+    userData: {name: "Luke Hovee",
     email: "lhovee@redmoon.com",
     hashedPassword: 'Password123',
     role: "admin",
     state: "California",
     city: "Los Angeles",
     techStack: ["JavaScript", "React", "Node.js"],
-    bio: "I am the admin of this platform.",
+    bio: "I am the admin of this platform.",},
+    roleData:{
+       firstName: "Luke",
+       lastName: "Hovee"
+    }
   },
   {
-    name: "Ronald McDonald",
-    email: "apprentice@example.com",
-    hashedPassword: 'Password123',
-    role: "apprentice",
-    state: "New York",
-    city: "New York City",
-    techStack: ["Python", "Django", "React"],
-    bio: "I am an aspiring developer looking for opportunities.",
+    userData:{
+
+      name: "Ronald McDonald",
+      email: "apprentice@example.com",
+      hashedPassword: 'Password123',
+      role: "apprentice",
+      state: "New York",
+      city: "New York City",
+      techStack: ["Python", "Django", "React"],
+      bio: "I am an aspiring developer looking for opportunities.",
+    },
+    roleData: {
+      firstName: 'Ronald',
+      lastName: 'McDonald',
+      level: 1
+    }
   },{
-    name: "Horrible Stack Company",
-    email: "crapstack@painfulcoding.com",
-    hashedPassword: 'Password123',
-    role: "company",
-    state: "Texas",
-    city: "Austin",
-    techStack: ["Java", "Spring Boot", "Angular"],
-    bio: "We are a tech company looking for talent.",
+    userData: {
+      name: "Horrible Stack Company",
+      email: "crapstack@painfulcoding.com",
+      hashedPassword: 'Password123',
+      role: "company",
+      state: "Texas",
+      city: "Austin",
+      techStack: ["Java", "Spring Boot", "Angular"],
+      bio: "We are a tech company looking for talent.",
+    },
+    roleData:{
+      address: "102 Market St 94112"
+    }
   }
 ]
 
@@ -38,15 +56,15 @@ const users = [{
 async function main(users){
 
     for(let user of users){
-        user.hashedPassword = await hash(user.hashedPassword, 11);
-        await prisma.user.upsert({
-                where: {email: user.email},
-                update: {},
-                create: {...user}
-            })
-    }
+        const {userData, roleData}  = user;
+        userData.hashedPassword = await hash(userData.hashedPassword, 11);
+        const role = userData.role;
+        await createUserAndRole(userData, roleData, role);
 
+      }
 }
+
+
 
 main(users)
   .then(async () => {
