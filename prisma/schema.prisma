@@ -60,9 +60,9 @@ model User {
   city           String
   techStack      String[]
   bio            String?
-  adminCols      Admin[]      @relation("ColsOfAdmin")
-  apprenticeCols Apprentice[] @relation("ColsOfApprentice")
-  companyCols    Company[]    @relation("ColsOfCompany")
+  admin          Admin[]      @relation("ColsOfAdmin")
+  apprentice     Apprentice[] @relation("ColsOfApprentice")
+  company        Company[]    @relation("ColsOfCompany")
 }
 
 model VerificationRequest {
@@ -79,7 +79,7 @@ model VerificationRequest {
 //The following three tables will need left joins in order to be accessed appropriately.
 model Admin {
   id        String @id @default(cuid())
-  userId    String
+  userId    String @unique
   firstName String
   lastName  String
   user      User   @relation("ColsOfAdmin", fields: [userId], references: [id])
@@ -87,7 +87,7 @@ model Admin {
 
 model Apprentice {
   id                     String         @id @default(cuid())
-  userId                 String
+  userId                 String         @unique
   firstName              String
   lastName               String
   level                  Int
@@ -97,7 +97,7 @@ model Apprentice {
 
 model Company {
   id                   String         @id @default(cuid())
-  userId               String
+  userId               String         @unique
   address              String
   employerSubscription Subscription[] @relation("SubscribedEmployer")
   companyIssue         Issue[]        @relation("IssuedCompany")
