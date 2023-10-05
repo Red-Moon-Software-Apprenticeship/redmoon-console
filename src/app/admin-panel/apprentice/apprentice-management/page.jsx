@@ -1,20 +1,25 @@
 import Layout from '@/components/Layout/Layout';
-import { getApprentices } from '@/database/users/findUsers';
+import {prisma} from '@/database/db'
 import { secureAdminServerRoute } from '@/lib/secureAdminRoute';
 import React from 'react';
 import ApprConsole from './ApprConsole';
+import { getApprsProfile } from '@/database/users/findUsers';
 
 const ApprenticeManagementConsole = async() => {
   await secureAdminServerRoute()
-  const apprs = await getApprentices()
-
   return (
     <Layout>
-
       <h2>Apprentices</h2>
       <div className='flex-center'>
-        
-          <ApprConsole apprs={apprs}/>
+        <table>
+              <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Level</th>
+              </tr>
+          <ApprConsole/>
+          </table>
+
       </div>
         
     </Layout>

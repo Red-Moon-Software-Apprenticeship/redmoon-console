@@ -1,40 +1,48 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DeleteApprModal from './DeleteApprModal';
+import EditApprModal from './EditApprModal';
 
-const ApprConsole = ({ apprs }) => {
-    const [delApprModal, setDelApprModal] = useState(false)
-    const [editApprModal, setEditApprModal] = useState(false)
-    const [currAppr, setCurrAppr] = useState({})
+
+const ApprConsole = () => {
+    const [apprs, setApprs] = useState([]);
+    const [delModal, setDelModal] = useState(false);
+    const [editModal, setEditModal] = useState(false);
+    const [currAppr, setCurrAppr] = useState({});
+    const apprsState = {apprs, setApprs};
+
+    useEffect(() => {
+      fetch('/api/apprentice')
+        .then(response => response.json())
+        .then(data => setApprs(data))
+        .catch(error => console.error('Error fetching apprentices:', error));
+
+    }, []);
+
 
     const handleDelete = (e, appr) => {
         e.stopPropagation()
-
-        setDelApprModal(!delApprModal)
+        setDelModal(prev => !prev)
         setCurrAppr(appr)
     }
 
     const handleEdit = (e, appr) => {
         e.stopPropagation()
-        setEditApprModal(!editApprModal)
+        setEditModal(prev => !prev)
         setCurrAppr(appr)
     }
 
     const handleEmailClick = (e, email) =>{
         e.stopPropagation()
 
-        console.log(email)
+    }
 
+    const toggleModal = ( getter, setter) => {
+        setter(!getter)
+        setCurrAppr('')
     }
 
     return (<>
-
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Level</th>
-            </tr>
             {apprs.map((appr, idx) =>
                 <tr key={idx}>
                     <td className='flex-left'>{appr.firstName} {appr.lastName}</td>
@@ -54,10 +62,9 @@ const ApprConsole = ({ apprs }) => {
                     </td>
                 </tr>
             )}
-        </table>
 
-        {delApprModal && <DeleteApprModal />}
-        {editApprModal && <EditApprModal />}
+        {delModal && <DeleteApprModal appr={currAppr} toggleModal={() => toggleModal(delModal, setDelModal)} apprsState={apprsState}/>}
+        {editModal && <EditApprModal appr={currAppr} toggleModal={() => toggleModal(editModal, setEditModal)} apprsState={apprsState} />}
     </>
     );
 };
