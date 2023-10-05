@@ -21,6 +21,10 @@
     justify-content: left;
 }
 
+.flex-right{
+    justify-content: flex-end;
+}
+
 .flex-row{
     flex-direction: row;
 }

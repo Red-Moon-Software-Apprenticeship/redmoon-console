@@ -1,14 +1,14 @@
 "use client"
-
+import styles from './modallayout.module.css'
 import React from 'react';
 
-const ModalLayout = ({children}) => {
-  
-  return (
-        <div id='modal-overlay'>
+const ModalLayout = ({children, toggleModal}) => {
+    return (
+
+        <div id={styles.overlay} className='flex-center' onClick={toggleModal}>
             {children}
-        </div>
-    );
-};
+        </div>    
+    )
+}
 
 export default ModalLayout;

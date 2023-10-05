@@ -1,23 +1,29 @@
 import { prisma } from "@/database/db";
 
-//Abstracted away the main query, leaving only the select field to be filled out
-const getUsersLeftJoin = async (model, selectOptions) => (
-    await model.findMany({
-        include: {
+//Abstracted away the main query, leaving only the select field to be filled ou
+
+
+export const getApprsProfile  = async() => (
+    prisma.apprentice.findMany(
+        {select: {
+            userId: true,
+            firstName: true,
+            lastName: true,
+            level: true,
             user:{
-                select: selectOptions
+              select:{
+                email: true,
+                image: true,
+              }
             }
-        }
-    })
+        }}
+      )
 )
 
-export const getApprentices = async (selectOptions) => (
-    await getUsersLeftJoin(prisma.apprentice, selectOptions)
-)
 
-export const getAdmins = async (selectOptions) => (
-    await getUsersLeftJoin(prisma.admin, selectOptions)
+export const getAdmins = async (userQuery) => (
+    await getUsersLeftJoin(prisma.admin, userQuery)
 )
-export const getCompanies = async (selectOptions) => (
-    await getUsersLeftJoin(prisma.company, selectOptions)
+export const getCompanies = async (userQuery) => (
+    await getUsersLeftJoin(prisma.company, userQuery)
 )

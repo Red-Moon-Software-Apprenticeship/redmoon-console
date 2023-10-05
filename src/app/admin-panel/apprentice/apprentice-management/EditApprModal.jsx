@@ -37,10 +37,7 @@ const EditApprModal = ({appr, toggleModal, apprsState}) => {
                 </div>
                 <div className='flex-center flex-col'>
                     <h2>Edit Apprentice Info</h2>
-                    <form onSubmit={e => {
-                        e.preventDefault();
-                        // Gather data from the form and call handleEdit(editedData)
-                    }}>
+                    <form onSubmit={e => handleEdit(e)}>
                         <div className="input-group">
                             <label>First Name:</label>
                             <input type="text" defaultValue={appr.firstName} name="firstName" required />

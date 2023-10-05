@@ -6,12 +6,16 @@ import './apprmanagement.css'
 const DeleteApprModal = ({ appr, toggleModal, apprsState }) => {
     const {apprs, setApprs} = apprsState
     const handleDelete = async () => {
+
         try {
-            const response = await fetch(`/api/deleteApprentice/${appr.userId}`, {
-                method: 'DELETE',
+            const response = await fetch(`/api/user/`, {
+                headers:{"Content-Type": "application/json"},
+                method: "DELETE",
+                body: JSON.stringify({
+                    userId: appr.userId
+                })
             });
             if (response.ok) {
-                // Remove the deleted apprentice from the apprs state
                 const updatedApprs = apprs.filter(a => a.userId !== appr.userId);
                 setApprs(updatedApprs);
                 
