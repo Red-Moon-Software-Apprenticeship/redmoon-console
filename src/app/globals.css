@@ -1,4 +1,44 @@
-:root {
+.flex-center,
+.flex-left,
+.flex-center-right,
+.se,
+.sb,
+.flex-row,
+.flex-col{
+    display: flex;
+}
 
+.flex-center{
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-center-hori{
+    justify-content: center;
+}
+
+.flex-left{
+    justify-content: left;
+}
+
+.flex-row{
+    flex-direction: row;
+}
+
+.flex-col{
+    flex-direction: column;
+}
+
+.cursor-events:hover{
+    cursor: pointer;
+}
+
+
+.padding-inline-default{
+    padding-inline: 2.75rem; 
+}
+
+.padding-block-default{
+    padding-block: 2.75rem;
 }
 

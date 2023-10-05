@@ -8,7 +8,7 @@ import Link from 'next/link';
 const AdminPanel = async () => {
 
     await secureAdminServerRoute()
-
+     
     return (
         <Layout>
             <section>

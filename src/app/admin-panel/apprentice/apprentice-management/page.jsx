@@ -1,13 +1,22 @@
 import Layout from '@/components/Layout/Layout';
+import { getApprentices } from '@/database/users/findUsers';
+import { secureAdminServerRoute } from '@/lib/secureAdminRoute';
 import React from 'react';
+import ApprConsole from './ApprConsole';
 
-const ApprenticeManagementConsole = () => {
-
+const ApprenticeManagementConsole = async() => {
+  await secureAdminServerRoute()
+  const apprs = await getApprentices()
 
   return (
     <Layout>
-        Heres where you can manage apprentices
 
+      <h2>Apprentices</h2>
+      <div className='flex-center'>
+        
+          <ApprConsole apprs={apprs}/>
+      </div>
+        
     </Layout>
   );
 };

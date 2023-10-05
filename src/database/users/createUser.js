@@ -23,7 +23,6 @@ export const createUserAndRole = (userData, roleData, relation) => {
     })
 }
 
-//For use in seeding, do not use in prod.
 export const createAdmin = (userData, roleData) => {
 
     return prisma.user.create({
