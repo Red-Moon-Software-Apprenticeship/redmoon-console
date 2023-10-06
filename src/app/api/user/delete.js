@@ -12,7 +12,6 @@ const DELETE = async(req) => {
     }
 
     try{
-        
         const data = await req.json()
         const {userId} = data;
         const deletedUser = await deleteUser(userId);

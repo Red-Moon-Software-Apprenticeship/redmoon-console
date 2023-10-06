@@ -4,12 +4,14 @@ import { secureAdminServerRoute } from '@/lib/secureAdminRoute';
 import React from 'react';
 import ApprConsole from './ApprConsole';
 import { getApprsProfile } from '@/database/users/findUsers';
+import AddApprBtn from './AddApprBtn';
 
 const ApprenticeManagementConsole = async() => {
   await secureAdminServerRoute()
   return (
     <Layout>
       <h2>Apprentices</h2>
+      <AddApprBtn/>
       <div className='flex-center'>
         <table>
               <tr>

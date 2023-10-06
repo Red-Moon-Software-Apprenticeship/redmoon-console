@@ -30,13 +30,17 @@ const DeleteApprModal = ({ appr, toggleModal, apprsState }) => {
         }
     };
 
+    const handleOnClick = e => {
+        e.stopPropagation()
+        toggleModal()
+    }
 
 
     return (
         <ModalLayout toggleModal={toggleModal}>
-            <dialog className='modal-body' open>
+            <dialog className='modal-body' open onClick={e => e.stopPropagation()}>
                 <div className='flex-right'>
-                    <button onClick={toggleModal}>Close</button>
+                    <button onClick={handleOnClick}>Close</button>
                 </div>
                 <div className='flex-center flex-col'>
                     <h2>Confirm Removal</h2>
@@ -47,7 +51,7 @@ const DeleteApprModal = ({ appr, toggleModal, apprsState }) => {
                         <button onClick={handleDelete}>
                             Yes, Remove    
                         </button>
-                        <button onClick={toggleModal}>
+                        <button onClick={handleOnClick}>
                             No, Cancel    
                         </button>
                     </div>
