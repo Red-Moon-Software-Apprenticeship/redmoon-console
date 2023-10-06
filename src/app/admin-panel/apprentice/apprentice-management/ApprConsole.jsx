@@ -10,7 +10,7 @@ const ApprConsole = () => {
     const [editModal, setEditModal] = useState(false);
     const [currAppr, setCurrAppr] = useState({});
     const apprsState = {apprs, setApprs};
-
+ 
     useEffect(() => {
       fetch('/api/apprentice')
         .then(response => response.json())

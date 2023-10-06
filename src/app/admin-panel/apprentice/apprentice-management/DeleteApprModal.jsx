@@ -2,27 +2,25 @@
 import ModalLayout from '@/components/ModalLayout/ModalLayout';
 import React from 'react';
 import './apprmanagement.css'
+import { createReq } from '@/lib/createReqObj';
 
 const DeleteApprModal = ({ appr, toggleModal, apprsState }) => {
     const {apprs, setApprs} = apprsState
     const handleDelete = async () => {
 
+        const userId = appr.userId;
+
         try {
-            const response = await fetch(`/api/user/`, {
-                headers:{"Content-Type": "application/json"},
-                method: "DELETE",
-                body: JSON.stringify({
-                    userId: appr.userId
-                })
-            });
+            const response = await fetch(`/api/user/`, createReq('DELETE', {userId: '69420'}));
             if (response.ok) {
-                const updatedApprs = apprs.filter(a => a.userId !== appr.userId);
+                const updatedApprs = apprs.filter(a => a.userId !== userId);
                 setApprs(updatedApprs);
-                
                 alert('Apprentice removed successfully!');
                 toggleModal();
+
             } else {
                 alert('Error removing apprentice.');
+                
             }
         } catch (error) {
             console.error('Error:', error);

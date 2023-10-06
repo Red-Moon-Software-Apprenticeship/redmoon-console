@@ -6,6 +6,8 @@ import { createReq } from '@/lib/createReqObj';
 const EditApprModal = ({ appr, toggleModal, apprsState }) => {
     const { apprs, setApprs } = apprsState;
     const [isEditable, setIsEditable] = useState(false);
+
+
     const handleEdit = async (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
@@ -17,10 +19,10 @@ const EditApprModal = ({ appr, toggleModal, apprsState }) => {
         };
 
         try {
-            const response = await fetch(`/api/editApprentice/${appr.userId}`, createReq('PATCH', editedData));
+            const response = await fetch(`/api/apprentice/`, createReq('PATCH', editedData));
             if (response.ok) {
-                const updatedAppr = await response.json();
-                const updatedApprs = apprs.map(a => a.userId === appr.userId ? updatedAppr : a);
+                const {updatedAppr} = await response.json();
+                const updatedApprs = apprs.map(a => a.userId === appr.userId ? {...a, ...updatedAppr} : a);
                 setApprs(updatedApprs);
 
                 alert('Apprentice updated successfully!');
