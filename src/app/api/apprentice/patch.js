@@ -9,7 +9,7 @@ const handler = async(req) => {
     const sessionUser = session?.user
     if ( !session || 
          !sessionUser || 
-         (sessionUser.role !== 'admin' && !sessionUser.id !== req.userId ) ||
+         (sessionUser.role !== 'admin' && sessionUser.id !== req.userId ) ||
          sessionUser.role !== 'admin'
          ){
 
