@@ -1,18 +1,21 @@
 import Layout from '@/components/Layout/Layout';
-import {prisma} from '@/database/db'
 import { secureAdminServerRoute } from '@/lib/secureAdminRoute';
 import React from 'react';
 import ApprConsole from './ApprConsole';
-import { getApprsProfile } from '@/database/users/findUsers';
-import AddApprBtn from './AddApprBtn';
+import Link from 'next/link';
 
 const ApprenticeManagementConsole = async() => {
   await secureAdminServerRoute()
   return (
     <Layout>
       <h2>Apprentices</h2>
-      <AddApprBtn/>
-      <div className='flex-center'>
+      <button>
+        <Link href='/admin-panel/apprentice/new'>
+          Add an Apprentice
+        </Link>
+      </button>
+ 
+       <div className='flex-center'>
         <table>
               <tr>
                   <th>Name</th>

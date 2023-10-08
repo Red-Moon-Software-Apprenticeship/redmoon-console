@@ -16,7 +16,7 @@ const ApprConsole = () => {
         .then(response => response.json())
         .then(data => setApprs(data))
         .catch(error => console.error('Error fetching apprentices:', error));
-
+    
     }, []);
 
 

@@ -1,13 +1,18 @@
+"use client"
+
 import { createReq } from '@/lib/createReqObj';
 import React, { useState } from 'react';
+import ApprSignUp from './ApprSignUp';
+import CompanySignUp from './CompanySignUp';
 
-const SignupForm = ({ src = '' }) => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [role, setRole] = useState('');
+//Source is being used to track if this comes from the admin page or not, if it is, it defaults to apprentice options
 
-    const [state, setState] = useState('');
-    const [city, setCity] = useState('');
+//Create specific child components that display options based on who is coming through: if its a company, show the items relevent to a company, appr, show appr.  
+const SignupForm = ({src = '', defaultRole ='apprentice'}) => {
+    
+    const [role, setRole] = useState(defaultRole);
+
+    
 
     //Specifc to apprentice applications
     const [firstName, setFirstName] = useState('');
@@ -21,100 +26,33 @@ const SignupForm = ({ src = '' }) => {
     const [techStack, setTechStack] = useState([]);
     const [bio, setBio] = useState('');
 
+    const handleSwapForm = e =>{
+        e.stopPropagation()
+        setRole(e.target.innerText.toLowerCase())
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    }
 
-        const payload = {
-
-            email,
-            password,
-            role,
-            state,
-            city,
-            techStack,
-            bio,
-            firstName,
-            lastName,
-        };
-
-        try {
-            const response = await fetch('/api/user', createReq('POST', payload));
-            const data = await response.json();
-
-            if (response.ok) {
-                console.log(data);
-                // Handle success - maybe redirect or show a success message
-            } else {
-                console.error(data); // Display the error message from the server
-            }
-        } catch (error) {
-            console.error('There was an error:', error);
-        }
-    };
 
     return (
-        <>
-            <form onSubmit={handleSubmit}>
-                {src === 'admin' || role === 'apprentice' ?
-                    <>
-                        <div>
-                            <label>First Name:</label>
-                            <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-                        </div>
-                        <div>
-                            <label>Last Name:</label>
-                            <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} />
-                        </div>
-                    </>
-                    :
+        <>  
+            { 
+                <>
                     <div>
-                        <label>Your Company's name: </label>
-                        <input type="text" value={name} onChange={e => setName(e.target.value)} />
+                        <h3>
+                            You are a:
+                        </h3>
+                        <div>
+                            <button id='apprentice' onClick={handleSwapForm}>Apprentice</button>
+                            <button id='company' onClick={handleSwapForm}>Company</button>
+                        </div>
                     </div>
-
-                }
-
-                <div>
-                    <label>Email:</label>
-                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-                </div>
-
-                <div>
-                    <label>Password:</label>
-                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                </div>
-
-                <div>
-                    <label>Role:</label>
-                    <input type="text" value={role} onChange={(e) => setRole(e.target.value)} />
-                </div>
-
-                <div>
-                    <label>State:</label>
-                    <input type="text" value={state} onChange={(e) => setState(e.target.value)} />
-                </div>
-
-                <div>
-                    <label>City:</label>
-                    <input type="text" value={city} onChange={(e) => setCity(e.target.value)} />
-                </div>
-
-                <div>
-                    <label>Tech Stack (comma-separated):</label>
-                    <input type="text" value={techStack.join(', ')} onChange={(e) => setTechStack(e.target.value.split(',').map(item => item.trim()))} />
-                </div>
-
-                <div>
-                    <label>Bio:</label>
-                    <textarea value={bio} onChange={(e) => setBio(e.target.value)}></textarea>
-                </div>
-
-                <div>
-                    <button type="submit">Sign Up</button>
-                </div>
-            </form>
-
+                
+               
+                </> }
+            {
+                role === 'apprentice' ? <ApprSignUp/> : <CompanySignUp/>
+            }
+            
         </>
     );
 }

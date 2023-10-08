@@ -58,7 +58,7 @@ model User {
   role           String
   state          String
   city           String
-  techStack      String[]
+  techStack      String[]     @default([])
   bio            String?
   admin          Admin[]      @relation("ColsOfAdmin")
   apprentice     Apprentice[] @relation("ColsOfApprentice")

@@ -2,10 +2,8 @@ import { getApprsProfile } from "@/database/users/findUsers";
 import { NextResponse } from "next/server";
 
 const GET = async() => {
-    
     try{
         const apprs = await getApprsProfile();
-
         return NextResponse.json(apprs, {status: 200})
     }
 
