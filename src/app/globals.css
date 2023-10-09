@@ -1,7 +1,7 @@
 .flex-center,
 .flex-left,
 .flex-center-right,
-.se,
+.flex-evenly,
 .sb,
 .flex-row,
 .flex-col{
@@ -23,6 +23,11 @@
 
 .flex-right{
     justify-content: flex-end;
+}
+
+.flex-evenly{
+    justify-content: space-evenly;
+    align-items: center;
 }
 
 .flex-row{

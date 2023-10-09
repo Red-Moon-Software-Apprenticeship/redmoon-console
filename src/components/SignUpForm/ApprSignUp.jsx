@@ -1,21 +1,23 @@
 "use server"
 import React from 'react';
+import './signupform.css'
 import SignUpDefaults from './SignUpDefaults';
 
-const createAppr = async(data) => {
+export const createAppr = async(data) => {
     "use server"
-
-    console.log(data)
-
-
-
+    const {firstName, lastName, email, password, state, city} = Object.fromEntries(data)
+    
 } 
 
 const ApprSignUp = ({createAppr}) => {
 
 
   return (
-    <form action={createAppr}>
+    <form 
+        id='sign-up-form'
+        action={createAppr}
+      >
+
         <div>
             <label>First Name: </label>
             <input type="text" name='firstName'/>

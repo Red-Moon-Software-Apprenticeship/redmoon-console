@@ -1,0 +1,9 @@
+#sign-up-form{
+    width: 70%;
+
+}
+
+#sign-up-form div{
+    display: flex;
+    justify-content: space-between;
+}

@@ -14,6 +14,10 @@ const SignUpDefaults = () => {
                 <label>Password:</label>
                 <input type="password" name="password" />
             </div>
+            <div>
+                <label>Confirm Password:</label>
+                <input type="password" name="password" />
+            </div>
 
             <div>
                 <label>State:</label>

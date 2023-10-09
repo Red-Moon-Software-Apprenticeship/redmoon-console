@@ -19,11 +19,6 @@ const AdminPanel = async () => {
                             Apprentice management portal
                         </Link>
                     </li>
-                    <li>
-                        <Link href='/admin-panel/apprentice/add-apprentice'>
-                            Manually add a new apprentice
-                        </Link>
-                    </li>
                 </ul>
             </section>
             {/* show partners */}
