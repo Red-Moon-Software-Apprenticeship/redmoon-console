@@ -2,13 +2,13 @@ import {useState, useEffect} from 'react';
 
 
 
-export const useErrors = (...depedencies) =>{
+export const useErrors = () =>{
     const [errors, setErrors] = useState([])
 
 
-    const clearErrorsEffect = useEffect(()=> { 
+    const clearErrorsEffect = (...depedencies)=> (useEffect(()=> { 
         setErrors([])
-    }, depedencies)
+    }, depedencies))
 
    return [errors, setErrors, clearErrorsEffect]
 }

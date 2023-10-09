@@ -11,13 +11,13 @@ export const createUser = (userData) => (
 
 export const createUserAndRole = (userData, roleData, relation) => {
     //Nope, no spoofing allowed
-    if (relation !== 'apprentice' || relation !== 'company'){
+    if (!relation || (relation !== 'apprentice' && relation !== 'company')){
         return null
     }
 
     const newData = {...userData};
-    newData[role] = {create: roleData};
-
+    newData[relation] = {create: roleData};
+    console.log(newData)
     return prisma.user.create({
         data: newData
     })

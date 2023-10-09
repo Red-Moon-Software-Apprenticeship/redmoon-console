@@ -1,7 +1,8 @@
-import React from 'react';
-
+'use client'
+import React, {useState} from 'react';
 const SignUpDefaults = () => {
-
+    const [password, setPassword] = useState('')
+    const [confirm, setConfirm] = useState('')
 
     return (
         <>
@@ -12,11 +13,21 @@ const SignUpDefaults = () => {
 
             <div>
                 <label>Password:</label>
-                <input type="password" name="password" />
+                <input
+                 type="password"
+                 name="password"
+                 value={password}
+                 onChange={e => setPassword(e.target.value)}/>
             </div>
+
             <div>
                 <label>Confirm Password:</label>
-                <input type="password" name="password" />
+                <input 
+                    type="password"
+                    name="confirmedPassword"
+                    value={confirm}
+                    onChange={e => setConfirm(e.target.value)}    
+                />
             </div>
 
             <div>

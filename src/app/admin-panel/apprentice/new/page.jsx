@@ -1,6 +1,6 @@
 import React from 'react';
 import Layout from '@/components/Layout/Layout';
-import ApprSignUp, {createAppr} from '@/components/SignUpForm/ApprSignUp';
+import ApprSignUp from '@/components/SignUpForm/ApprSignUp';
 import Link from 'next/link';
 
 const NewAppr = () => {
@@ -15,7 +15,7 @@ const NewAppr = () => {
             </Link>
           </button>
         </div>
-        <ApprSignUp createAppr={createAppr}/>
+        <ApprSignUp/>
     </Layout>
     );
 };
