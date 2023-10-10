@@ -1,8 +1,8 @@
 'use client'
-import React, {useState} from 'react';
-const SignUpDefaults = () => {
-    const [password, setPassword] = useState('')
-    const [confirm, setConfirm] = useState('')
+import React from 'react';
+
+const SignUpDefaults = ({childState}) => {
+    const {password, setPassword, confirm, setConfirm} = childState;
 
     return (
         <>

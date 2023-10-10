@@ -2,6 +2,8 @@
 import { hash } from "bcrypt"
 import { validateNewAppr } from "./handleSignUpErrors"
 import { createUserAndRole } from "@/database/users/createUser"
+
+
 export const createAppr = async (formData) => {
     const data = Object.fromEntries(formData);
     const errors = await validateNewAppr(data)
@@ -28,8 +30,11 @@ export const createAppr = async (formData) => {
             lastName,
             level: 1
         }
-    
-    const newAppr = await createUserAndRole(userData, roleData, role)
-    return newAppr;
+    try {
+        const newAppr = await createUserAndRole(userData, roleData, role)
+        return newAppr;
+    } catch (error) {
+        return {errors: [error.message]}
+    }
 
 } 

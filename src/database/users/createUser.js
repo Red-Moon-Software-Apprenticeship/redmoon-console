@@ -17,7 +17,6 @@ export const createUserAndRole = (userData, roleData, relation) => {
 
     const newData = {...userData};
     newData[relation] = {create: roleData};
-    console.log(newData)
     return prisma.user.create({
         data: newData
     })
