@@ -8,65 +8,118 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+//For Account, Session, and User, Verification Request tables explanation, see here:  https://next-auth.js.org/v3/adapters/prisma
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String  
+  refreshToken      String? @db.Text
+  accessToken       String? @db.Text
+  expiresAt         Int?
+  tokenType         String?
+  scope             String?
+  idToken           String? @db.Text
+  sessionState      String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  userId       String
+  expires      DateTime
+  sessionToken String   @unique
+  accessToken  String   @unique
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  user         User     @relation(fields: [userId], references: [id])
+}
 
 model User {
-  id              Int           @id @default(autoincrement())
-  type            String    
-  state           String
-  city            String
-  techStack       String
-  bio             String
-  adminCols       Admin[]       @relation("ColsOfAdmin")
-  apprenticeCols  Apprentice[]  @relation("ColsOfApprentice")
-  companyCols     Company[]     @relation("ColsOfCompany")
+  // NextAuth boilerplate
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  accounts      Account[]
+  sessions      Session[]
+
+  //Added for Red Moons purposes 
+  hashedPassword String? //Temporary password, im not sure what alternative we're going with at the end, if we implement auth0 we can get rid of this
+  role           String
+  state          String
+  city           String
+  techStack      String[]
+  bio            String?
+  admin          Admin[]      @relation("ColsOfAdmin")
+  apprentice     Apprentice[] @relation("ColsOfApprentice")
+  company        Company[]    @relation("ColsOfCompany")
+}
+
+model VerificationRequest {
+  id         String   @id @default(cuid())
+  identifier String
+  token      String   @unique
+  expires    DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@unique([identifier, token])
 }
 
 //The following three tables will need left joins in order to be accessed appropriately.
 model Admin {
-  id        Int       @id @default(autoincrement())
-  userId    Int
+  id        String @id @default(cuid())
+  userId    String @unique
   firstName String
   lastName  String
-  user      User      @relation("ColsOfAdmin", fields: [userId], references: [id])
+  user      User   @relation("ColsOfAdmin", fields: [userId], references: [id])
 }
 
 model Apprentice {
-  id                     Int            @id @default(autoincrement())
-  userId                 Int
+  id                     String         @id @default(cuid())
+  userId                 String         @unique
   firstName              String
   lastName               String
   level                  Int
   apprenticeSubscription Subscription[] @relation("SubscribedToApprentice")
   user                   User           @relation("ColsOfApprentice", fields: [userId], references: [id])
-
 }
 
-model Company{
-  id                   Int            @id @default(autoincrement())
-  userId               Int
+model Company {
+  id                   String         @id @default(cuid())
+  userId               String         @unique
   address              String
   employerSubscription Subscription[] @relation("SubscribedEmployer")
   companyIssue         Issue[]        @relation("IssuedCompany")
   user                 User           @relation("ColsOfCompany", fields: [userId], references: [id])
-
 }
 
 model Issue {
-  id          Int       @id @default(autoincrement())
-  companyId   Int
+  id          String   @id @default(cuid())
+  companyId   String
   title       String
   description String
   techStack   String[]
-  company     Company   @relation("IssuedCompany", fields: [companyId], references: [id])
+  company     Company  @relation("IssuedCompany", fields: [companyId], references: [id])
 }
 
 model Subscription {
-  id                Int            @id @default(autoincrement())
-  employerId        Int
-  apprenticeId      Int
-  startDate         DateTime
-  endDate           DateTime
-  cost              Float          @map("numeric(10, 2)")
-  employer          Company        @relation("SubscribedEmployer", fields: [employerId], references: [id])
-  apprentice        Apprentice     @relation("SubscribedToApprentice", fields: [apprenticeId], references: [id])
+  id           String     @id @default(cuid())
+  employerId   String
+  apprenticeId String
+  startDate    DateTime
+  endDate      DateTime
+  cost         Float      @map("numeric(10, 2)")
+  employer     Company    @relation("SubscribedEmployer", fields: [employerId], references: [id])
+  apprentice   Apprentice @relation("SubscribedToApprentice", fields: [apprenticeId], references: [id])
 }

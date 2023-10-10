@@ -1,6 +1,22 @@
 # redmoon-console
-# redmoon-console
 The marketing site, customer relationship management, and apprentice management software for Red Moon
+
+# Table of Contents
+
+1. [redmoon-console](#redmoon-console)
+2. [Contributing to this Project](#contributing)
+3. [Project vision](#project-vision)
+   1. [Marketing Site and Employer Management](#1-marketing-site-and-employer-management)
+   2. [Subscribed Employers Management](#2-subscribed-employers-management)
+   3. [Apprentices Management](#3-apprentices-management)
+
+4. [Getting Setup](#getting-setup)
+   1. [Install Dependencies](#1-run-npm-install)
+   2. [Setting Up the Database and Prisma](#2-setting-up-the-database-and-prisma)
+   3. [Setting Up Google and Github OAuth](#3-setting-up-google-and-github-oauth)
+   4. [Seeding data](#4-seeding-data)
+   5. [Running the Development Server](#3-running-the-development-server)
+
 
 ## Project vision
 
@@ -28,6 +44,29 @@ Need a way to see all subscribed employers, what kind of help they're looking fo
 
 Will need to be able to fill out the information on apprentices that employers will see, manage what small team they're on, tracking what Level they're on, what training they've done, etc.
 
+## Contributing
+
+### For Prospective Apprentices
+
+As you know, contributing to the Red Moon Apprenticeship program is one way of applying to the Redmoon Apprenticeship. This is your chance to show us what your capable of. Here are some ways to contribute:
+
+1. Tackle an open issue:
+2. Submit your own issue:
+3. Improve an existing feature:
+4. Write tests for an existing feature(s):
+
+If you're looking for ideas, please consult the issues tab.
+
+### Domain Specific Guidelines
+
+#### Frontend Design
+
+Please consult existing style sheets and designs before submitting a pull request.
+
+#### User Auth and Payments
+
+Any features that look to edit any tables responsible for user authentication, or that deal with payments must have tests written for them before being merged onto the project. You can collaborate with other contributors to write tests (one person writes tests, another writes the feature, etc). In some cases, we might suggest a test for you to write.
+
 ## Getting setup
 
 1. Run:
@@ -36,9 +75,16 @@ Will need to be able to fill out the information on apprentices that employers w
 npm install
 ```
 
-2. Setting up the database
+2. Setting up the database and Prisma
 
-The redmoon console uses Prisma to manage its Postgresql database. 
+The redmoon console uses Prisma ORM to manage its Postgresql database. 
+
+It is highly recommended that you install Prisma globally:
+
+```bash
+npm install -g prisma
+
+```
 
 First, in /prisma create a .env file, inside copy-paste the following:
 
@@ -50,19 +96,46 @@ Of course, replace johndoe and randompassword with your Postgresql username and 
 In the root folder, run the following:
 
 ```bash
-prisma db push  # This will create the initial table
-prisma generate # This will set up the Prisma client, which will allow us to do basic interactions with the database.
+npx prisma db push  # This will create the initial table
+npx prisma generate # This will set up the Prisma client, which will allow us to do basic interactions with the database.
 ```
 
 For hosting, we want to run migrations so that the live database stays in sync with database changes, Prisma provides the following command
 
 ```bash
-prisma migrate dev --name <name>
-
+npx prisma migrate dev --name <name>
 ```
 Where name here is the name of the migration.
 
-4. Running the development server:
+
+3. Setting Up Google and Github OAuth
+
+If you want to test features specific to Google and Github OAuth, refer to the below instructions, else feel free to skip this section.
+
+Create a .env file in project root. Inside the .env file should look like this:
+
+```bash
+GOOGLE_CLIENT_ID=<YOUR KEY>
+GOOGLE_CLIENT_SECRET=<YOUR KEY>
+GITHUB_ID=<YOUR KEY>
+GITHUB_SECRET=<YOUR KEY>
+
+```
+
+You will need a Github account and a Google API account in order to get set up, please refer to the following video for a walkthrough:
+
+![Google API key access](https://youtu.be/MrzCV0och5k?si=6fKEDV-rufPRQLTz&t=114)
+![GitHub API key access](https://youtu.be/MrzCV0och5k?si=hhl05aOBKbTYByMA&t=576)
+
+4. Seeding data:
+
+```bash
+npx prisma db seed
+```
+
+As of right now, only seeds three users. Feel free to submit a PR seeding more users.
+
+5. Running the development server:
 
 ```bash
 npm run dev

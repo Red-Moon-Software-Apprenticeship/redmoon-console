@@ -1,1 +1,1 @@
-//This is a temporary folder for utility functions
+//This is a temporary folder for utility functions, please delete this file once you'ev contributed something.
