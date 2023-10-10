@@ -1,26 +1,20 @@
 "use client"
 import React, { useState } from 'react';
-import './signupform.css'
 import SignUpDefaults from './SignUpDefaults';
 import { createAppr } from '@/lib/serverActions';
-import { useErrors } from '@/hooks/useErrors';
 import { clearForm } from '@/lib/clearForm';
 import { redirect, usePathname } from 'next/navigation';
 import { ADMIN_ADD_APPRENTICE_PATH } from '@/lib/constants';
+import './signupform.css'
+import { useSignUpBundler, useErrors } from '@/hooks';
 
 const ApprSignUp = ({ }) => {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
-  const [password, setPassword] = useState('')
-  const [confirm, setConfirm] = useState('')
-  const [email, setEmail] = useState('')
-  const [stateState, setState] = useState('')
-  const [city, setCity] = useState('')
-  const [successMsg, setSuccessMsg] = useState('')
-  const childState = { password, setPassword, confirm, setConfirm }
-  const [errors, setErrors, clearErrorsEffect] = useErrors()
   const pathname = usePathname()
-
+  const [successMsg, setSuccessMsg] = useState('')
+  const signUpState = useSignUpBundler()
+  const [errors, setErrors, clearErrorsEffect] = useErrors()
  
   const formAction = async (data) => {
     const res = await createAppr(data)
@@ -34,14 +28,12 @@ const ApprSignUp = ({ }) => {
         redirect('/sign-up/thank-you')
       }
       
-      clearForm(
-                setFirstName, setLastName, setPassword, 
-                setConfirm, setEmail, setCity, setState
-                )
+      clearForm(setFirstName, setLastName, ...signUpState.setters)
+
     }
   }
 
-  clearErrorsEffect(firstName, lastName, password, confirm)
+  clearErrorsEffect(firstName, lastName, ...signUpState.getters)
 
 
   return (
@@ -61,7 +53,7 @@ const ApprSignUp = ({ }) => {
           <input id='last-name' type="text" name='lastName' value={lastName} onChange={e => setLastName(e.target.value)} />
         </div>
 
-        <SignUpDefaults childState={childState} />
+        <SignUpDefaults signUpState={signUpState}/>
         <div>
           <button>Submit</button>
         </div>

@@ -1,3 +1,10 @@
+:root{
+    --color-lime-green: #84cc16;
+    --color-urgent-red: #dc2626;
+
+    
+}
+
 .flex-center,
 .flex-left,
 .flex-center-right,

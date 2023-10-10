@@ -7,3 +7,21 @@
     display: flex;
     justify-content: space-between;
 }
+
+#pw-confirmation{
+    position: fixed;
+
+}
+
+#pw-match{
+    position: absolute;
+    right: 1rem;
+}
+
+.pw-matching{
+    color: var(--color-lime-green)    
+}
+
+.pw-not-matching{
+    color: var(--color-urgent-red)
+}

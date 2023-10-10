@@ -9,14 +9,14 @@ const ApprConsole = () => {
     const [delModal, setDelModal] = useState(false);
     const [editModal, setEditModal] = useState(false);
     const [currAppr, setCurrAppr] = useState({});
-    const apprsState = {apprs, setApprs};
- 
+    const apprsState = { apprs, setApprs };
+
     useEffect(() => {
-      fetch('/api/apprentice')
-        .then(response => response.json())
-        .then(data => setApprs(data))
-        .catch(error => console.error('Error fetching apprentices:', error));
-    
+        fetch('/api/apprentice')
+            .then(response => response.json())
+            .then(data => setApprs(data))
+            .catch(error => console.error('Error fetching apprentices:', error));
+
     }, []);
 
 
@@ -32,38 +32,39 @@ const ApprConsole = () => {
         setCurrAppr(appr)
     }
 
-    const handleEmailClick = (e, email) =>{
+    const handleEmailClick = (e, email) => {
         e.stopPropagation()
 
     }
 
-    const toggleModal = ( getter, setter) => {
+    const toggleModal = (getter, setter) => {
         setter(!getter)
         setCurrAppr('')
     }
 
     return (<>
-            {apprs.map((appr, idx) =>
-                <tr key={idx}>
-                    <td className='flex-left'>{appr.firstName} {appr.lastName}</td>
-                    <td className='cursor-events' 
-                        onClick={e => handleEmailClick(e, appr.user.email)}>
-                        {appr.user.email}
-                    </td>
-                    <td> {appr.level}</td>
-                    <td>
-                        <button onClick={e => handleDelete(e, appr)}>
-                            Remove
-                        </button>
-                    </td>
-                    <td><button onClick={e => handleEdit(e, appr)}>
+        {apprs.map((appr, idx) =>
+            <tr key={idx}>
+                <td className='flex-left'>{appr.firstName} {appr.lastName}</td>
+                <td className='cursor-events'
+                    onClick={e => handleEmailClick(e, appr.user.email)}>
+                    {appr.user.email}
+                </td>
+                <td> {appr.level}</td>
+                <td>
+                    <button onClick={e => handleDelete(e, appr)}>
+                        Remove
+                    </button>
+                </td>
+                <td>
+                    <button onClick={e => handleEdit(e, appr)}>
                         Edit Info
                     </button>
-                    </td>
-                </tr>
-            )}
+                </td>
+            </tr>
+        )}
 
-        {delModal && <DeleteApprModal appr={currAppr} toggleModal={() => toggleModal(delModal, setDelModal)} apprsState={apprsState}/>}
+        {delModal && <DeleteApprModal appr={currAppr} toggleModal={() => toggleModal(delModal, setDelModal)} apprsState={apprsState} />}
         {editModal && <EditApprModal appr={currAppr} toggleModal={() => toggleModal(editModal, setEditModal)} apprsState={apprsState} />}
     </>
     );

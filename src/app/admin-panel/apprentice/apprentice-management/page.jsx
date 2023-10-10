@@ -17,12 +17,15 @@ const ApprenticeManagementConsole = async() => {
  
        <div className='flex-center'>
         <table>
+            <tbody>
+
               <tr>
                   <th>Name</th>
                   <th>Email</th>
                   <th>Level</th>
               </tr>
-          <ApprConsole/>
+              <ApprConsole/>
+            </tbody>
           </table>
 
       </div>
