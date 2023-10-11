@@ -63,6 +63,7 @@ model User {
   admin          Admin[]      @relation("ColsOfAdmin")
   apprentice     Apprentice[] @relation("ColsOfApprentice")
   company        Company[]    @relation("ColsOfCompany")
+  verificationToken VerificationToken[] @relation("VerificationToken")
 }
 
 model VerificationRequest {
@@ -76,6 +77,12 @@ model VerificationRequest {
   @@unique([identifier, token])
 }
 
+model VerificationToken{
+  id String @id @default(cuid())
+  userId String @unique()
+  token String
+  user  User @relation("VerificationToken", fields: [userId], references: [id], onDelete: Cascade)
+}
 
 model Apprentice {
   id                     String         @id @default(cuid())
