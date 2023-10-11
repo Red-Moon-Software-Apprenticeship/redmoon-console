@@ -9,7 +9,6 @@ const CompanyManagement = async () => {
   await secureAdminServerRoute()
   return (
     <Layout>
-
         <UnderConstruction/>
      </Layout>
 

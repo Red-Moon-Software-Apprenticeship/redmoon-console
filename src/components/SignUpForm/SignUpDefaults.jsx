@@ -1,5 +1,6 @@
 'use client'
 import React, { useState, useEffect } from 'react';
+import USStatesDropdown from './USStatesDropdown';
 
 const SignUpDefaults = ({ signUpState }) => {
     const [password, confirm, email, state, city] = signUpState.getters;
@@ -59,20 +60,18 @@ const SignUpDefaults = ({ signUpState }) => {
                     onChange={e => setConfirm(e.target.value)}
                 />
             </div>
+            <div id='pw-match' className='flex-right'>
+
             {password.length > 0 && confirm.length > 0 &&
-                <span id='pw-match' className={`${pwMatch ? 'pw-matching' : 'pw-not-matching'}`}>
+                <span id='pw-match-txt' className={`${pwMatch ? 'pw-matching' : 'pw-not-matching'}`}>
                     {pwMatch ? "Passwords match!" : "Passwords don't match"}
                 </span>
             }
+            </div>
 
             <div>
                 <label>State:</label>
-                <input
-                    type="text"
-                    name="state"
-                    value={state}
-                    onChange={e => setState(e.target.value)}
-                />
+                 <USStatesDropdown state={state} setState={setState}/> 
             </div>
 
             <div>

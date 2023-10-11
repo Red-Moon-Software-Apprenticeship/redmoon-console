@@ -1,12 +1,13 @@
-"use client"
 import React from 'react';
-import { useSession } from 'next-auth/react';
+import { getServerSession } from 'next-auth'
 import AdminNav from './AdminNav';
 import ApprNav from './ApprNav';
 import CompanyNav from './CompanyNav';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import Link from 'next/link';
 
-const RoleLockedNav = () => {
-    const { data: session } = useSession()
+const RoleLockedNav = async () => {
+    const session = await getServerSession(authOptions)
     const role = session?.user?.role;
     const mapComponent = {
         'admin': <AdminNav />,
@@ -14,13 +15,27 @@ const RoleLockedNav = () => {
         'company': <CompanyNav />
     }
 
-    const roleLockedNav = mapComponent[role]
+    const roleBasedNav = mapComponent[role]
 
-    return (
-        <>
-            {(session && session.user) && roleLockedNav}
-        </>
-    )
+    if (!session) {
+        return (
+            <>
+                <li>
+                    <Link href='/sign-up'>
+                        Sign Up
+                    </Link>
+                </li>
+
+            </>)
+
+    } else {
+
+        return (
+            <>
+                {(session && session.user) && roleBasedNav}
+            </>
+        )
+    }
 };
 
 export default RoleLockedNav;

@@ -8,7 +8,7 @@ import CompanySignUp from './CompanySignUp';
 //Create specific child components that display options based on who is coming through: if its a company, show the items relevent to a company, appr, show appr.  
 const SignupForm = ({}) => {
     
-    const [role, setRole] = useState(defaultRole);
+    const [role, setRole] = useState('apprentice');
 
 
     const handleSwapForm = e =>{
@@ -22,7 +22,7 @@ const SignupForm = ({}) => {
         <>  
             { 
                 <>
-                    <div>
+                    <div id='' className='flex-center flex-col'>
                         <h3>
                             You are a:
                         </h3>

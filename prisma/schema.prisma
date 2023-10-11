@@ -76,6 +76,7 @@ model VerificationRequest {
   @@unique([identifier, token])
 }
 
+
 model Apprentice {
   id                     String         @id @default(cuid())
   userId                 String         @unique
