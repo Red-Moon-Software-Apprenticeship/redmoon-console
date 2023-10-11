@@ -1,8 +1,8 @@
 "use server"
 import { hash } from "bcrypt"
 import { createUserAndRole } from "@/database/users/createUser"
-import { PrismaClientInitializationError, PrismaClientRustPanicError } from "@prisma/client/runtime/library"
 import { validateNewCompany } from "../validations"
+import { createUserErrors } from "./_sharedErrors"
 
 export const createCompany = async (formData) => {
     const data =  Object.fromEntries(formData)
@@ -32,21 +32,8 @@ export const createCompany = async (formData) => {
         const newCompany = createUserAndRole(userData, roleData, role)
         return newCompany
     } catch (error) {
-         if (error.code === 'P2002') {
-                return { errors: [`The ${error.meta.target} is already in use.`] };
-            }
         
-    
-        if (error instanceof PrismaClientInitializationError) {
-            return { errors: ['Failed to initialize database connection.'] };
-        }
-        
-        if (error instanceof PrismaClientRustPanicError) {
-            return { errors: ['Internal server error. Please try again later.'] };
-        }
-
-
-        return { errors: [error.message] };
+        return createUserErrors(error)
 
 
     }

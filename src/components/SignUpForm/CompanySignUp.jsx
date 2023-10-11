@@ -14,7 +14,7 @@ const CompanySignUp = () => {
   const [address, setAddress] = useState('');
   const pathname = usePathname();
   const signUpState = useSignUpBundler();
-  const [successMsg, setSuccessMsg] = signUpState.successState;
+  const [successMsg, setSuccessMsg, clearSuccessMsg] = signUpState.successState;
   const [errors, setErrors, clearErrorsEffect] = useErrors();
 
   const formAction = async (data) => {
@@ -32,6 +32,7 @@ const CompanySignUp = () => {
     }
   };
 
+  clearSuccessMsg()
   clearErrorsEffect(address, name, ...signUpState.getters);
 
   return (
@@ -49,7 +50,7 @@ const CompanySignUp = () => {
           <input type="text" id='address' name='address' value={address} onChange={e => setAddress(e.target.value)} />
         </div>
 
-        <div>
+        <div className='btn-holder'>
           <button>Submit</button>
         </div>
 

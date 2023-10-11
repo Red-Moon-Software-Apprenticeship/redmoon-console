@@ -6,7 +6,7 @@
 
 .flex-center,
 .flex-left,
-.flex-center-right,
+.flex-right,
 .flex-evenly,
 .sb,
 .flex-row,
@@ -28,6 +28,7 @@
 }
 
 .flex-right{
+    display: flex;
     justify-content: flex-end;
 }
 

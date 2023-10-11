@@ -4,8 +4,14 @@ import React, { useState, useEffect } from 'react';
 const SignUpDefaults = ({ signUpState }) => {
     const [password, confirm, email, state, city] = signUpState.getters;
     const [setPassword, setConfirm, setEmail, setState, setCity] = signUpState.setters;
-
+    const [showPw, setShowPw] = useState(false)
     const [pwMatch, setPwMatch] = useState(true);
+
+    const handleOnClick = (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        setShowPw(!showPw)
+    }
 
     useEffect(() => {
         if (password !== confirm) {
@@ -14,6 +20,7 @@ const SignUpDefaults = ({ signUpState }) => {
             setPwMatch(true)
         }
     }, [password, confirm])
+    
     return (
         <>
             <div>
@@ -29,11 +36,17 @@ const SignUpDefaults = ({ signUpState }) => {
             <div>
                 <label htmlFor="password">Password:</label>
                 <input
-                    type="password"
+                    type={`${showPw ? 'text' : 'password'}`}
                     id="password"
                     name="password"
                     value={password}
-                    onChange={e => setPassword(e.target.value)} />
+                    onChange={e => setPassword(e.target.value)} 
+                />
+            </div>
+            <div className='btn-holder'>
+                <button onClick={handleOnClick}>
+                    Show Password
+                </button>
             </div>
 
             <div>

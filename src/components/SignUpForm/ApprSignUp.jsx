@@ -55,7 +55,7 @@ const ApprSignUp = ({ }) => {
         </div>
 
         <SignUpDefaults signUpState={signUpState} />
-        <div>
+        <div className='btn-holder'>
           <button>Submit</button>
         </div>
 

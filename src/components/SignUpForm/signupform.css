@@ -25,3 +25,8 @@
 .pw-not-matching{
     color: var(--color-urgent-red)
 }
+
+#sign-up-form .btn-holder{
+    display: flex;
+    justify-content: flex-end;
+}
