@@ -7,13 +7,14 @@ import { redirect, usePathname } from 'next/navigation';
 import { ADMIN_ADD_APPRENTICE_PATH } from '@/lib/constants';
 import './signupform.css'
 import { useSignUpBundler, useErrors } from '@/hooks';
+import OnSuccess from './OnSuccess';
 
 const ApprSignUp = ({ }) => {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const pathname = usePathname()
-  const [successMsg, setSuccessMsg] = useState('')
   const signUpState = useSignUpBundler()
+  const {successMsg, setSuccessMsg} = signUpState.successState;
   const [errors, setErrors, clearErrorsEffect] = useErrors()
  
   const formAction = async (data) => {
@@ -21,7 +22,7 @@ const ApprSignUp = ({ }) => {
     if (res?.errors) {
       setErrors(res.errors)
     } else {
-
+      //Pathbased logic, using the path we can determine 
       if (pathname === ADMIN_ADD_APPRENTICE_PATH){
         setSuccessMsg(`Sucessfully added ${firstName} ${lastName} to the database.`)
       } else {
@@ -65,12 +66,8 @@ const ApprSignUp = ({ }) => {
             )}
           </ul>
         }
-
-        {
-          !!successMsg && <div>
-            <p>{successMsg}</p>
-          </div>
-        }
+        <OnSuccess successMsg={successMsg}/>
+       
       </form>
     </>
   );
