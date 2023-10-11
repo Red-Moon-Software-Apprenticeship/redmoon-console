@@ -16,19 +16,19 @@ const ApprSignUp = ({ }) => {
   const signUpState = useSignUpBundler()
   const [successMsg, setSuccessMsg] = signUpState.successState;
   const [errors, setErrors, clearErrorsEffect] = useErrors()
- 
+
   const formAction = async (data) => {
     const res = await createAppr(data)
     if (res?.errors) {
       setErrors(res.errors)
     } else {
       //Pathbased logic, using the path we can determine 
-      if (pathname === ADMIN_ADD_APPRENTICE_PATH){
+      if (pathname === ADMIN_ADD_APPRENTICE_PATH) {
         setSuccessMsg(`Sucessfully added ${firstName} ${lastName} to the database.`)
       } else {
         redirect('/sign-up/thank-you')
       }
-      
+
       clearForm(setFirstName, setLastName, ...signUpState.setters)
 
     }
@@ -46,15 +46,15 @@ const ApprSignUp = ({ }) => {
       >
 
         <div>
-          <label>First Name: </label>
-          <input type="text" name='firstName' value={firstName} onChange={e => setFirstName(e.target.value)} />
+          <label htmlFor='firstName'>First Name: </label>
+          <input type="text" id='firstName' name='firstName' value={firstName} onChange={e => setFirstName(e.target.value)} />
         </div>
         <div>
           <label htmlFor='last-name'>Last Name: </label>
           <input id='last-name' type="text" name='lastName' value={lastName} onChange={e => setLastName(e.target.value)} />
         </div>
 
-        <SignUpDefaults signUpState={signUpState}/>
+        <SignUpDefaults signUpState={signUpState} />
         <div>
           <button>Submit</button>
         </div>
@@ -66,8 +66,8 @@ const ApprSignUp = ({ }) => {
             )}
           </ul>
         }
-        <OnSuccess successMsg={successMsg}/>
-       
+        <OnSuccess successMsg={successMsg} />
+
       </form>
     </>
   );

@@ -14,7 +14,7 @@ const CompanySignUp = () => {
   const [address, setAddress] = useState('');
   const pathname = usePathname();
   const signUpState = useSignUpBundler();
-  const [ successMsg, setSuccessMsg ] = signUpState.successState;
+  const [successMsg, setSuccessMsg] = signUpState.successState;
   const [errors, setErrors, clearErrorsEffect] = useErrors();
 
   const formAction = async (data) => {
@@ -45,9 +45,10 @@ const CompanySignUp = () => {
         </div>
         <SignUpDefaults signUpState={signUpState} />
         <div>
-          <label>Company Address: </label>
-          <input type="text" name='address' value={address} onChange={e => setAddress(e.target.value)} />
+          <label htmlFor='address'>Company Address: </label>
+          <input type="text" id='address' name='address' value={address} onChange={e => setAddress(e.target.value)} />
         </div>
+
         <div>
           <button>Submit</button>
         </div>

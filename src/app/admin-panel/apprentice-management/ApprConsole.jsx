@@ -19,8 +19,7 @@ const ApprConsole = () => {
 
     }, []);
 
-
-    const handleDelete = (e, appr) => {
+     const handleDelete = (e, appr) => {
         e.stopPropagation()
         setDelModal(prev => !prev)
         setCurrAppr(appr)
