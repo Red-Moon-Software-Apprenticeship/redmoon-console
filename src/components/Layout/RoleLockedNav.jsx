@@ -14,11 +14,11 @@ const RoleLockedNav = () => {
         'company': <CompanyNav />
     }
 
-    const roleLockedComponent = mapComponent[role]
+    const roleLockedNav = mapComponent[role]
 
     return (
         <>
-            {(session && session.user) && roleLockedComponent}
+            {(session && session.user) && roleLockedNav}
         </>
     )
 };
