@@ -14,7 +14,7 @@ const ApprSignUp = ({ }) => {
   const [lastName, setLastName] = useState('')
   const pathname = usePathname()
   const signUpState = useSignUpBundler()
-  const {successMsg, setSuccessMsg} = signUpState.successState;
+  const [successMsg, setSuccessMsg] = signUpState.successState;
   const [errors, setErrors, clearErrorsEffect] = useErrors()
  
   const formAction = async (data) => {

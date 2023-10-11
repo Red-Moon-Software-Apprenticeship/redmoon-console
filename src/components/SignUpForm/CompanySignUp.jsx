@@ -1,10 +1,10 @@
 "use client";
 import React, { useState } from 'react';
 import SignUpDefaults from './SignUpDefaults';
-import { createAppr } from '@/lib/serverActions';  
 import { clearForm } from '@/lib/clearForm';
 import { redirect, usePathname } from 'next/navigation';
-import { ADMIN_ADD_APPRENTICE_PATH } from '@/lib/constants'; 
+import { ADMIN_ADD_COMPANY_PATH } from '@/lib/constants';
+import { createCompany } from '@/lib/serverActions';
 import './signupform.css';
 import { useSignUpBundler, useErrors } from '@/hooks';
 import OnSuccess from './OnSuccess';
@@ -14,36 +14,36 @@ const CompanySignUp = () => {
   const [address, setAddress] = useState('');
   const pathname = usePathname();
   const signUpState = useSignUpBundler();
-  const { successMsg, setSuccessMsg } = signUpState.successState;
+  const [ successMsg, setSuccessMsg ] = signUpState.successState;
   const [errors, setErrors, clearErrorsEffect] = useErrors();
- 
+
   const formAction = async (data) => {
-    const res = await createCompany(data); 
+    const res = await createCompany(data);
     if (res?.errors) {
       setErrors(res.errors);
     } else {
-      if (pathname === ADMIN_ADD_APPRENTICE_PATH) {  
-        setSuccessMsg(`Successfully registered the company with address ${address}.`);
+      if (pathname === ADMIN_ADD_COMPANY_PATH) {
+        setSuccessMsg(`Successfully registered the ${name}.`);
       } else {
         redirect('/sign-up/thank-you');
       }
-      
+
       clearForm(setName, setAddress, ...signUpState.setters);
     }
   };
 
-  clearErrorsEffect(address, name,...signUpState.getters);
+  clearErrorsEffect(address, name, ...signUpState.getters);
 
   return (
     <>
       <form id='sign-up-form' action={formAction}>
         <div>
-          <label htmlFor="company-name">
-             Company Name
+          <label htmlFor="name">
+            Company Name
           </label>
-          <input type="text" name='company-name' value={name} onChange={e => setName(e.target.value)} />
+          <input type="text" name='name' value={name} onChange={e => setName(e.target.value)} />
         </div>
-                <SignUpDefaults signUpState={signUpState}/>
+        <SignUpDefaults signUpState={signUpState} />
         <div>
           <label>Company Address: </label>
           <input type="text" name='address' value={address} onChange={e => setAddress(e.target.value)} />
@@ -59,7 +59,7 @@ const CompanySignUp = () => {
             )}
           </ul>
         }
-        <OnSuccess successMsg={successMsg}/>
+        <OnSuccess successMsg={successMsg} />
       </form>
     </>
   );
