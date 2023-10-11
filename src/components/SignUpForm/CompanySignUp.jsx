@@ -2,18 +2,20 @@
 import React, { useState } from 'react';
 import SignUpDefaults from './SignUpDefaults';
 import { clearForm } from '@/lib/clearForm';
-import { redirect, usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { ADMIN_ADD_COMPANY_PATH } from '@/lib/constants';
 import { createCompany } from '@/lib/serverActions';
 import './signupform.css';
 import { useSignUpBundler, useErrors } from '@/hooks';
 import OnSuccess from './OnSuccess';
+import {signIn} from 'next-auth/react'
 
 const CompanySignUp = () => {
   const [name, setName] = useState('')
   const [address, setAddress] = useState('');
   const pathname = usePathname();
   const signUpState = useSignUpBundler();
+  const [password] = signUpState.getters;
   const [successMsg, setSuccessMsg, clearSuccessMsg] = signUpState.successState;
   const [errors, setErrors, clearErrorsEffect] = useErrors();
 
@@ -22,10 +24,18 @@ const CompanySignUp = () => {
     if (res?.errors) {
       setErrors(res.errors);
     } else {
+
       if (pathname === ADMIN_ADD_COMPANY_PATH) {
         setSuccessMsg(`Successfully registered the ${name}.`);
       } else {
-        redirect('/sign-up/thank-you');
+         await signIn('credentials',
+          {
+            email: res.email,
+            password,
+            redirect: true,
+            callbackUrl: '/sign-up/thank-you-partner'
+          }
+         )
       }
 
       clearForm(setName, setAddress, ...signUpState.setters);
@@ -37,7 +47,10 @@ const CompanySignUp = () => {
 
   return (
     <>
-      <form id='sign-up-form' action={formAction}>
+      <form 
+        id='sign-up-form' 
+        action={formAction}
+      >
         <div>
           <label htmlFor="name">
             Company Name
@@ -50,7 +63,7 @@ const CompanySignUp = () => {
           <input type="text" id='address' name='address' value={address} onChange={e => setAddress(e.target.value)} />
         </div>
 
-        <div className='btn-holder'>
+        <div className='flex-right'>
           <button>Submit</button>
         </div>
 

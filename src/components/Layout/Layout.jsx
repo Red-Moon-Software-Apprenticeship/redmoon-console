@@ -12,7 +12,10 @@ const Layout = ({children}) => {
     <>
         <Header/>
         <NavBar/>
+          <main className='padding-inline-default'>
+
             {children}
+          </main>
         <Footer/>
     </>
   )

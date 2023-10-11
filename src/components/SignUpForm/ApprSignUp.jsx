@@ -8,12 +8,14 @@ import { ADMIN_ADD_APPRENTICE_PATH } from '@/lib/constants';
 import './signupform.css'
 import { useSignUpBundler, useErrors } from '@/hooks';
 import OnSuccess from './OnSuccess';
+import {signIn } from 'next-auth/react';
 
 const ApprSignUp = ({ }) => {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const pathname = usePathname()
   const signUpState = useSignUpBundler()
+  const [password] = signUpState.getters;
   const [successMsg, setSuccessMsg] = signUpState.successState;
   const [errors, setErrors, clearErrorsEffect] = useErrors()
 
@@ -26,11 +28,17 @@ const ApprSignUp = ({ }) => {
       if (pathname === ADMIN_ADD_APPRENTICE_PATH) {
         setSuccessMsg(`Sucessfully added ${firstName} ${lastName} to the database.`)
       } else {
-        redirect('/sign-up/thank-you')
-      }
-
+        await signIn('credentials',
+          {
+            email: res.email,
+            password,
+            redirect: true,
+            callbackUrl: '/sign-up/thank-you-appr'
+          }
+      )
       clearForm(setFirstName, setLastName, ...signUpState.setters)
 
+      }
     }
   }
 

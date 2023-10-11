@@ -59,11 +59,14 @@ const SignUpDefaults = ({ signUpState }) => {
                     onChange={e => setConfirm(e.target.value)}
                 />
             </div>
+            <div id='pw-match' className='flex-right'>
+
             {password.length > 0 && confirm.length > 0 &&
-                <span id='pw-match' className={`${pwMatch ? 'pw-matching' : 'pw-not-matching'}`}>
+                <span id='pw-match-txt' className={`${pwMatch ? 'pw-matching' : 'pw-not-matching'}`}>
                     {pwMatch ? "Passwords match!" : "Passwords don't match"}
                 </span>
             }
+            </div>
 
             <div>
                 <label>State:</label>

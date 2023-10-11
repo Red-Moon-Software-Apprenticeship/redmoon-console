@@ -1,12 +1,13 @@
 
 import Layout from '@/components/Layout/Layout'
-import UnderConstruction from '@/components/UnderConstruction'
+import SignupForm from '@/components/SignUpForm'
 
 const SignUp =() => {
   return (
    <Layout>
-      <UnderConstruction/>
+    <SignupForm/>
    </Layout>
+
   )
 }
 

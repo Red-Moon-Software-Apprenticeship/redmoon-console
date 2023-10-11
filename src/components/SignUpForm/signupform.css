@@ -1,21 +1,13 @@
-#sign-up-form{
-    width: 70%;
-
-}
 
 #sign-up-form div{
     display: flex;
     justify-content: space-between;
 }
 
-#pw-confirmation{
-    position: fixed;
 
-}
 
 #pw-match{
-    position: absolute;
-    right: 1rem;
+    height:1.5rem;
 }
 
 .pw-matching{
