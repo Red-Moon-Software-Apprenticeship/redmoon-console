@@ -10,7 +10,6 @@ const CompanyManagement = async () => {
   return (
     <Layout>
 
-        <CompanySignUp/>
         <UnderConstruction/>
      </Layout>
 
