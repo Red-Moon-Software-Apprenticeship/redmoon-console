@@ -10,7 +10,7 @@ const ApprenticeManagementConsole = async() => {
     <Layout>
       <h2>Apprentices</h2>
       <button>
-        <Link href='/admin-panel/apprentice/new'>
+        <Link href='/admin-panel/apprentice-management/new'>
           Add an Apprentice
         </Link>
       </button>
