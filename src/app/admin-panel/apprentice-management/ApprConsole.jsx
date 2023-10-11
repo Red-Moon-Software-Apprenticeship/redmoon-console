@@ -34,6 +34,8 @@ const ApprConsole = () => {
 
     const handleEmailClick = (e, email) => {
         e.stopPropagation()
+        navigator.clipboard.writeText(email)
+        alert(`Email copied to clipboard: ${email}`)
 
     }
 

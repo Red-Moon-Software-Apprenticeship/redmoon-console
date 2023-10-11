@@ -1,6 +1,6 @@
 "use server"
 import { hash } from "bcrypt"
-import { validateNewAppr } from "./handleSignUpErrors"
+import { validateNewAppr } from "../validations/validateNewAppr"
 import { createUserAndRole } from "@/database/users/createUser"
 import { PrismaClientInitializationError, PrismaClientRustPanicError } from "@prisma/client/runtime/library"
 

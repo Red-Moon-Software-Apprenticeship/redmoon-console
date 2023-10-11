@@ -4,7 +4,7 @@ import React from 'react';
 import ApprConsole from './ApprConsole';
 import Link from 'next/link';
 
-const ApprenticeManagementConsole = async() => {
+const ApprenticeManagement = async() => {
   await secureAdminServerRoute()
   return (
     <Layout>
@@ -34,4 +34,4 @@ const ApprenticeManagementConsole = async() => {
   );
 };
 
-export default ApprenticeManagementConsole;
+export default ApprenticeManagement;

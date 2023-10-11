@@ -18,7 +18,7 @@ const CompanySignUp = () => {
   const [errors, setErrors, clearErrorsEffect] = useErrors();
  
   const formAction = async (data) => {
-    const res = await createAppr(data); 
+    const res = await createCompany(data); 
     if (res?.errors) {
       setErrors(res.errors);
     } else {
@@ -28,11 +28,11 @@ const CompanySignUp = () => {
         redirect('/sign-up/thank-you');
       }
       
-      clearForm(setAddress, ...signUpState.setters);
+      clearForm(setName, setAddress, ...signUpState.setters);
     }
   };
 
-  clearErrorsEffect(address, ...signUpState.getters);
+  clearErrorsEffect(address, name,...signUpState.getters);
 
   return (
     <>
@@ -43,12 +43,11 @@ const CompanySignUp = () => {
           </label>
           <input type="text" name='company-name' value={name} onChange={e => setName(e.target.value)} />
         </div>
+                <SignUpDefaults signUpState={signUpState}/>
         <div>
           <label>Company Address: </label>
           <input type="text" name='address' value={address} onChange={e => setAddress(e.target.value)} />
         </div>
-
-        <SignUpDefaults signUpState={signUpState}/>
         <div>
           <button>Submit</button>
         </div>

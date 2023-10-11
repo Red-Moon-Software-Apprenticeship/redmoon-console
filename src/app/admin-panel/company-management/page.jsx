@@ -1,18 +1,20 @@
 import Layout from '@/components/Layout/Layout';
+import CompanySignUp from '@/components/SignUpForm/CompanySignUp';
 import UnderConstruction from '@/components/UnderConstruction';
-import React from 'react';
 import { secureAdminServerRoute } from '@/lib/secureAdminRoute';
+import React from 'react';
 
-const AdminManagement = async () => {
+const CompanyManagement = async () => {
 
-   await secureAdminServerRoute();
-
-
+  await secureAdminServerRoute()
   return (
     <Layout>
+
+        <CompanySignUp/>
         <UnderConstruction/>
-    </Layout>
+     </Layout>
+
     );
 };
 
-export default AdminManagement;
+export default CompanyManagement;
