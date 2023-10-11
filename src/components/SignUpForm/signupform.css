@@ -26,7 +26,7 @@
     color: var(--color-urgent-red)
 }
 
-#sign-up-form .btn-holder{
+#sign-up-form .flex-right{
     display: flex;
     justify-content: flex-end;
 }

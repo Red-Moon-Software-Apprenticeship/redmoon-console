@@ -55,7 +55,7 @@ const ApprSignUp = ({ }) => {
         </div>
 
         <SignUpDefaults signUpState={signUpState} />
-        <div className='btn-holder'>
+        <div className='flex-right'>
           <button>Submit</button>
         </div>
 

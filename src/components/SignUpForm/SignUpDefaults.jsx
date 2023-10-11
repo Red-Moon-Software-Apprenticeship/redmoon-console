@@ -43,7 +43,7 @@ const SignUpDefaults = ({ signUpState }) => {
                     onChange={e => setPassword(e.target.value)} 
                 />
             </div>
-            <div className='btn-holder'>
+            <div className='flex-right'>
                 <button onClick={handleOnClick}>
                     Show Password
                 </button>
