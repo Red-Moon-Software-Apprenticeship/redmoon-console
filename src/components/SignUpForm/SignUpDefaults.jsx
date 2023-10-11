@@ -1,5 +1,6 @@
 'use client'
 import React, { useState, useEffect } from 'react';
+import USStatesDropdown from './USStatesDropdown';
 
 const SignUpDefaults = ({ signUpState }) => {
     const [password, confirm, email, state, city] = signUpState.getters;
@@ -70,12 +71,7 @@ const SignUpDefaults = ({ signUpState }) => {
 
             <div>
                 <label>State:</label>
-                <input
-                    type="text"
-                    name="state"
-                    value={state}
-                    onChange={e => setState(e.target.value)}
-                />
+                 <USStatesDropdown state={state} setState={setState}/> 
             </div>
 
             <div>

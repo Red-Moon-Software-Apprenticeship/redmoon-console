@@ -1,4 +1,3 @@
-
 import Layout from '@/components/Layout/Layout'
 import SignupForm from '@/components/SignUpForm'
 
