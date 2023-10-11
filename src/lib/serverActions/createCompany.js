@@ -18,7 +18,7 @@ export const createCompany = async (formData) => {
     const userData = {
         name,
         email,
-        password,
+        hashedPassword,
         role,
         state,
         city

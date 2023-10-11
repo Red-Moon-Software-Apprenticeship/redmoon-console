@@ -28,7 +28,7 @@ export const validateNewAppr = async ( data) => {
 
   // Check Confirm Password
   if (password !== confirmedPassword) {
-    errors.push('Password and Confirm Password do not match.');
+    errors.push('Password and Password Confirmation do not match.');
   }
 
   // Check State
