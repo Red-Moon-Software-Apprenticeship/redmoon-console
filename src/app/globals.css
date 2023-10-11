@@ -1,4 +1,60 @@
-:root {
+:root{
+    --color-lime-green: #84cc16;
+    --color-urgent-red: #dc2626;
 
+}
+
+.flex-center,
+.flex-left,
+.flex-right,
+.flex-evenly,
+.sb,
+.flex-row,
+.flex-col{
+    display: flex;
+}
+
+.flex-center{
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-center-hori{
+    justify-content: center;
+}
+
+.flex-left{
+    justify-content: left;
+}
+
+.flex-right{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.flex-evenly{
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.flex-row{
+    flex-direction: row;
+}
+
+.flex-col{
+    flex-direction: column;
+}
+
+.cursor-events:hover{
+    cursor: pointer;
+}
+
+
+.padding-inline-default{
+    padding-inline: 2.75rem; 
+}
+
+.padding-block-default{
+    padding-block: 2.75rem;
 }
 

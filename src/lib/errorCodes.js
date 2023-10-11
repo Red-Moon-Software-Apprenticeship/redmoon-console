@@ -1,0 +1,1 @@
+export const NON_EXISTANCE_CODE = 'P2025'

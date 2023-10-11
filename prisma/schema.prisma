@@ -58,7 +58,7 @@ model User {
   role           String
   state          String
   city           String
-  techStack      String[]
+  techStack      String[]     @default([])
   bio            String?
   admin          Admin[]      @relation("ColsOfAdmin")
   apprentice     Apprentice[] @relation("ColsOfApprentice")
@@ -76,24 +76,24 @@ model VerificationRequest {
   @@unique([identifier, token])
 }
 
+model Apprentice {
+  id                     String         @id @default(cuid())
+  userId                 String         @unique
+  firstName              String
+  lastName               String
+  level                  Int            @default(1)
+  apprenticeSubscription Subscription[] @relation("SubscribedToApprentice")
+  user                   User           @relation("ColsOfApprentice", fields: [userId], references: [id],  onDelete: Cascade, onUpdate: Cascade)
+}
 //The following three tables will need left joins in order to be accessed appropriately.
 model Admin {
   id        String @id @default(cuid())
   userId    String @unique
   firstName String
   lastName  String
-  user      User   @relation("ColsOfAdmin", fields: [userId], references: [id])
+  user      User   @relation("ColsOfAdmin", fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade )
 }
 
-model Apprentice {
-  id                     String         @id @default(cuid())
-  userId                 String         @unique
-  firstName              String
-  lastName               String
-  level                  Int
-  apprenticeSubscription Subscription[] @relation("SubscribedToApprentice")
-  user                   User           @relation("ColsOfApprentice", fields: [userId], references: [id])
-}
 
 model Company {
   id                   String         @id @default(cuid())
@@ -101,7 +101,8 @@ model Company {
   address              String
   employerSubscription Subscription[] @relation("SubscribedEmployer")
   companyIssue         Issue[]        @relation("IssuedCompany")
-  user                 User           @relation("ColsOfCompany", fields: [userId], references: [id])
+  user                 User           @relation("ColsOfCompany", fields: [userId], references: [id],  onDelete: Cascade, onUpdate: Cascade )
+
 }
 
 model Issue {
