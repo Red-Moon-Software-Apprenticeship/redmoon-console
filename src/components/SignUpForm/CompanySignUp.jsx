@@ -9,6 +9,7 @@ import './signupform.css';
 import { useSignUpBundler, useErrors } from '@/hooks';
 import OnSuccess from './OnSuccess';
 import { signUpSubmitSideEffects } from '@/lib/signUpSubmitSideEffects';
+import Errors from '../Errors';
 
 const CompanySignUp = () => {
   const [name, setName] = useState('')
@@ -61,13 +62,7 @@ const CompanySignUp = () => {
           <button>Submit</button>
         </div>
 
-        {!!errors.length &&
-          <ul>
-            {errors.map((error, idx) =>
-              <li key={idx}>{error}</li>
-            )}
-          </ul>
-        }
+        <Errors errors={errors}/>
         <OnSuccess successMsg={successMsg} />
       </form>
     </>

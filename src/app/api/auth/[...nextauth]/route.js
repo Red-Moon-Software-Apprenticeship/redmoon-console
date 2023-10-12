@@ -37,12 +37,14 @@ export const authOptions = {
           return null
         }
 
+        const {id, email, name, role, subRole} = user;
         //Valid login
         return {
-          id: user.id,
-          email: user.email,
-          name: user.name,
-          role: user.role
+          id,
+          email,
+          name,
+          role,
+          subRole
         }
       }
     }),
@@ -63,7 +65,8 @@ export const authOptions = {
     //Retrieves the user's role from the user table, sticks it on token. The user argument is the same as the one returned in authentication.
     jwt: async ({ token, user }) => {
       if (user) {
-        token.role = user.role
+        token.role = user.role;
+        token.subRole = user.subRole;
       }
       return token
     },
@@ -72,7 +75,8 @@ export const authOptions = {
     session: async ({ session, token }) => {
       if (session?.user) {
         session.user.id = token.sub;
-        session.user.role = token.role
+        session.user.role = token.role;
+        session.user.subRole = token.subRole;
       }
 
       return session;

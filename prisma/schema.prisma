@@ -56,6 +56,7 @@ model User {
   //Added for Red Moons purposes 
   hashedPassword    String? //Temporary password, im not sure what alternative we're going with at the end, if we implement auth0 we can get rid of this
   role              String
+  subRole           String                @default("unverified")
   state             String
   city              String
   techStack         String[]              @default([])

@@ -11,7 +11,7 @@ import OnSuccess from './OnSuccess';
 import {signIn } from 'next-auth/react';
 import { createReq } from '@/lib/createReqObj';
 import { signUpSubmitSideEffects } from '@/lib/signUpSubmitSideEffects';
-
+import Error from 'next/error';
 const ApprSignUp = ({ }) => {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
@@ -60,13 +60,7 @@ const ApprSignUp = ({ }) => {
           <button>Submit</button>
         </div>
 
-        {!!errors.length &&
-          <ul>
-            {errors.map((error, idx) =>
-              <li key={idx}>{error}</li>
-            )}
-          </ul>
-        }
+        <Errors errors={errors} /> 
         <OnSuccess successMsg={successMsg} />
 
       </form>
