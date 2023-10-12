@@ -16,18 +16,21 @@ export const createUserRoleToken = (userData, roleData, verifToken, relation) =>
     }
 
     userData[relation] = {create: roleData};
-    userData['verifToken'] = verifToken;
+    userData['verifToken'] = {create:verifToken};
     return prisma.user.create({
         data: userData
     })
 }
 
-export const createAdmin = (userData, roleData) => {
+export const createAdmin = (userData, roleData, verifToken) => {
 
     return prisma.user.create({
         data: userData,
         admin: {
             create: roleData
-        }
+        },
+        verifToken: { 
+            create: verifToken
+        }        
     })
 }

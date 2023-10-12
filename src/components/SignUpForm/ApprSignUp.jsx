@@ -9,6 +9,8 @@ import './signupform.css'
 import { useSignUpBundler, useErrors } from '@/hooks';
 import OnSuccess from './OnSuccess';
 import {signIn } from 'next-auth/react';
+import { createReq } from '@/lib/createReqObj';
+import { signUpSubmitSideEffects } from '@/lib/signUpSubmitSideEffects';
 
 const ApprSignUp = ({ }) => {
   const [firstName, setFirstName] = useState('')
@@ -24,20 +26,11 @@ const ApprSignUp = ({ }) => {
     if (res?.errors) {
       setErrors(res.errors)
     } else {
-      //Pathbased logic, using the path we can determine 
       if (pathname === ADMIN_ADD_APPRENTICE_PATH) {
         setSuccessMsg(`Sucessfully added ${firstName} ${lastName} to the database.`)
+        clearForm(setFirstName, setLastName, ...signUpState.setters)
       } else {
-        await signIn('credentials',
-          {
-            email: res.email,
-            password,
-            redirect: true,
-            callbackUrl: '/sign-up/thank-you-appr'
-          }
-      )
-      clearForm(setFirstName, setLastName, ...signUpState.setters)
-
+        signUpSubmitSideEffects(res, password) 
       }
     }
   }

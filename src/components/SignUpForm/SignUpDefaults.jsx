@@ -70,7 +70,7 @@ const SignUpDefaults = ({ signUpState }) => {
             </div>
 
             <div>
-                <label>State:</label>
+                <label htmlFor='state'>State:</label>
                  <USStatesDropdown state={state} setState={setState}/> 
             </div>
 

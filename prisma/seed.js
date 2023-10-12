@@ -4,12 +4,11 @@ const prisma = new PrismaClient();
 const {generateMockApprs} = require('./fakeApprentice')
 
 
-
 const createUserAndRole = (userData, roleData, relation) => {
 
   const newData = {...userData};
   newData[relation] = {create: roleData};
-
+ 
   return prisma.user.create({
       data: newData
   })
@@ -23,6 +22,7 @@ const users = [{
     state: "California",
     city: "Los Angeles",
     techStack: ["JavaScript", "React", "Node.js"],
+    emailVerified: new Date(Date.now()),
     bio: "I am the admin of this platform.",},
     roleData:{
        firstName: "Luke",
@@ -38,6 +38,7 @@ const users = [{
       role: "apprentice",
       state: "New York",
       city: "New York City",
+      emailVerified: new Date(Date.now()),
       techStack: ["Python", "Django", "React"],
       bio: "I am an aspiring developer looking for opportunities.",
     },
@@ -50,6 +51,7 @@ const users = [{
     userData: {
       name: "Horrible Stack Company",
       email: "crapstack@painfulcoding.com",
+      emailVerified: new Date(Date.now()),
       hashedPassword: 'Password123',
       role: "company",
       state: "Texas",

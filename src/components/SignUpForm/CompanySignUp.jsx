@@ -8,7 +8,7 @@ import { createCompany } from '@/lib/serverActions';
 import './signupform.css';
 import { useSignUpBundler, useErrors } from '@/hooks';
 import OnSuccess from './OnSuccess';
-import {signIn} from 'next-auth/react'
+import { signUpSubmitSideEffects } from '@/lib/signUpSubmitSideEffects';
 
 const CompanySignUp = () => {
   const [name, setName] = useState('')
@@ -27,19 +27,13 @@ const CompanySignUp = () => {
 
       if (pathname === ADMIN_ADD_COMPANY_PATH) {
         setSuccessMsg(`Successfully registered the ${name}.`);
+        clearForm(setName, setAddress, ...signUpState.setters);
       } else {
-         await signIn('credentials',
-          {
-            email: res.email,
-            password,
-            redirect: true,
-            callbackUrl: '/sign-up/thank-you-partner'
-          }
-         )
+       signUpSubmitSideEffects(res, password) 
       }
 
-      clearForm(setName, setAddress, ...signUpState.setters);
     }
+    return
   };
 
   clearSuccessMsg()
