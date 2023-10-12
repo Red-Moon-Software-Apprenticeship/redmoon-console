@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { buildEmailContents, createFallback, sendEmail} from '@/lib/emails';
-import { makeHTMLBody, makeSubjectAppr, makeSubjectComp } from '@lib/emails/thankYouVerifyEmail'
+import { makeHTMLBody, makeSubjectAppr, makeSubjectComp } from '@/lib/emails/thankYouVerifyEmail'
 
 
 // export const runtime ='edge' //uncomment once we have edge going
