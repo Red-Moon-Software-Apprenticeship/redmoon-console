@@ -9,16 +9,16 @@ export const createUser = (userData) => (
 
 //Abstraction of user and role creation
 
-export const createUserAndRole = (userData, roleData, relation) => {
+export const createUserRoleToken = (userData, roleData, verifToken, relation) => {
     //Nope, no spoofing allowed
     if (!relation || (relation !== 'apprentice' && relation !== 'company')){
         return null
     }
 
-    const newData = {...userData};
-    newData[relation] = {create: roleData};
+    userData[relation] = {create: roleData};
+    userData['verifToken'] = verifToken;
     return prisma.user.create({
-        data: newData
+        data: userData
     })
 }
 

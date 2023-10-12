@@ -15,7 +15,7 @@ model Account {
   userId            String
   type              String
   provider          String
-  providerAccountId String  
+  providerAccountId String
   refreshToken      String? @db.Text
   accessToken       String? @db.Text
   expiresAt         Int?
@@ -54,34 +54,28 @@ model User {
   sessions      Session[]
 
   //Added for Red Moons purposes 
-  hashedPassword String? //Temporary password, im not sure what alternative we're going with at the end, if we implement auth0 we can get rid of this
-  role           String
-  state          String
-  city           String
-  techStack      String[]     @default([])
-  bio            String?
-  admin          Admin[]      @relation("ColsOfAdmin")
-  apprentice     Apprentice[] @relation("ColsOfApprentice")
-  company        Company[]    @relation("ColsOfCompany")
-  verificationToken VerificationToken[] @relation("VerificationToken")
+  hashedPassword    String? //Temporary password, im not sure what alternative we're going with at the end, if we implement auth0 we can get rid of this
+  role              String
+  state             String
+  city              String
+  techStack         String[]              @default([])
+  bio               String?
+  admin             Admin[]               @relation("ColsOfAdmin")
+  apprentice        Apprentice[]          @relation("ColsOfApprentice")
+  company           Company[]             @relation("ColsOfCompany")
+  verifToken        VerificationRequest[] @relation("VerificationToken")
 }
 
 model VerificationRequest {
-  id         String   @id @default(cuid())
-  identifier String
-  token      String   @unique
-  expires    DateTime
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  id        String   @id @default(cuid())
+  token     String   
+  expires   DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String   @unique
+  user      User     @relation("VerificationToken", fields: [userId], references: [id], onDelete: Cascade)
 
-  @@unique([identifier, token])
-}
-
-model VerificationToken{
-  id String @id @default(cuid())
-  userId String @unique()
-  token String
-  user  User @relation("VerificationToken", fields: [userId], references: [id], onDelete: Cascade)
+  @@unique([id, token])
 }
 
 model Apprentice {
@@ -91,17 +85,17 @@ model Apprentice {
   lastName               String
   level                  Int            @default(1)
   apprenticeSubscription Subscription[] @relation("SubscribedToApprentice")
-  user                   User           @relation("ColsOfApprentice", fields: [userId], references: [id],  onDelete: Cascade, onUpdate: Cascade)
+  user                   User           @relation("ColsOfApprentice", fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
+
 //The following three tables will need left joins in order to be accessed appropriately.
 model Admin {
   id        String @id @default(cuid())
   userId    String @unique
   firstName String
   lastName  String
-  user      User   @relation("ColsOfAdmin", fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade )
+  user      User   @relation("ColsOfAdmin", fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
-
 
 model Company {
   id                   String         @id @default(cuid())
@@ -109,8 +103,7 @@ model Company {
   address              String
   employerSubscription Subscription[] @relation("SubscribedEmployer")
   companyIssue         Issue[]        @relation("IssuedCompany")
-  user                 User           @relation("ColsOfCompany", fields: [userId], references: [id],  onDelete: Cascade, onUpdate: Cascade )
-
+  user                 User           @relation("ColsOfCompany", fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
 model Issue {

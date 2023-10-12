@@ -23,7 +23,7 @@ export const sendEmail = async (emailOptions)=>{
         console.log('success')
             
     } catch(error) {
-        console.error('aiiiyaaaahhh...whyyyyy')
+        console.error('Error sending the email.')
 
 
     }

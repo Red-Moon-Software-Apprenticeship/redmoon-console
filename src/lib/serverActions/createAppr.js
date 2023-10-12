@@ -1,8 +1,9 @@
 "use server"
 import { hash } from "bcrypt"
 import { validateNewAppr } from "../validations/validateNewAppr"
-import { createUserAndRole } from "@/database/users/createUser"
+import { createUserRoleToken } from "@/database/users/createUser"
 import { createUserErrors } from "./_sharedErrors"
+import { createVerifToken } from "./_createVerifReq"
 
 export const createAppr = async (formData) => {
     const data = Object.fromEntries(formData);
@@ -30,8 +31,11 @@ export const createAppr = async (formData) => {
             lastName,
             level: 1
         }
+    
+    const verifToken = createVerifToken()
+
     try {
-        const newAppr = await createUserAndRole(userData, roleData, role)
+        const newAppr = await createUserRoleToken(userData, roleData, verifToken, role)
         return newAppr;
         
     } catch (error) {
