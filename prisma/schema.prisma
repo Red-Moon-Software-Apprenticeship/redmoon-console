@@ -87,6 +87,7 @@ model Apprentice {
   level                  Int            @default(1)
   apprenticeSubscription Subscription[] @relation("SubscribedToApprentice")
   user                   User           @relation("ColsOfApprentice", fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  githubIssue            ApprFirstPR @relation("PullAuthor")           
 }
 
 //The following three tables will need left joins in order to be accessed appropriately.
@@ -125,4 +126,13 @@ model Subscription {
   cost         Float      @map("numeric(10, 2)")
   employer     Company    @relation("SubscribedEmployer", fields: [employerId], references: [id])
   apprentice   Apprentice @relation("SubscribedToApprentice", fields: [apprenticeId], references: [id])
+}
+
+model ApprFirstPR{
+  id String @id @default(cuid())
+  apprId String @unique
+  url String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())    
+  issueAuthor Apprentice @relation("PullAuthor", fields: [apprId], references: [id])
 }
