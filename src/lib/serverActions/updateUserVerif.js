@@ -28,7 +28,7 @@ export const updateUserVerif = async (data, userId) => {
         }
     
     } catch (error) {
-        console.log(error)
+ 
         return {errors: ['Unsuccesful Verification']}
     }
 }

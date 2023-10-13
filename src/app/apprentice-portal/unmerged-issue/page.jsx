@@ -1,7 +1,7 @@
 import React from 'react';
 import Layout from '@/components/Layout/Layout';
 import Link from 'next/link';
-import IssueSubmissionForm from './IssueSubmissionForm';
+import IssueSubmitForm from './IssueSubmitForm';
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
@@ -11,7 +11,7 @@ const UnmergedIssue = async () => {
     const session = await getServerSession(authOptions);
     const role = session?.user?.role;
     const userId = session?.user?.id;
-    if (!session || !["admin", "apprentice"].includes(role)) {
+    if (!session || !(role === "apprentice" || role ==='admin')) {
         redirect("/");
     }
 
@@ -34,8 +34,10 @@ const UnmergedIssue = async () => {
                 </li>
             </ul>
 
-            <p>Once you finish, please submit your project below</p>
-            <IssueSubmissionForm userId={userId}/>
+            <div className='flex-center flex-col'>
+                <p>Once you finish, please submit your project below</p>
+                <IssueSubmitForm userId={userId}/>
+            </div>
         </Layout>
     );
 };

@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import { redirect } from 'next/navigation';
 import { upsertAdmissionPR } from '@/lib/serverActions/upsertAdmissionPR';
 
-const IssueSubmissionForm = ({userId}) => {
+const  IssueSubmitForm = ({userId}) => {
   const [pullRequestUrl, setPullRequestUrl] = useState('')
   const [successMsg, setSuccessMsg] = useState('')
   const [errors, setErrors, clearErrorsEffect, Errors] = useErrors()
@@ -36,4 +36,4 @@ const IssueSubmissionForm = ({userId}) => {
     );
 };
 
-export default IssueSubmissionForm;
+export default IssueSubmitForm;

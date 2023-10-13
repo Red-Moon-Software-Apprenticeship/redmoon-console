@@ -28,8 +28,7 @@ export const upsertAdmissionPR = async (data, userId) => {
         return { message: "success", data: newPR }
 
     } catch (error) {
-        console.log(error)
-        return { errors: ['Unsucessful submission'] }
+         return { errors: ['Unsucessful submission'] }
     }
 
 }

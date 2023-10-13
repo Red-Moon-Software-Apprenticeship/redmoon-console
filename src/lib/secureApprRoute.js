@@ -6,9 +6,8 @@ export const secureApprRoute = async () => {
     const session = getServerSession(authOptions);
     const role = session?.user?.role;
 
-    if (!session || !["admin", "apprentice"].includes(role)) {
+    if (!session || !(role === "apprentice" || role ==='admin')) {
         redirect("/");
-    }
-
+      }
     
-} 
+}
