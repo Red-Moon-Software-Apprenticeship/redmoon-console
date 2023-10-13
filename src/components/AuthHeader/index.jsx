@@ -9,10 +9,10 @@ import Link from 'next/link';
 
 const AuthHeader = () => {
   const {data: session} = useSession()
- 
+
   return (
     <div>
-        {(session && session.user) ? <LoggedIn/> : <LoggedOut/>}     
+        {(session && session.user) ? <LoggedIn name={session.user.name}/> : <LoggedOut/>}     
         {(session && session.user && session.user.subRole === 'unverified') && 
            <button>
             <Link href='/auth/verify'>

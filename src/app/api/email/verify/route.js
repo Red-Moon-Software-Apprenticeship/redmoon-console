@@ -1,6 +1,4 @@
 import POST from "./post";
 
-export {
-         POST as POST,
 
-        };
+export {POST as POST};

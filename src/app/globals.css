@@ -9,6 +9,7 @@
 .flex-right,
 .flex-evenly,
 .sb,
+.flex-around,
 .flex-row,
 .flex-col{
     display: flex;
@@ -35,6 +36,10 @@
 .flex-evenly{
     justify-content: space-evenly;
     align-items: center;
+}
+
+.flex-around{
+    justify-content: space-around;
 }
 
 .flex-row{

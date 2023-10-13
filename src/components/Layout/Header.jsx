@@ -7,7 +7,7 @@ import Link from 'next/link';
 const Header = () => {
 
   return (
-    <header>
+    <header className='flex-around'>
         <Link href='/'>
 
           <h1>Red Moon Apprenticeship</h1>

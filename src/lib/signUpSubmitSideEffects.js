@@ -9,7 +9,7 @@ import {createReq} from "./createReqObj";
 //2. Signs in the new user
 export const signUpSubmitSideEffects = async(res, password) => {
     const {email, verifToken: token, role } = res;
-    fetch('/api/email/verify', createReq("POST", {email, token, role})) //Don't await this or even error handle it, if it fails we don't want to block the
+    fetch('/api/email/first-verify', createReq("POST", {email, token, role})) //Don't await this or even error handle it, if it fails we don't want to block the
     await signIn('credentials',
           {
             email,

@@ -3,15 +3,13 @@ import React, { useState } from 'react';
 import SignUpDefaults from './SignUpDefaults';
 import { createAppr } from '@/lib/serverActions';
 import { clearForm } from '@/lib/clearForm';
-import { redirect, usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { ADMIN_ADD_APPRENTICE_PATH } from '@/lib/constants';
 import './signupform.css'
 import { useSignUpBundler, useErrors } from '@/hooks';
-import OnSuccess from './OnSuccess';
-import {signIn } from 'next-auth/react';
-import { createReq } from '@/lib/createReqObj';
+import OnSuccess from '../OnSuccess';
 import { signUpSubmitSideEffects } from '@/lib/signUpSubmitSideEffects';
-import Error from 'next/error';
+
 const ApprSignUp = ({ }) => {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')

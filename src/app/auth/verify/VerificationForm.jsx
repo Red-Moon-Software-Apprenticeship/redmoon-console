@@ -1,15 +1,17 @@
 "use client"
-import Errors from '@/components/Errors';
 import { useErrors } from '@/hooks';
 import { updateUserVerif } from '@/lib/serverActions/updateUserVerif';
 import React, {useState} from 'react';
 import { useSession } from 'next-auth/react';
-import { redirect } from 'next/dist/server/api-utils';
+import OnSuccess from '@/components/OnSuccess';
+import SendAnotherToken from './SendAnotherToken';
+import { redirect } from 'next/navigation';
 
 const VerificationForm = () => {
   const [token, setToken] = useState('')
-  const [errors, setErrors, clearErrorsEffect] = useErrors()
-  const [success, setSuccess] = useState("") 
+  const [errors, setErrors, clearErrorsEffect, Errors] = useErrors()
+  const {update} = useSession()
+  const [successMsg, setSuccessMsg] = useState("") 
   const {data: session} = useSession()
 
   const formAction = async (data) =>{
@@ -17,12 +19,20 @@ const VerificationForm = () => {
     if (res?.errors) {
       setErrors(res.errors)
     } else{
-      setSuccess(res.msg)
-      redirect('/')
+      setSuccessMsg(res.msg)
+      update()
+      setTimeout(() => {
+        redirect('/')
+      }, 4000 )
     }
   }
   
   clearErrorsEffect(token)
+
+  if (session?.user?.subRole !== 'unverified') {
+    redirect('/')
+  }
+  
   return (
   <>
    <form action={formAction}>
@@ -31,6 +41,8 @@ const VerificationForm = () => {
       <button>Submit</button>
    </form> 
    <Errors errors={errors}/>
+   <OnSuccess successMsg={successMsg}/> 
+   <SendAnotherToken email={session?.user?.email} name={session?.user?.name}/>
   </>
   );
 };

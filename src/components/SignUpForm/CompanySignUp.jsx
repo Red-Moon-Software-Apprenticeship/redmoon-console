@@ -7,9 +7,8 @@ import { ADMIN_ADD_COMPANY_PATH } from '@/lib/constants';
 import { createCompany } from '@/lib/serverActions';
 import './signupform.css';
 import { useSignUpBundler, useErrors } from '@/hooks';
-import OnSuccess from './OnSuccess';
+import OnSuccess from '../OnSuccess';
 import { signUpSubmitSideEffects } from '@/lib/signUpSubmitSideEffects';
-import Errors from '../Errors';
 
 const CompanySignUp = () => {
   const [name, setName] = useState('')
@@ -18,8 +17,8 @@ const CompanySignUp = () => {
   const signUpState = useSignUpBundler();
   const [password] = signUpState.getters;
   const [successMsg, setSuccessMsg, clearSuccessMsg] = signUpState.successState;
-  const [errors, setErrors, clearErrorsEffect] = useErrors();
-
+  const [errors, setErrors, clearErrorsEffect, Errors] = useErrors();
+  
   const formAction = async (data) => {
     const res = await createCompany(data);
     if (res?.errors) {
