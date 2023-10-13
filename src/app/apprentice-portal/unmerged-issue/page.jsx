@@ -1,10 +1,19 @@
 import React from 'react';
-import { secureApprRoute } from '@/lib/secureApprRoute';
 import Layout from '@/components/Layout/Layout';
+import Link from 'next/link';
+import IssueSubmissionForm from './IssueSubmissionForm';
+import { getServerSession } from 'next-auth';
+import { redirect } from 'next/navigation';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 
-const UnmergedIssue = () => {
+const UnmergedIssue = async () => {
 
-    secureApprRoute()
+    const session = await getServerSession(authOptions);
+    const role = session?.user?.role;
+    const userId = session?.user?.id;
+    if (!session || !["admin", "apprentice"].includes(role)) {
+        redirect("/");
+    }
 
     return (
         <Layout>
@@ -14,19 +23,19 @@ const UnmergedIssue = () => {
 
             <ul>
                 <li>
-                    <h4></h4>
-                    <Link href=''>
+                    <Link href='https://github.com/Red-Moon-Software-Apprenticeship/redmoon-console' target='_blank'>
+                        Redmoon Console
                     </Link>
                 </li>
                 <li>
-                    <h4></h4>
-                    <Link href=''>
+                    <Link href='https://github.com/Red-Moon-Software-Apprenticeship/redmoon-code-screen' target='_blank'>
+                        Redmoon code screen
                     </Link>
                 </li>
             </ul>
 
-            <p>Once you finish, please submit your project bellow</p>
-            
+            <p>Once you finish, please submit your project below</p>
+            <IssueSubmissionForm userId={userId}/>
         </Layout>
     );
 };
