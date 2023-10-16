@@ -10,7 +10,9 @@ const Header = () => {
     <header className='flex-around'>
         <Link href='/'>
 
-          <h1>Red Moon Apprenticeship</h1>
+          <span>
+            Red Moon Apprenticeship
+          </span>
         </Link>
         <AuthProvider>
           <AuthHeader/>

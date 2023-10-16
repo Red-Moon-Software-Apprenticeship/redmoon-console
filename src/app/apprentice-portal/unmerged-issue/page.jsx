@@ -36,6 +36,7 @@ const UnmergedIssue = async () => {
 
             <div className='flex-center flex-col'>
                 <p>Once you finish, please submit your project below</p>
+                <p>A Redmoon staff member will review your project and merge it into our projects.</p>
                 <IssueSubmitForm userId={userId}/>
             </div>
         </Layout>

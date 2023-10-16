@@ -10,6 +10,7 @@ import { useSignUpBundler, useErrors } from '@/hooks';
 import OnSuccess from '../OnSuccess';
 import { signUpSubmitSideEffects } from '@/lib/signUpSubmitSideEffects';
 
+
 const ApprSignUp = ({ }) => {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
@@ -17,7 +18,7 @@ const ApprSignUp = ({ }) => {
   const signUpState = useSignUpBundler()
   const [password] = signUpState.getters;
   const [successMsg, setSuccessMsg] = signUpState.successState;
-  const [errors, setErrors, clearErrorsEffect] = useErrors()
+  const [errors, setErrors, clearErrorsEffect, Errors] = useErrors()
 
   const formAction = async (data) => {
     const res = await createAppr(data)

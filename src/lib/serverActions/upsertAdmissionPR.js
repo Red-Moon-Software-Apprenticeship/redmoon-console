@@ -1,6 +1,7 @@
 "use server"
 import { prisma } from '@/database'
 
+//upsert: either create or update
 export const upsertAdmissionPR = async (data, userId) => {
     const { pullRequestURL: url } = Object.fromEntries(data);
     try {
@@ -25,6 +26,7 @@ export const upsertAdmissionPR = async (data, userId) => {
                 url
             }
         })
+        
         return { message: "success", data: newPR }
 
     } catch (error) {
