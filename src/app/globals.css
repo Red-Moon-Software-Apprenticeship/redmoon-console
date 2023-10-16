@@ -63,3 +63,10 @@
     padding-block: 2.75rem;
 }
 
+
+.read-only-input {
+    background-color: #f1f1f1; 
+    border: 1px solid #ccc;
+    pointer-events: none;     
+    color: #a9a9a9;
+}

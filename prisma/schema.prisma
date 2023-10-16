@@ -87,7 +87,7 @@ model Apprentice {
   level                  Int            @default(1)
   user                   User           @relation("ColsOfApprentice", fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   apprenticeSubscription Subscription[] @relation("SubscribedToApprentice")
-  githubIssue            ApprFirstPR[]  @relation("PullAuthor")
+  githubIssue            ApprFirstPR?    @relation("PullAuthor")
 }
 
 //The following three tables will need left joins in order to be accessed appropriately.
@@ -131,8 +131,8 @@ model Subscription {
 model ApprFirstPR {
   id          String     @id @default(cuid())
   apprId      String     @unique
-  url         String
+  url         String     @default("")
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @default(now())
-  issueAuthor Apprentice @relation("PullAuthor", fields: [apprId], references: [id], onUpdate: Cascade)
+  issueAuthor Apprentice @relation("PullAuthor", fields: [apprId], references: [id], onUpdate: Cascade, onDelete: Cascade)
 }
