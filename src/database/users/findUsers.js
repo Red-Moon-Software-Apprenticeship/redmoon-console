@@ -21,9 +21,34 @@ export const getApprsProfile  = async() => (
 )
 
 
+export const getApplicantApprs = async() => (
+await prisma.user.findMany({
+        where: {
+            role: 'apprentice',
+            subRole: 'unmerged issue'
+        },
+        select: {
+            id: true,
+            name: true,
+            email: true,
+            apprentice: {
+                select: {
+                    githubIssue: {
+                        select: {
+                            url: true
+                        }
+                    }
+                }
+            }
+        }
+    })
+
+)
+
 export const getAdmins = async (userQuery) => (
     await getUsersLeftJoin(prisma.admin, userQuery)
 )
 export const getCompanies = async (userQuery) => (
     await getUsersLeftJoin(prisma.company, userQuery)
 )
+
