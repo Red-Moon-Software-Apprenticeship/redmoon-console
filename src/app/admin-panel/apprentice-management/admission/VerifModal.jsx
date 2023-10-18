@@ -1,15 +1,38 @@
+"use client"
 import ModalLayout from '@/components/ModalLayout/ModalLayout';
-import React from 'react';
+import OnSuccess from '@/components/OnSuccess';
+import { useErrors } from '@/hooks';
+import { createReq } from '@/lib/createReqObj';
+import React, { useState } from 'react';
 
-const VerifModal = ({ toggleModal }) => {
+const VerifModal = ({ toggleModal, userId  }) => {
 
-  const handleOnClick = (e) => {
-      e.preventDefault()
-      e.stopPropagation()
-      
-      //make a request to the route resposnible for manually verifying the user
-  }
+  const [successMsg, setSuccessMsg] = useState('');
+  const [errors, setErrors, _, Errors] = useErrors()
 
+  const handleOnClick = async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    try {
+        // Define the API endpoint. Update this to your actual endpoint.
+
+        const verifBody = {userId, emailVerified: new Date(Date.now())}
+        const response = await fetch('/api/user/admin-override/verify', createReq('PATCH', verifBody))
+        
+        if (response.ok) {
+            setSuccessMsg("User succesfully verified")
+            toggleModal()
+          
+        } else {
+        
+            const errorData = await response.json();
+            setErrors(errorData);
+        }
+    } catch (error) {
+        setErrors(error.errors);
+    }
+}
   return (
     <ModalLayout toggleModal={toggleModal}>
       <dialog open onClick={e => e.stopPropagation()}>
@@ -17,13 +40,15 @@ const VerifModal = ({ toggleModal }) => {
         <p>You should let them know separately that their account has been verified</p>
         <div className="flex-center">
 
-          <button onClick={toggleModal}>
+          <button onClick={handleOnClick}>
             Verify
           </button>
           <button onClick={toggleModal}>
             Exit
           </button>
         </div>
+        {successMsg && <OnSuccess successMsg={successMsg}/>}
+        {!!errors.length && <Errors errors={errors}/>} 
       </dialog>
     </ModalLayout>
   );

@@ -39,7 +39,7 @@ const Admission = async () => {
                 <td>{applicant.email}</td>
                 <td>{applicant?.apprentice[0]?.githubIssue?.url}</td>
                 <td><ApproveButton userId={applicant.id} /></td>
-                <td><VerifModalBtn/></td>
+                <td><VerifModalBtn userId={applicant.id}/></td>
               </tr>
 
             )}

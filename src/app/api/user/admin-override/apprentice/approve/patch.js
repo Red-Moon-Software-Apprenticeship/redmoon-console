@@ -1,8 +1,6 @@
 import { NextResponse } from 'next/server';
 
-const handler = (req) => {
-    
-    
+const PATCH = (req) => {
 
     try{
 
@@ -17,4 +15,4 @@ const handler = (req) => {
 
 }
 
-export default handler;
+export default PATCH;

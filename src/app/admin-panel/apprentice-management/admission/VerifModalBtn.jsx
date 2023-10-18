@@ -2,7 +2,7 @@
 import React, {useState} from 'react';
 import VerifModal from './VerifModal';
 
-const VerifModalBtn = () => {
+const VerifModalBtn = ({userId}) => {
     const [verifModal, setVerifModal] = useState(false ) 
 
     const toggleVerifModal = () => { 
@@ -16,7 +16,7 @@ const VerifModalBtn = () => {
   return (
     <>
       <button onClick={handleOnClick}>Verify User</button>
-      {verifModal && <VerifModal toggleModal={toggleVerifModal}/>}    
+      {verifModal && <VerifModal toggleModal={toggleVerifModal} userId={userId}/>} 
     </>
   );
 };
