@@ -15,7 +15,6 @@ const VerifModal = ({ toggleModal, userId  }) => {
     e.stopPropagation();
     
     try {
-        // Define the API endpoint. Update this to your actual endpoint.
 
         const verifBody = {userId, emailVerified: new Date(Date.now())}
         const response = await fetch('/api/user/admin-override/verify', createReq('PATCH', verifBody))

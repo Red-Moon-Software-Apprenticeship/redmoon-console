@@ -1,18 +1,43 @@
 'use client'
-import React, {useState} from 'react';
+import { createReq } from '@/lib/createReqObj';
+import React, {useEffect, useState} from 'react';
 
 const ApprovalButton = ({userId}) => {
   const [isApproved, setIsApproved] = useState(false)
-   
-  const handleOnClick = (e) => {
+  const [errors, setErrors] = useState([])
+  const handleOnClick = async e => {
+    e.stopPropagation()
+    e.preventDefault()
+
+    const body = {
+      userId,
+      subRole: ''
+    }
+    try {
+      const  response = await fetch('/api/user/admin-override/apprentice/approve', createReq('PATCH', body))
+      // if (response.ok) setIsApproved(!isApproved)
+
+    } catch (error) {
+       setErrors(['Error'])
+       
+    }
+
     
-    setIsApproved(!isApproved) 
-    console.log(userId)
+
   }
+
+  useEffect(()=>{
+    if(errors.length){
+      setTimeout(()=>{ setErrors([]) }, 3000)
+    } 
+  }
+    , [errors])
 
   return (
     <button onClick={handleOnClick} className={`${isApproved ? 'read-only-input': ''}`}>
-        {isApproved ? 'Approved!' : 'Admit'}
+        { errors.length
+          ? [errors][0]
+          : isApproved ? 'Approved!' : 'Admit'}
     </button>
   );
 };
