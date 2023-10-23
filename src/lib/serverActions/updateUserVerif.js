@@ -1,6 +1,7 @@
 "use server"
 import { prisma } from "@/database";
 import { findUsersVerifAttrs } from "@/database/users/findUserToken";
+import { updateSelfVerifStatus } from "@/database/users/updateUser";
 
 export const updateUserVerif = async (data, userId) => {
     const {token} = Object.fromEntries(data);    
@@ -14,16 +15,8 @@ export const updateUserVerif = async (data, userId) => {
             throw new Error('You are already verified!')
 
         } else{
-           await prisma.user.update({
-                where: {
-                    id: userId
-                },
-               
-                data:{ 
-                    emailVerified: new Date(Date.now()),
-                    subRole: role === 'apprentice' ? 'unmerged issue' : ''
-                }
-            })
+            
+            await updateSelfVerifStatus(userId, role)
             return ({msg: 'Successful Verification!'})
         }
     
