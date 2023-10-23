@@ -15,14 +15,13 @@ const ApprovalButton = ({userId}) => {
     }
     try {
       const  response = await fetch('/api/user/admin-override/apprentice/approve', createReq('PATCH', body))
-      // if (response.ok) setIsApproved(!isApproved)
+      if (response.ok) setIsApproved(!isApproved)
 
     } catch (error) {
        setErrors(['Error'])
        
     }
 
-    
 
   }
 
