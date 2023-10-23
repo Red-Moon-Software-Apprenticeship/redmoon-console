@@ -17,7 +17,6 @@ const Admission = async () => {
   }
   const applicants = await getApplicantApprs()
 
-
   return (
     <Layout>
       <h1>Approve Git Pull Requests</h1>
@@ -39,7 +38,11 @@ const Admission = async () => {
                 <td>{applicant.email}</td>
                 <td>{applicant?.apprentice[0]?.githubIssue?.url}</td>
                 <td><ApproveButton userId={applicant.id} /></td>
-                <td><VerifModalBtn userId={applicant.id}/></td>
+                <td><VerifModalBtn
+                     userId={applicant.id}
+                     emailVerified={applicant.emailVerified ? applicant.emailVerified : ""}    
+                     />
+                </td>
               </tr>
 
             )}

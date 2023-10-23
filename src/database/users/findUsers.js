@@ -31,6 +31,7 @@ await prisma.user.findMany({
             id: true,
             name: true,
             email: true,
+            emailVerified: true,
             apprentice: {
                 select: {
                     githubIssue: {
