@@ -2,7 +2,7 @@
 import { hash } from "bcrypt"
 import { validateNewAppr } from "../validations/validateNewAppr"
 import { createUserRoleToken } from "@/database/users/createUser"
-import { createUserErrors } from "./_sharedErrors"
+import { createUserErrors } from "../sharedErrors"
 import { createVerifToken } from "./_createVerifReq"
 
 export const createAppr = async (formData) => {

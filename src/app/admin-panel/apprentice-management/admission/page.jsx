@@ -5,7 +5,6 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { redirect } from 'next/navigation';
 import { getApplicantApprs } from '@/database/users/findUsers';
 import ApproveButton from './ApproveButton'
-import VerifModal from './VerifModal';
 import VerifModalBtn from './VerifModalBtn';
 
 const Admission = async () => {

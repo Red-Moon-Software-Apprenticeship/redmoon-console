@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import {prisma} from '@/database';
 import { updateUserVerifStatus } from '@/database/users/updateUser';
+import { createUserErrors } from '@/lib/sharedErrors';
 
 const PATCH = async (req) => {
     
@@ -13,10 +14,10 @@ const PATCH = async (req) => {
             
         return NextResponse.json({msg: updatedUser}, {status: 200})
     }catch(error){
-        let err, status = 500
 
+        let err = createUserErrors(error), status = 500
 
-        return NextResponse.json({errors: [error]}, {status})
+        return NextResponse.json({errors: [err]}, {status})
 
     }
 
