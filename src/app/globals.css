@@ -9,6 +9,7 @@
 .flex-right,
 .flex-evenly,
 .sb,
+.flex-around,
 .flex-row,
 .flex-col{
     display: flex;
@@ -37,6 +38,10 @@
     align-items: center;
 }
 
+.flex-around{
+    justify-content: space-around;
+}
+
 .flex-row{
     flex-direction: row;
 }
@@ -58,3 +63,10 @@
     padding-block: 2.75rem;
 }
 
+
+.read-only-input {
+    background-color: #f1f1f1; 
+    border: 1px solid #ccc;
+    pointer-events: none;     
+    color: #a9a9a9;
+}

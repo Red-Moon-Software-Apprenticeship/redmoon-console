@@ -3,12 +3,13 @@ import React, { useState } from 'react';
 import SignUpDefaults from './SignUpDefaults';
 import { createAppr } from '@/lib/serverActions';
 import { clearForm } from '@/lib/clearForm';
-import { redirect, usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { ADMIN_ADD_APPRENTICE_PATH } from '@/lib/constants';
 import './signupform.css'
 import { useSignUpBundler, useErrors } from '@/hooks';
-import OnSuccess from './OnSuccess';
-import {signIn } from 'next-auth/react';
+import OnSuccess from '../OnSuccess';
+import { signUpSubmitSideEffects } from '@/lib/signUpSubmitSideEffects';
+
 
 const ApprSignUp = ({ }) => {
   const [firstName, setFirstName] = useState('')
@@ -17,27 +18,18 @@ const ApprSignUp = ({ }) => {
   const signUpState = useSignUpBundler()
   const [password] = signUpState.getters;
   const [successMsg, setSuccessMsg] = signUpState.successState;
-  const [errors, setErrors, clearErrorsEffect] = useErrors()
+  const [errors, setErrors, clearErrorsEffect, Errors] = useErrors()
 
   const formAction = async (data) => {
     const res = await createAppr(data)
     if (res?.errors) {
       setErrors(res.errors)
     } else {
-      //Pathbased logic, using the path we can determine 
       if (pathname === ADMIN_ADD_APPRENTICE_PATH) {
         setSuccessMsg(`Sucessfully added ${firstName} ${lastName} to the database.`)
+        clearForm(setFirstName, setLastName, ...signUpState.setters)
       } else {
-        await signIn('credentials',
-          {
-            email: res.email,
-            password,
-            redirect: true,
-            callbackUrl: '/sign-up/thank-you-appr'
-          }
-      )
-      clearForm(setFirstName, setLastName, ...signUpState.setters)
-
+        signUpSubmitSideEffects(res, password) 
       }
     }
   }
@@ -67,13 +59,7 @@ const ApprSignUp = ({ }) => {
           <button>Submit</button>
         </div>
 
-        {!!errors.length &&
-          <ul>
-            {errors.map((error, idx) =>
-              <li key={idx}>{error}</li>
-            )}
-          </ul>
-        }
+        <Errors errors={errors} /> 
         <OnSuccess successMsg={successMsg} />
 
       </form>

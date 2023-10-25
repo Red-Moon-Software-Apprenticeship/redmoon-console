@@ -7,8 +7,8 @@ import { ADMIN_ADD_COMPANY_PATH } from '@/lib/constants';
 import { createCompany } from '@/lib/serverActions';
 import './signupform.css';
 import { useSignUpBundler, useErrors } from '@/hooks';
-import OnSuccess from './OnSuccess';
-import {signIn} from 'next-auth/react'
+import OnSuccess from '../OnSuccess';
+import { signUpSubmitSideEffects } from '@/lib/signUpSubmitSideEffects';
 
 const CompanySignUp = () => {
   const [name, setName] = useState('')
@@ -17,8 +17,8 @@ const CompanySignUp = () => {
   const signUpState = useSignUpBundler();
   const [password] = signUpState.getters;
   const [successMsg, setSuccessMsg, clearSuccessMsg] = signUpState.successState;
-  const [errors, setErrors, clearErrorsEffect] = useErrors();
-
+  const [errors, setErrors, clearErrorsEffect, Errors] = useErrors();
+  
   const formAction = async (data) => {
     const res = await createCompany(data);
     if (res?.errors) {
@@ -27,19 +27,13 @@ const CompanySignUp = () => {
 
       if (pathname === ADMIN_ADD_COMPANY_PATH) {
         setSuccessMsg(`Successfully registered the ${name}.`);
+        clearForm(setName, setAddress, ...signUpState.setters);
       } else {
-         await signIn('credentials',
-          {
-            email: res.email,
-            password,
-            redirect: true,
-            callbackUrl: '/sign-up/thank-you-partner'
-          }
-         )
+       signUpSubmitSideEffects(res, password) 
       }
 
-      clearForm(setName, setAddress, ...signUpState.setters);
     }
+    return
   };
 
   clearSuccessMsg()
@@ -67,13 +61,7 @@ const CompanySignUp = () => {
           <button>Submit</button>
         </div>
 
-        {!!errors.length &&
-          <ul>
-            {errors.map((error, idx) =>
-              <li key={idx}>{error}</li>
-            )}
-          </ul>
-        }
+        <Errors errors={errors}/>
         <OnSuccess successMsg={successMsg} />
       </form>
     </>

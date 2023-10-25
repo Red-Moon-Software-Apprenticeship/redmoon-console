@@ -1,8 +1,9 @@
 "use server"
 import { hash } from "bcrypt"
-import { createUserAndRole } from "@/database/users/createUser"
+import { createUserRoleToken } from "@/database/users/createUser"
 import { validateNewCompany } from "../validations"
-import { createUserErrors } from "./_sharedErrors"
+import { createUserErrors } from "../sharedErrors"
+import { createVerifToken } from "./_createVerifReq"
 
 export const createCompany = async (formData) => {
     const data =  Object.fromEntries(formData)
@@ -27,9 +28,9 @@ export const createCompany = async (formData) => {
     const roleData = {
         address
     }
-
+    const verifToken = createVerifToken()
     try {
-        const newCompany = createUserAndRole(userData, roleData, role)
+        const newCompany = createUserRoleToken(userData, roleData, verifToken, role)
         return newCompany
     } catch (error) {
         

@@ -14,7 +14,11 @@ const ApprenticeManagement = async() => {
           Add an Apprentice
         </Link>
       </button>
- 
+      <button>
+        <Link href='/admin-panel/apprentice-management/admission'>
+          Admit an Apprentice        
+        </Link>
+      </button>
        <div className='flex-center'>
         <table>
             <tbody>

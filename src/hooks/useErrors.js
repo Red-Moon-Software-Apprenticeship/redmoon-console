@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react';
-
+import Errors from '@/components/Errors';
 
 
 export const useErrors = () =>{
@@ -10,6 +10,6 @@ export const useErrors = () =>{
         setErrors([])
     }, depedencies))
 
-   return [errors, setErrors, clearErrorsEffect]
+   return [errors, setErrors, clearErrorsEffect, Errors]
 }
 

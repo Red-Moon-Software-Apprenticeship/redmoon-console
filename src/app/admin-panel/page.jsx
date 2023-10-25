@@ -13,11 +13,9 @@ const AdminPanel = async () => {
         <Layout>
             <section>
                 <h3>Apprentices</h3>
-
                 <Link href='/admin-panel/apprentice-management'>
                     Apprentice management portal
                 </Link>
-
             </section>
             <section>
                 <h3>Partners</h3>

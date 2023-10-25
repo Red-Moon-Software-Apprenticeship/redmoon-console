@@ -11,7 +11,7 @@ const LoggedOut = () => {
                 Sign in
             </button>
             <button>
-                <Link href='/auth/new'>
+                <Link href='/sign-up'>
                     Sign up
                 </Link>
             </button>

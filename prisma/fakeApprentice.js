@@ -17,6 +17,7 @@ const generateMockApprs = (num) => {
             email: email,
             hashedPassword: 'Password123',
             role: "apprentice",
+            emailVerified: new Date(Date.now()),
             state: faker.address.state(),
             city: faker.address.city(),
             techStack: [faker.random.arrayElement(stackOptions), 

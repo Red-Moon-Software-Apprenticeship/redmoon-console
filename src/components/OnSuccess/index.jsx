@@ -1,7 +1,7 @@
 import React from 'react';
-import './signupform.css'
 
 const OnSuccess = ({successMsg}) => {
+
 
   return (
     <>
