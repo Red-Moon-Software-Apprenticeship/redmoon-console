@@ -2,13 +2,15 @@
 import { useErrors } from '@/hooks';
 import React, { useState } from 'react';
 import OnSuccess from '@/components/OnSuccess';
-const PasswordChangeForm =() => {
+import { createReq } from '@/lib/createReqObj';
+
+const PasswordChangeForm =({userId}) => {
     const [currentPassword, setCurrentPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [errors, setErrors, clearErrorsEffect, Errors] = useErrors()
     const [successMsg, setSuccessMsg] = useState('') 
-    
+        
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -17,7 +19,17 @@ const PasswordChangeForm =() => {
             return;
         }
 
+        const body = 
+                    {
+                        userId, 
+                        password: currentPassword,
+                        newPassword 
+                    }
+
+
         try {
+           
+            const res = await fetch('/api/user/password', createReq('patch', body))
             
         } catch (error) {
             
