@@ -9,8 +9,8 @@ const ApprNav = async () => {
     return (
         <>
             <li>
-                <Link href='/apprentice-portal'>
-                    My Portal
+                <Link href='/my-profile'> 
+                    My Profile
                 </Link>
             </li>
             { subRole === 'unmerged issue' &&
