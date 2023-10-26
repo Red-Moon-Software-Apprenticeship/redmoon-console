@@ -15,26 +15,30 @@ export const createCompany = async (formData) => {
     
     const {name, email, password, state, city, address} = data;
     const role = 'company';
-    const hashedPassword = await hash(password, 11)
-    const userData = {
-        name,
-        email,
-        hashedPassword,
-        role,
-        state,
-        city
-    }
 
-    const roleData = {
-        address
-    }
-    const verifToken = createVerifToken()
     try {
-        const newCompany = createUserRoleToken(userData, roleData, verifToken, role)
+
+        const hashedPassword = await hash(password, 11)
+        const userData = {
+            name,
+            email,
+            hashedPassword,
+            role,
+            state,
+            city
+        }
+
+        const roleData = {
+            address
+        }
+        const verifToken = createVerifToken()
+
+        const newCompany = await createUserRoleToken(userData, roleData, verifToken, role)
         return newCompany
     } catch (error) {
-        
-        return createUserErrors(error)
+
+        const {errors} = createUserErrors(error)
+        return {errors}
 
 
     }

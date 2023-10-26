@@ -39,7 +39,8 @@ export const createAppr = async (formData) => {
         return newAppr;
         
     } catch (error) {
-        return createUserErrors(error)
+        const {errors} = createUserErrors(error)
+        return {errors}
 
     }
 
