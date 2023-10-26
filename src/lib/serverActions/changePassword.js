@@ -7,14 +7,13 @@ import { updatePassword } from "@/database/users/updatePassword";
 
 export const changePassword = async (formData, userId) => {
     const { currentPassword, newPassword, confirmPassword } = Object.fromEntries(formData);
+    
+    const session = await getServerSession(authOptions);
+    if (session?.user?.id !== userId) {
+        return {errors: ["You are not authorized to change the password!"]};
+    }
 
     try {
-
-        const session = await getServerSession(authOptions);
-
-        if (session?.user?.id !== userId) {
-            throw new Error("You are not authorized to change the password!");
-        }
 
         if (newPassword !== confirmPassword) {
             throw new Error("Passwords do not match!");

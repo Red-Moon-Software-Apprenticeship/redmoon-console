@@ -1,7 +1,6 @@
 "use client"
 import { useErrors, useSuccess } from '@/hooks';
 import React, { useState } from 'react';
-import { createReq } from '@/lib/createReqObj';
 import { clearForm } from '@/lib/clearForm';
 import { changePassword } from '@/lib/serverActions';
 
@@ -22,11 +21,12 @@ const PasswordChangeForm =({userId}) => {
         const res = await changePassword(data, userId)
 
         if (res?.errors){
-
             setErrors(res.errors)
+            
         }else{
             setSuccessMsg('Password changed successfully!')
-            // clearForm(setCurrentPassword, setNewPassword, setConfirmPassword)
+            clearForm(setCurrentPassword, setNewPassword, setConfirmPassword)
+
         }
     };
     
