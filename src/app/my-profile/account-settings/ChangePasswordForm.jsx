@@ -3,6 +3,7 @@ import { useErrors, useSuccess } from '@/hooks';
 import React, { useState } from 'react';
 import { createReq } from '@/lib/createReqObj';
 import { clearForm } from '@/lib/clearForm';
+import { changePassword } from '@/lib/serverActions';
 
 const PasswordChangeForm =({userId}) => {
     const [currentPassword, setCurrentPassword] = useState('');
@@ -13,21 +14,19 @@ const PasswordChangeForm =({userId}) => {
         
     const formAction = async (data) => {
 
-        
         if (newPassword !== confirmPassword) {
             setErrors(['Passwords do not match!'])
             return;
         }
         
-        const res = await changePassword(data)
-
+        const res = await changePassword(data, userId)
 
         if (res?.errors){
 
             setErrors(res.errors)
         }else{
             setSuccessMsg('Password changed successfully!')
-            clearForm(setCurrentPassword, setNewPassword, setConfirmPassword)
+            // clearForm(setCurrentPassword, setNewPassword, setConfirmPassword)
         }
     };
     
@@ -37,10 +36,11 @@ const PasswordChangeForm =({userId}) => {
 
     return (
         <>
-            <form onSubmit={formAction}>
+            <form action={formAction}>
                 <div>
                     <label htmlFor="currentPassword">Current Password:</label>
                     <input
+                        name='currentPassword'
                         type="password"
                         id="currentPassword"
                         value={currentPassword}
@@ -50,6 +50,7 @@ const PasswordChangeForm =({userId}) => {
                 <div>
                     <label htmlFor="newPassword">New Password:</label>
                     <input
+                        name="newPassword"
                         type="password"
                         id="newPassword"
                         value={newPassword}
@@ -59,6 +60,7 @@ const PasswordChangeForm =({userId}) => {
                 <div>
                     <label htmlFor="confirmPassword">Confirm Password:</label>
                     <input
+                        name='confirmPassword'
                         type="password"
                         id="confirmPassword"
                         value={confirmPassword}
