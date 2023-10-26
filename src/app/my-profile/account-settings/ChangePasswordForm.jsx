@@ -2,6 +2,7 @@
 import { useErrors, useSuccess } from '@/hooks';
 import React, { useState } from 'react';
 import { createReq } from '@/lib/createReqObj';
+import { clearForm } from '@/lib/clearForm';
 
 const PasswordChangeForm =({userId}) => {
     const [currentPassword, setCurrentPassword] = useState('');
@@ -10,28 +11,23 @@ const PasswordChangeForm =({userId}) => {
     const [errors, setErrors, clearErrorsEffect, Errors] = useErrors()
     const [successMsg, setSuccessMsg, OnSuccess] = useSuccess() 
         
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const formAction = async (data) => {
 
+        
         if (newPassword !== confirmPassword) {
             setErrors(['Passwords do not match!'])
             return;
         }
-
-        const body = 
-                    {
-                        userId, 
-                        currentPassword,
-                        newPassword 
-                    }
+        
+        const res = await changePassword(data)
 
 
-        try {
-           
-            const res = await fetch('/api/user/password', createReq('PATCH', body))
-            
-        } catch (error) {
-            
+        if (res?.errors){
+
+            setErrors(res.errors)
+        }else{
+            setSuccessMsg('Password changed successfully!')
+            clearForm(setCurrentPassword, setNewPassword, setConfirmPassword)
         }
     };
     
@@ -41,7 +37,7 @@ const PasswordChangeForm =({userId}) => {
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={formAction}>
                 <div>
                     <label htmlFor="currentPassword">Current Password:</label>
                     <input
