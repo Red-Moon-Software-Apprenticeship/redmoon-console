@@ -1,7 +1,6 @@
 "use client"
-import { useErrors } from '@/hooks';
+import { useErrors, useSuccess } from '@/hooks';
 import React, { useState } from 'react';
-import OnSuccess from '@/components/OnSuccess';
 import { createReq } from '@/lib/createReqObj';
 
 const PasswordChangeForm =({userId}) => {
@@ -9,7 +8,7 @@ const PasswordChangeForm =({userId}) => {
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [errors, setErrors, clearErrorsEffect, Errors] = useErrors()
-    const [successMsg, setSuccessMsg] = useState('') 
+    const [successMsg, setSuccessMsg, OnSuccess] = useSuccess() 
         
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -22,21 +21,23 @@ const PasswordChangeForm =({userId}) => {
         const body = 
                     {
                         userId, 
-                        password: currentPassword,
+                        currentPassword,
                         newPassword 
                     }
 
 
         try {
            
-            const res = await fetch('/api/user/password', createReq('patch', body))
+            const res = await fetch('/api/user/password', createReq('PATCH', body))
             
         } catch (error) {
             
         }
     };
     
-
+    clearErrorsEffect(
+        currentPassword, newPassword, confirmPassword, successMsg
+    )
 
     return (
         <>
