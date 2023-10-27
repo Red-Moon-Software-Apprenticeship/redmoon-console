@@ -5,6 +5,7 @@ import CompanySpecificFields from './CompanySpecificFields';
 import TechStackItem from './TechStackItem';
 import { combineFormEntries } from '@/lib/combineFormEntries';
 import { updateUserProfile } from '@/lib/serverActions/updateUserProfile';
+import USStatesDropdown from '@/components/USStatesDropdown';
 
 
 const ProfileEditForm = ({ role, userData, userId }) => {
@@ -74,13 +75,7 @@ const ProfileEditForm = ({ role, userData, userId }) => {
                 />
 
                 <label htmlFor="state">State:</label>
-                <input
-                    type="text"
-                    id="state"
-                    name="state"
-                    value={state}
-                    onChange={(e) => setState(e.target.value)}
-                />
+                <USStatesDropdown state={state} setState={setState}/>
                 <label htmlFor="techStack">
                     Tech Stack:
 

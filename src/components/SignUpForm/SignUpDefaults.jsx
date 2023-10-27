@@ -1,6 +1,6 @@
 'use client'
 import React, { useState, useEffect } from 'react';
-import USStatesDropdown from './USStatesDropdown';
+import USStatesDropdown from '../USStatesDropdown';
 
 const SignUpDefaults = ({ signUpState }) => {
     const [password, confirm, email, state, city] = signUpState.getters;

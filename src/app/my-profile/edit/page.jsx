@@ -9,7 +9,7 @@ const Edit = async () => {
     const session = await getServerSession(authOptions);
     const{ role, id }  = session?.user;
     const userData = await findUserProfileData(id, role); 
-    console.log(userData)
+
     return (
       <Layout>
           <ProfileEditForm role={role} userData={userData} userId={id} /> 
