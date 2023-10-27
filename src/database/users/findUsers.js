@@ -20,6 +20,30 @@ export const getApprsProfile  = async() => (
       )
 )
 
+export const getApprsForIndex = async () => (
+    await prisma.apprentice.findMany(
+        {
+          select:{
+            firstName: true,
+            lastName: true,
+            level: true,
+            user:{
+                select:{
+                    image: true,
+                    techStack: true,
+                    city: true,
+                    state: true,
+                }
+            }
+          } 
+
+        }
+
+    )
+
+
+)
+
 
 export const getApplicantApprs = async() => (
 await prisma.user.findMany({

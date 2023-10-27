@@ -1,10 +1,19 @@
 import Layout from '@/components/Layout/Layout'
-import UnderConstruction from '@/components/UnderConstruction'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '../api/auth/[...nextauth]/route'
+import { getApprsForIndex } from '@/database/users/findUsers'
 
-const MyProfile =() => {
+const MyProfile = async () => {
+  const session = await getServerSession(authOptions);
+  const apprs = await getApprsForIndex()  
   return (
    <Layout>
-      <UnderConstruction/>
+      <ul>
+
+
+
+      </ul>
+
    </Layout>
   )
 }
