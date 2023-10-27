@@ -1,13 +1,12 @@
 "use client"
 import ModalLayout from '@/components/ModalLayout/ModalLayout';
-import OnSuccess from '@/components/OnSuccess';
-import { useErrors } from '@/hooks';
+import { useErrors, useSuccess} from '@/hooks';
 import { createReq } from '@/lib/createReqObj';
 import React, { useState } from 'react';
 
 const VerifModal = ({ toggleModal, userId  }) => {
 
-  const [successMsg, setSuccessMsg] = useState('');
+  const [successMsg, setSuccessMsg, OnSuccess] = useSuccess();
   const [errors, setErrors, _, Errors] = useErrors()
 
   const handleOnClick = async (e) => {

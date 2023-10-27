@@ -1,9 +1,8 @@
 "use client"
-import { useErrors } from '@/hooks';
+import { useErrors, useSuccess } from '@/hooks';
 import { updateUserVerif } from '@/lib/serverActions/updateUserVerif';
 import React, {useState} from 'react';
 import { useSession } from 'next-auth/react';
-import OnSuccess from '@/components/OnSuccess';
 import SendAnotherToken from './SendAnotherToken';
 import { redirect } from 'next/navigation';
 
@@ -11,7 +10,7 @@ const VerificationForm = () => {
   const [token, setToken] = useState('')
   const [errors, setErrors, clearErrorsEffect, Errors] = useErrors()
   const {update} = useSession()
-  const [successMsg, setSuccessMsg] = useState("") 
+  const [successMsg, setSuccessMsg, OnSuccess] =  useSuccess() 
   const {data: session} = useSession()
 
   const formAction = async (data) =>{

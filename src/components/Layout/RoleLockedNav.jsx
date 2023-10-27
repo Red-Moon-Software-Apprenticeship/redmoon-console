@@ -16,8 +16,7 @@ const RoleLockedNav = async () => {
     }
 
     const roleBasedNav = mapComponent[role]
-
-    if (!session) {
+    if (!(session && session.user)) {
         return (
             <>
                 <li>
@@ -32,7 +31,13 @@ const RoleLockedNav = async () => {
 
         return (
             <>
-                {(session && session.user) && roleBasedNav}
+                <li>
+                    <Link href='/my-profile'>
+                        My Profile
+                    </Link>
+                </li>
+                {roleBasedNav}
+
             </>
         )
     }

@@ -4,7 +4,7 @@ import { prisma } from "@/database/db";
 
 
 export const getApprsProfile  = async() => (
-    prisma.apprentice.findMany(
+   await prisma.apprentice.findMany(
         {select: {
             userId: true,
             firstName: true,

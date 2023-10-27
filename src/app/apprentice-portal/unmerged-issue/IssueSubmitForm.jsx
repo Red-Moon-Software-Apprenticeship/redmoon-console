@@ -1,13 +1,12 @@
 "use client"
-import OnSuccess from '@/components/OnSuccess';
-import { useErrors } from '@/hooks';
+import { useErrors, useSuccess } from '@/hooks';
 import React, { useState } from 'react';
 import { redirect } from 'next/navigation';
 import { upsertAdmissionPR } from '@/lib/serverActions/upsertAdmissionPR';
 
 const  IssueSubmitForm = ({userId}) => {
   const [pullRequestUrl, setPullRequestUrl] = useState('')
-  const [successMsg, setSuccessMsg] = useState('')
+  const [successMsg, setSuccessMsg, OnSuccess] = useSuccess() 
   const [errors, setErrors, clearErrorsEffect, Errors] = useErrors()
 
   const formAction = async (data)=>{
