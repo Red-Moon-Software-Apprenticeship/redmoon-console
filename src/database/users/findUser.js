@@ -24,26 +24,51 @@ export const findUsersPassword = async (userId) => (
 
 export const findUserProfileData = async(userId, role) => {
 
-  const data =   {
-      state: true,
-      city: true,
-      techStack: true,
-      bio: true
-      
-    }
 
-  if (role === 'company'){
-    data[company] = { 
-      address: true
-    }
 
+  if (role === 'company')  {
+    const companyData =  await findCompanyProfileData(userId)
+    const address = companyData.address
+
+    return { ...companyData.user,address } 
+ } else {
+
+    return  await prisma.user.findUnique({
+      select :  {
+        state: true,
+        city: true,
+        techStack: true,
+        bio: true
+      }
+      ,
+      where:{ 
+        id : userId
+      }
+    })
+    
   }
+}
 
-  return  await prisma.user.findUnique({
-    select : data,
-    where:{ 
-      id : userId
+
+export const findCompanyProfileData = async(userId) => {
+  return await prisma.company.findUnique({
+    select: {
+      address: true,
+      user:{
+        select:{
+          city: true,
+          state: true,    
+          bio: true,
+          techStack: true,
+        }
+
+      }
+    },
+    where: {
+      userId: userId
     }
   })
   
+
+
 }

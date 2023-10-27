@@ -2,36 +2,51 @@
 import React, {useState} from 'react';
 import { useErrors, useSuccess } from '@/hooks';
 import CompanySpecificFields from './CompanySpecificFields';
-import { clearForm } from '@/lib/clearForm';
 import TechStackItem from './TechStackItem';
 import { combineFormEntries } from '@/lib/combineFormEntries';
 import { updateUserProfile } from '@/lib/serverActions/updateUserProfile';
 
 
-const ProfileEditForm = ({ role, userData, id }) => {
+const ProfileEditForm = ({ role, userData, userId }) => {
     const [city, setCity] = useState(userData.city);
     const [state, setState] = useState(userData.state);
     const [bio, setBio] = useState(userData.bio);
     const [techStack, setTechStack] = useState(userData.techStack)
     const [techStackEntry, setTechStackEntry] = useState('')
-    const [address, setAddress] = useState(userData?.company?.address ?? '')
+    const [address, setAddress] = useState(userData?.address ?? '')
     const [successMsg, setSuccessMsg, OnSuccess] = useSuccess()
     const [errors, setErrors, clearErrorsEffect, Errors] = useErrors();
 
+    const reformatCompanyData = (data) =>{
+        if(role === 'company'){
+            delete data.address
+            data['company'] = {
+                update:{
+
+                    data:{
+                        address
+                    },
+                    where:{
+                        userId
+                    }
+                }
+            }
+
+        }
+
+    }
 
     const formAction = async (formData) => {
-        //Clean the form data
-        const data = combineFormEntries(formData, techStack)
+        const data = combineFormEntries(formData, {techStack})
         delete data.techStackEntry
-
-        const res = await updateUserProfile(formData, userId)
-        
+        reformatCompanyData(data)
+       
+        const res = await updateUserProfile(data, userId)
         if (res?.errors) {
             setErrors(res?.errors)
         } else {
             setSuccessMsg("Succesfully updated user data")
-            clearForm()
-        }
+         }
     }
 
     clearErrorsEffect(city, state, bio, techStack, address)
@@ -86,7 +101,8 @@ const ProfileEditForm = ({ role, userData, id }) => {
                          idx={idx}
                          key={idx}
                          techStack={techStack}
-                         setTechStack={setTechStack} />
+                         setTechStack={setTechStack} 
+                        />
                     )}
                 </div>
 

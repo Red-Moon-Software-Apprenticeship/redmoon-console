@@ -2,6 +2,7 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route"
 import { getServerSession } from "next-auth"
 import { createUserErrors } from "../sharedErrors"
+import { updateUserPublicProfile } from "@/database/users/updateUserPublicProfile"
 
 export const updateUserProfile = async(data, userId) => {
 
@@ -16,7 +17,7 @@ export const updateUserProfile = async(data, userId) => {
 
 
     } catch (error) {
- 
+        console.log(error)
         let errors = createUserErrors(error)
 
         return {errors: errors.errors}

@@ -8,11 +8,7 @@ const ApprNav = async () => {
     const subRole = session?.user?.subRole
     return (
         <>
-            <li>
-                <Link href='/my-profile'> 
-                    My Profile
-                </Link>
-            </li>
+          
             { subRole === 'unmerged issue' &&
               
               <li>
