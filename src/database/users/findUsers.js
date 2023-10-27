@@ -24,6 +24,7 @@ export const getApprsForIndex = async () => (
     await prisma.apprentice.findMany(
         {
           select:{
+            id: true,
             firstName: true,
             lastName: true,
             level: true,
