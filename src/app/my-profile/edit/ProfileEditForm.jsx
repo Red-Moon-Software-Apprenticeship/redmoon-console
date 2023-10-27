@@ -4,6 +4,9 @@ import { useErrors, useSuccess } from '@/hooks';
 import CompanySpecificFields from './CompanySpecificFields';
 import { clearForm } from '@/lib/clearForm';
 import TechStackItem from './TechStackItem';
+import { combineFormEntries } from '@/lib/combineFormEntries';
+import { updateUserProfile } from '@/lib/serverActions/updateUserProfile';
+
 
 const ProfileEditForm = ({ role, userData, id }) => {
     const [city, setCity] = useState(userData.city);
@@ -11,28 +14,18 @@ const ProfileEditForm = ({ role, userData, id }) => {
     const [bio, setBio] = useState(userData.bio);
     const [techStack, setTechStack] = useState(userData.techStack)
     const [techStackEntry, setTechStackEntry] = useState('')
-    const [address, setAddress] = useState(userData?.company?.address)
+    const [address, setAddress] = useState(userData?.company?.address ?? '')
     const [successMsg, setSuccessMsg, OnSuccess] = useSuccess()
     const [errors, setErrors, clearErrorsEffect, Errors] = useErrors();
 
-    const MAP_FORM_ACTION = {
-        'apprentice': () => { },
-        'admin': () => { },
-        'company': () => { }
-    }
-
-    const serverAction = MAP_FORM_ACTION[role];
 
     const formAction = async (formData) => {
+        //Clean the form data
         const data = combineFormEntries(formData, techStack)
+        delete data.techStackEntry
 
-        //Used specifically for adding array objects to formData 
-        //Second argument accpets numerous arguments of type []<T>
+        const res = await updateUserProfile(formData, userId)
         
-        
-
-
-        const res = await serverAction(formData, userId)
         if (res?.errors) {
             setErrors(res?.errors)
         } else {

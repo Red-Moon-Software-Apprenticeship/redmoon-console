@@ -21,4 +21,3 @@ export const createUserErrors = (error) => {
 
     return ({errors, status});
 }
-
