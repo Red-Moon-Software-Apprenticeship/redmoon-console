@@ -21,3 +21,29 @@ export const findUsersPassword = async (userId) => (
     }
 
   }))
+
+export const findUserProfileData = async(userId, role) => {
+
+  const data =   {
+      state: true,
+      city: true,
+      techStack: true,
+      bio: true
+      
+    }
+
+  if (role === 'company'){
+    data[company] = { 
+      address: true
+    }
+
+  }
+
+  return  await prisma.user.findUnique({
+    select : data,
+    where:{ 
+      id : userId
+    }
+  })
+  
+}

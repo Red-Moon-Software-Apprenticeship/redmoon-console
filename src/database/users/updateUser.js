@@ -43,4 +43,19 @@ export const updateApprAdmission = async(userId, subRole) =>(
             name: true,
         }
     })   
-) 
+)
+
+
+export const updateUserProfileData = async(userId, data)=> (
+    await prisma.user.update({
+        where: {
+            id: userId
+        },
+        data,
+        select: {
+            id: true,
+        }
+
+    })
+
+)
