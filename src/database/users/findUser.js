@@ -72,3 +72,23 @@ export const findCompanyProfileData = async(userId) => {
 
 
 }
+
+export const findApprByEmail = async (email) => (
+  await prisma.user.findUnique({
+    where:{
+      email
+    },
+    select:{
+      name: true,
+      email: true,
+      image: true,
+      role: true,
+      state: true,
+      city: true,
+      techStack: true,
+      bio: true,
+    }
+  })
+
+
+)

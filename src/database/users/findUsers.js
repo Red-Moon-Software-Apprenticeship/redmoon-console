@@ -34,6 +34,7 @@ export const getApprsForIndex = async () => (
                     techStack: true,
                     city: true,
                     state: true,
+                    email: true,
                 }
             }
           } 

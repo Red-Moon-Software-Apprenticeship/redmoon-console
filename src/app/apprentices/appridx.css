@@ -1,0 +1,42 @@
+/* /home/mfong415/Open Source/redmoon-console/src/app/apprentices/[pageNo]/apprOffsetStyles.css */
+
+
+/* You can add more styles here specific to your component */
+
+
+
+.appr-card {
+    all: unset;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.appr-card > a {
+    all: unset;
+}
+
+.appr-card .appr-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 16px;
+}
+
+.appr-card .appr-info {
+    flex-grow: 1;
+}
+
+.appr-card .appr-info h3 {
+    margin: 0 0 8px;
+}
+
+.appr-card .appr-info p {
+    margin: 4px 0;
+    font-size: 0.9rem;
+}
