@@ -12,4 +12,15 @@ export const secureAdminServerRoute = async () =>{
         redirect('/')
     }
 }
-    
+//Call within try catch statement
+export const secureAdminApiRoute = async () =>{
+
+    const session = await getServerSession(authOptions);
+    if (!session || !session.user || session.user.role !== 'admin')
+    return {errors: "You are not permitted to access this route!",
+            status: 405
+            }
+
+    return {}
+}
+   

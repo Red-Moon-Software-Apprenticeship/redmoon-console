@@ -90,3 +90,21 @@ export const getCompanies = async (userQuery) => (
     await getUsersLeftJoin(prisma.company, userQuery)
 )
 
+
+export const findApprsNamesEmails = async () => (
+            await prisma.user.findMany({
+
+                where: { 
+                    role: 'apprentice',
+                },
+                select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                }
+
+                
+            })
+
+        )
+
