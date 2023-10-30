@@ -10,7 +10,7 @@ const LoggedIn = ({name}) => {
             <Link href='/my-profile'>
                 <span>Hello {name}</span>            
             </Link>
-            <button onClick={()=> signOut()}>
+            <button onClick={()=> signOut()} className="tertiary">
                 Sign Out
             </button>
         </div>

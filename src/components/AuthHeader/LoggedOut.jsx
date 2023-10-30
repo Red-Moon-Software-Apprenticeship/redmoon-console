@@ -7,10 +7,10 @@ const LoggedOut = () => {
 
     return (
         <>
-            <button onClick={() => signIn()}>
+            <button onClick={() => signIn()} className="primary">
                 Sign in
             </button>
-            <button>
+            <button className="secondary">
                 <Link href='/sign-up'>
                     Sign up
                 </Link>
