@@ -70,3 +70,60 @@
     pointer-events: none;     
     color: #a9a9a9;
 }
+
+/* General Button Styles */
+button, a.button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s, transform 0.2s;
+    margin: 5px;
+  }
+  
+  /* Primary Button (For main actions) */
+  button.primary, a.button.primary {
+    background-color: #3498db;
+    color: white;
+  }
+  
+  button.primary:hover, a.button.primary:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+  }
+  
+  /* Secondary Button (For secondary actions) */
+  button.secondary, a.button.secondary {
+    background-color: #f39c12;
+    color: white;
+  }
+  
+  button.secondary:hover, a.button.secondary:hover {
+    background-color: #d35400;
+    transform: scale(1.05);
+  }
+  
+  /* Tertiary Button (For less important actions) */
+  button.tertiary, a.button.tertiary {
+    background-color: #e74c3c;
+    color: white;
+  }
+  
+  button.tertiary:hover, a.button.tertiary:hover {
+    background-color: #c0392b;
+    transform: scale(1.05);
+  }
+  
+  /* Muted Button (For actions that you want to be less prominent) */
+  button.muted, a.button.muted {
+    background-color: #95a5a6;
+    color: white;
+  }
+  
+  button.muted:hover, a.button.muted:hover {
+    background-color: #7f8c8d;
+    transform: scale(1.05);
+  }
+  
