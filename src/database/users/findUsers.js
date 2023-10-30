@@ -35,6 +35,7 @@ export const getApprsForIndex = async () => (
                     city: true,
                     state: true,
                     email: true,
+                    urlSlug: true
                 }
             }
           } 

@@ -4,6 +4,7 @@ import { createUserRoleToken } from "@/database/users/createUser"
 import { validateNewCompany } from "../validations"
 import { createUserErrors } from "../sharedErrors"
 import { createVerifToken } from "./_createVerifReq"
+import { generateUrlSlug } from "../generateUrlSlug"
 
 export const createCompany = async (formData) => {
     const data =  Object.fromEntries(formData)
@@ -17,7 +18,7 @@ export const createCompany = async (formData) => {
     const role = 'company';
 
     try {
-
+        const urlSlug = await generateUrlSlug(name)
         const hashedPassword = await hash(password, 11)
         const userData = {
             name,
@@ -25,7 +26,8 @@ export const createCompany = async (formData) => {
             hashedPassword,
             role,
             state,
-            city
+            city,
+            urlSlug
         }
 
         const roleData = {
