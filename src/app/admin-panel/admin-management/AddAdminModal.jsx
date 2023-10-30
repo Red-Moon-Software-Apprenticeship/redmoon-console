@@ -27,7 +27,6 @@ const AddAdminModal = ({ apprs, toggleModal }) => {
     };
 
     const handleChange = (e) => {
-        console.log(e.target.value)
         setSelectedApprentice(e.target.value);
     };
 
@@ -41,12 +40,13 @@ const AddAdminModal = ({ apprs, toggleModal }) => {
         }
 
         const body = {
-            id: selectedApprentice
+            id: selectedApprentice,
+            role: 'admin'
         }
 
         try {
                 const response = await fetch(
-                    `/api/apprentice/role/promoteAdmin/`, 
+                    `/api/user/role/`, 
                     createReq('PATCH', body)
                 );
 

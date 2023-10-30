@@ -1,4 +1,6 @@
 import React from 'react';
+import DeleteAdminBtn from './DeleteAdminBtn';
+
 
 
 const AdminTableItem = ({admin }) => {
@@ -7,11 +9,11 @@ const AdminTableItem = ({admin }) => {
     return (
         <tr>
 
-            <td>{admin.firstName} {admin.lastName}</td>
+            <td>{admin.name}</td>
             <td>{admin.email}</td>
             <td>
                 <button>Edit</button>
-                <button>Delete</button>
+                <DeleteAdminBtn/>
             </td>
         </tr>
     
