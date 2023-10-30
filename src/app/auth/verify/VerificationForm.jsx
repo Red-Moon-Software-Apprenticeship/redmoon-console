@@ -28,7 +28,6 @@ const VerificationForm = () => {
   
   clearErrorsEffect(token)
 
-  console.log(session)
   if (session && session.user && session?.user?.subRole !== 'unverified') {
     redirect('/')
   }

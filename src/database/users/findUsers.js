@@ -2,21 +2,31 @@ import { prisma } from "@/database/db";
 
 //Abstracted away the main query, leaving only the select field to be filled ou
 
-
 export const getApprsProfile  = async() => (
-   await prisma.apprentice.findMany(
-        {select: {
-            userId: true,
-            firstName: true,
-            lastName: true,
-            level: true,
-            user:{
-              select:{
-                email: true,
-                image: true,
+   await prisma.user.findMany(
+        {  
+            where:{
+                role: 'apprentice',
+            },
+            
+            select: {
+              name: true,
+              email: true,
+              apprentice: {
+                select: {
+                    level: true,
+
+                }
+              },
+              verifToken:{ 
+                select: {
+                    token: true
+                }
+
               }
-            }
-        }}
+            },
+        
+        }
       )
 )
 

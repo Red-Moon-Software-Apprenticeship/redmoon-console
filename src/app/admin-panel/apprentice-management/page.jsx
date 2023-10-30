@@ -3,6 +3,7 @@ import { secureAdminServerRoute } from '@/lib/secureAdminRoute';
 import React from 'react';
 import ApprConsole from './ApprConsole';
 import Link from 'next/link';
+import '../adminpanel.css'
 
 const ApprenticeManagement = async() => {
   await secureAdminServerRoute()
@@ -20,13 +21,15 @@ const ApprenticeManagement = async() => {
         </Link>
       </button>
        <div className='flex-center'>
-        <table>
+        <table id='admin-page-table'>
             <tbody>
-
               <tr>
                   <th>Name</th>
                   <th>Email</th>
                   <th>Level</th>
+                  <th>Remove</th>
+                  <th>Edit Info</th>
+                  <th>Verification Code</th>
               </tr>
               <ApprConsole/>
             </tbody>
