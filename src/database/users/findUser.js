@@ -72,3 +72,35 @@ export const findCompanyProfileData = async(userId) => {
 
 
 }
+
+export const findApprBySlug = async (urlSlug) => (
+  await prisma.user.findUnique({
+    where:{
+      urlSlug
+    },
+    select:{
+      name: true,
+      email: true,
+      image: true,
+      role: true,
+      state: true,
+      city: true,
+      techStack: true,
+      bio: true,
+    }
+  })
+
+
+)
+
+export const findUserBySlugCheck = async (urlSlug) => (
+  await prisma.user.findUnique({
+    where: {
+      urlSlug
+    },
+    select:{
+      id: true
+    }
+  }) 
+
+)

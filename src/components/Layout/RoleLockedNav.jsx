@@ -5,6 +5,7 @@ import ApprNav from './ApprNav';
 import CompanyNav from './CompanyNav';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import Link from 'next/link';
+import './layout.css'
 
 const RoleLockedNav = async () => {
     const session = await getServerSession(authOptions)
@@ -19,7 +20,7 @@ const RoleLockedNav = async () => {
     if (!(session && session.user)) {
         return (
             <>
-                <li>
+                <li className='nav-item'>
                     <Link href='/sign-up'>
                         Sign Up
                     </Link>

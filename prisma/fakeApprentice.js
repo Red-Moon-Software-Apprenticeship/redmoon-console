@@ -1,7 +1,9 @@
 const faker = require('faker');
+const { generateUrlSlug } = require('./utils');
 
 
-const generateMockApprs = (num) => {
+
+const generateMockApprs = async (num) => {
     const res = [];
     const stackOptions = [
         'Python', 'Django', 'React', 'JavaScript', 'Node.js', 'Vue.js',
@@ -12,6 +14,7 @@ const generateMockApprs = (num) => {
         const lastName = faker.name.lastName();
         const fullName = `${firstName} ${lastName}`;
         const email = faker.internet.email(firstName, lastName, 'example.com')
+        const urlSlug = await generateUrlSlug(fullName);
         const userData = {
             name: fullName,
             email: email,
@@ -24,6 +27,7 @@ const generateMockApprs = (num) => {
                         faker.random.arrayElement(stackOptions), 
                         faker.random.arrayElement(stackOptions)],
             bio: faker.lorem.sentence(),
+            urlSlug
           };
       
           const roleData = {

@@ -61,6 +61,7 @@ model User {
   city           String
   techStack      String[]              @default([])
   bio            String?
+  urlSlug        String                @unique
   admin          Admin[]               @relation("ColsOfAdmin")
   apprentice     Apprentice[]          @relation("ColsOfApprentice")
   company        Company[]             @relation("ColsOfCompany")

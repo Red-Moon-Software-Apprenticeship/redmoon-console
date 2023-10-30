@@ -22,6 +22,7 @@ const ApprSignUp = ({ }) => {
 
   const formAction = async (data) => {
     const res = await createAppr(data)
+    console.log(res)
     if (res?.errors) {
       setErrors(res.errors)
     } else {

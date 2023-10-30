@@ -1,0 +1,42 @@
+.profile-container {
+    display: flex;
+    align-items: start;
+    max-width: 800px;
+    margin: 20px auto;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.profile-left {
+    flex: 0 0 150px; /* Adjust width as needed */
+    text-align: center;
+}
+
+.profile-image {
+    width: 100%; /* Adjust based on actual size */
+    height: auto;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.profile-right {
+    flex-grow: 1;
+    padding-left: 20px; /* Adjust spacing as needed */
+}
+
+.profile-right h1 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.profile-right p {
+    font-size: 1em;
+    color: #333;
+    margin: 5px 0;
+}
+
+/* Add additional styles for responsiveness and other elements as needed */

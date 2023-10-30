@@ -1,10 +1,16 @@
 import Layout from '@/components/Layout/Layout'
-import UnderConstruction from '@/components/UnderConstruction'
+import { redirect } from 'next/navigation'
 
-const MyProfile =() => {
+const MyProfile = async () => {
+
+  redirect('/apprentices/0')
+ 
   return (
    <Layout>
-      <UnderConstruction/>
+
+
+
+
    </Layout>
   )
 }
