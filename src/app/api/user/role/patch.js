@@ -12,10 +12,8 @@ const PATCH = async (req) => {
     try {
         const { id, role, subRole} = await req.json()
         const updatedUser = await updateUserRole(id, role, subRole)
-
         return NextResponse.json({ updatedUser }, { status: 200 })
     } catch (error) {
-
         let err, status = 500
         return NextResponse.json({ err }, { status })
 

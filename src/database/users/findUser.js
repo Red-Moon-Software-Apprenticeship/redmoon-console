@@ -121,3 +121,24 @@ export const findAdmins = async (userId) => (
       }
   })
 )
+
+export const findCompanies = async() => (
+  await prisma.user.findMany({
+    where: {
+      role: 'company'
+    },
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      subRole: true,
+      verifToken: {
+        select: {
+          token: true
+        }
+      }
+    }
+
+  })
+
+)
