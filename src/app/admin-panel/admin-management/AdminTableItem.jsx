@@ -16,13 +16,17 @@ const AdminTableItem = async ({ admin }) => {
 
             <td>{admin?.name}</td>
             <td>{admin?.email}</td>
-            <AuthProvider>
-                <td>
-                    <DemoteAdminBtn userId={id} />
-                    <DeleteAdminBtn userId={id} />
-                    <PromoteToSuperBtn userId={id} />
-                </td>
-            </AuthProvider>
+
+            {
+                subRole === 'super admin' &&
+                <AuthProvider>
+                    <td>
+                        <DemoteAdminBtn userId={id} />
+                        <DeleteAdminBtn userId={id} />
+                        <PromoteToSuperBtn userId={id} />
+                    </td>
+                </AuthProvider>
+            }
         </tr>
 
     );
