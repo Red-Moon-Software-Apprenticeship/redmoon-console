@@ -2,7 +2,7 @@
 import React, {useState} from 'react';
 import DemoteAdminModal from './DemoteAdminModal';
 
-const DemoteAdminBtn = () => {
+const DemoteAdminBtn = ({userId}) => {
     const [demoteModal, setDemoteModal] = useState(false)
     const toggleModal = () => {
         setDemoteModal(!demoteModal)    
@@ -18,7 +18,7 @@ const DemoteAdminBtn = () => {
         <button onClick={handleOnClick}>
             Edit
         </button>
-        {demoteModal && <DemoteAdminModal toggleModal={toggleModal}/>}
+        {demoteModal && <DemoteAdminModal userId={userId} toggleModal={toggleModal}/>}
     </>
   );
 };

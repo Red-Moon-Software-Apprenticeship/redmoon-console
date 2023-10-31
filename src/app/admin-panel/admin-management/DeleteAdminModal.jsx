@@ -8,10 +8,13 @@ const DeleteAdminModal = ({ userId, toggleModal }) => {
     const [errors, setErrors, clearErrorsEffect, Errors] = useErrors();
 
     const handleDelete = async () => {
+        const body = {
+            userId
+        }
         try {
             const response = await fetch(
-                `/api/user/delete/${userId}`, 
-                createReq('DELETE')
+                `/api/user/delete/`, 
+                createReq('DELETE', body)
             );
 
             if (response.ok) {

@@ -2,7 +2,7 @@
 import React, {useState} from 'react';
 import DeleteAdminModal from './DeleteAdminModal';
 
-const DeleteAdmminBtn = () => {
+const DeleteAdmminBtn = ({userId}) => {
     const [deleteModal, setDeleteModal] = useState(false)
 
     const toggleModal = () => {
@@ -19,7 +19,7 @@ const DeleteAdmminBtn = () => {
         <button onClick={handleOnClick}>
             Delete
         </button>
-        {deleteModal && <DeleteAdminModal toggleModal={toggleModal}/>}
+        {deleteModal && <DeleteAdminModal userId={userId} toggleModal={toggleModal}/>}
     </>
   );
 };

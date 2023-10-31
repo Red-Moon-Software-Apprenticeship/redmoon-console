@@ -2,15 +2,27 @@ import React from 'react';
 import ModalLayout from '@/components/ModalLayout/ModalLayout';
 import { useErrors } from '@/hooks';
 import { createReq } from '@/lib/createReqObj';
+import { useSession } from 'next-auth/react';
 
-const DemoteAdminModal = ({ adminId, toggleModal }) => {
+const DemoteAdminModal = ({ userId, toggleModal }) => {
     const [errors, setErrors, clearErrorsEffect, Errors] = useErrors();
+    // const {data: session} = useSession()
+    // const {subRole, role} = session?.user
+
+    // if(role !== 'admin' && subRole !== 'super admin') {
+    //     return <NotPermittedModal/>
+    // }
 
     const handleDemote = async () => {
+        
+        const body = {
+            id: userId,
+            role: 'apprentice',
+        }
         try {
             const response = await fetch(
-                `/api/admin/demote/${adminId}`, 
-                createReq('PATCH')
+                `/api/user/role`, 
+                createReq('PATCH', body)
             );
 
             if (response.ok) {
