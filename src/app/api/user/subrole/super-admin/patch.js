@@ -1,7 +1,7 @@
 import { updateUserSubrole } from "@/database/users/updateUser";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
-import { authOptions } from "../auth/[...nextauth]/route";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { generatePatchErrors } from "@/lib/sharedErrors";
 
 const PATCH = async (req) => {
@@ -9,15 +9,14 @@ const PATCH = async (req) => {
     const sessionUser = session?.user;
 
     if (!session || !sessionUser || sessionUser.role !== 'admin') {
-        return NextResponse.json({ msg: "Unauthorized access." }, { status: 401 });
+        return NextResponse.json({ errors: "Unauthorized access." }, { status: 401 });
     }
 
     try {
         const data = await req.json();
-        const { userId, subRole } = data;
+        const { id, subRole } = data;
 
-
-        const updatedUser = await updateUserSubrole(userId, subRole);
+        const updatedUser = await updateUserSubrole(id, subRole);
 
 
         
@@ -25,10 +24,9 @@ const PATCH = async (req) => {
 
     } catch (error) {
         
-        let [errors, status] = generatePatchErrors(errors) 
+        let {errors, status} = generatePatchErrors(error) 
 
-
-        return NextResponse.json({ errors: errors }, { status});
+        return NextResponse.json({ errors }, { status});
     }
 }
 

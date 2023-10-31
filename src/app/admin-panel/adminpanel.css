@@ -117,3 +117,8 @@
 .promote-button:hover {
     background-color: #0056b3;
 }
+
+#promote-admin-modal  p{
+    max-width: 100%;
+    text-wrap: wrap;
+}

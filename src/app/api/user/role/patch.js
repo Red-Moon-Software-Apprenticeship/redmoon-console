@@ -1,5 +1,5 @@
 import { updateUserRole } from '@/database/users/updateAppr';
-import { secureAdminApiRoute } from '@/lib/secureAdminRoute';
+import { secureAdminApiRoute } from '@/lib/secureAdminServerRoute';
 import { NextResponse } from 'next/server';
 
 const PATCH = async (req) => {

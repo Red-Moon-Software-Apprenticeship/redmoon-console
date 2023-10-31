@@ -114,9 +114,10 @@ export const findAdmins = async (userId) => (
           }
       },
       select: {
+          id: true,
           name: true,
           email: true,
-
+          subRole: true,
       }
   })
 )

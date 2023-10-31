@@ -3,12 +3,14 @@ import React, { useState } from 'react';
 import ModalLayout from '@/components/ModalLayout/ModalLayout';
 import { useErrors } from '@/hooks';
 import { createReq } from '@/lib/createReqObj';
+import { useRouter } from 'next/navigation';
 
 const AddAdminModal = ({ apprs, toggleModal }) => {
     const [filteredApprs, setFilteredApprs] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedApprentice, setSelectedApprentice] = useState({});
     const [errors, setErrors, clearErrorsEffect, Errors] = useErrors()
+    const router = useRouter()
 
     const handleSearch = (e) => {
         setSearchTerm(e.target.value);
@@ -51,7 +53,10 @@ const AddAdminModal = ({ apprs, toggleModal }) => {
                     createReq('PATCH', body)
                 );
 
-                if (response.ok) toggleModal()
+                if (response.ok) {
+                    router.refresh()
+                    toggleModal();
+                }
         
         } catch (error) {
             setErrors([error])

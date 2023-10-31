@@ -10,6 +10,7 @@ import AuthProvider from '@/components/AuthProvider';
 const AdminTableItem = async ({ admin }) => {
     const session = await getServerSession(authOptions)
     const { id, subRole } = session?.user
+    const adminId = admin?.id; 
 
     return (
         <tr>
@@ -18,14 +19,17 @@ const AdminTableItem = async ({ admin }) => {
             <td>{admin?.email}</td>
 
             {
-                subRole === 'super admin' &&
+                (subRole === 'super admin' && admin.subRole !== 'super admin')
+                ? 
                 <AuthProvider>
                     <td>
-                        <DemoteAdminBtn userId={id} />
-                        <DeleteAdminBtn userId={id} />
-                        <PromoteToSuperBtn userId={id} />
+                         <DemoteAdminBtn userId={adminId}/>
+                        <DeleteAdminBtn userId={adminId}/>
+                       <PromoteToSuperBtn userId={adminId}/>
                     </td>
                 </AuthProvider>
+
+                :<td/>
             }
         </tr>
 

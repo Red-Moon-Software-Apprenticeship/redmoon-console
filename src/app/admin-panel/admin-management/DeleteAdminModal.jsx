@@ -1,10 +1,11 @@
-
+"use client"
 import React from 'react';
 import ModalLayout from '@/components/ModalLayout/ModalLayout';
 import { useErrors } from '@/hooks';
 import { createReq } from '@/lib/createReqObj';
 import { useRouter } from 'next/navigation';
 import { secureSuperAdminClientFeature } from '@/lib/secureAdminClientFeature';
+import {useSession} from 'next-auth/react';
 
 const DeleteAdminModal = ({ userId, toggleModal }) => {
     const [errors, setErrors, clearErrorsEffect, Errors] = useErrors();
@@ -18,11 +19,12 @@ const DeleteAdminModal = ({ userId, toggleModal }) => {
         }
         try {
             const response = await fetch(
-                `/api/user/delete/`, 
+                `/api/user`, 
                 createReq('DELETE', body)
             );
 
             if (response.ok) {
+                router.refresh()
                 toggleModal();
             } else {
                 throw new Error('Failed to delete user.');

@@ -5,6 +5,7 @@ import { createReq } from '@/lib/createReqObj';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { secureSuperAdminClientFeature } from '@/lib/secureAdminClientFeature';
+import '../adminpanel.css'
 
 const PromoteToSuperModal = ({ userId, toggleModal }) => {
     const [errors, setErrors, _ , Errors] = useErrors();
@@ -26,6 +27,7 @@ const PromoteToSuperModal = ({ userId, toggleModal }) => {
 
             if (response.ok) {
                 toggleModal();
+                router.refresh()
             } else {
                 throw new Error('Failed to promote to super admin.');
             }
@@ -36,9 +38,10 @@ const PromoteToSuperModal = ({ userId, toggleModal }) => {
 
     return (
         <ModalLayout toggleModal={toggleModal}>
-            <dialog open id="promote-super-admin-modal" className="admin-modal" onClick={e => e.stopPropagation()}>
+            <dialog open id="promote-admin-modal" className="admin-modal" onClick={e => e.stopPropagation()}>
                 <h2>Promote to Super Admin</h2>
                 <p>Warning: super admins are given access to the top-level permissions, be careful </p>
+                <p>NOTE ALSO, IF YOU PROMOTE SOMEONE TO SUPER ADMIN, THEY CANNOT BE DEMOTED</p>
                 <p>Are you sure you want to promote this user to a super admin?</p>
                 <button onClick={handleOnClick} className="promote-button">Promote</button>
                 <Errors errors={errors} />

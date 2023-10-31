@@ -2,6 +2,7 @@ import { updateAppr } from "@/database/users/updateAppr";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import { authOptions } from "../auth/[...nextauth]/route";
+import { generatePatchErrors } from "@/lib/sharedErrors";
 
 const PATCH = async (req) => {
 
@@ -23,13 +24,11 @@ const PATCH = async (req) => {
         const { userId } = data;
         delete data.userId;
         const updatedAppr = await updateAppr(data, userId)
-        console.log(updatedAppr)
-        return NextResponse.json({ updatedAppr }, { status: 200 })
+         return NextResponse.json({ updatedAppr }, { status: 200 })
 
     } catch (error) {
-        let err, status = 500
-        console.log(error)
-        return NextResponse.json({ err }, { status })
+        let {errors, status} = generatePatchErrors(error)
+         return NextResponse.json({ errors }, { status })
 
     }
 

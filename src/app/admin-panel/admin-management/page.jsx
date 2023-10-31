@@ -1,7 +1,7 @@
 import Layout from '@/components/Layout/Layout';
 import React from 'react';
 import { getServerSession } from 'next-auth';
-import { prisma } from '@/database';
+import { redirect } from 'next/navigation';
 import '../adminpanel.css'
 import AdminTableItem from './AdminTableItem';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';

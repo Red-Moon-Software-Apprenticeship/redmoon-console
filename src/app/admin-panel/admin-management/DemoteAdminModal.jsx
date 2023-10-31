@@ -26,6 +26,7 @@ const DemoteAdminModal = ({ userId, toggleModal }) => {
             );
 
             if (response.ok) {
+                router.refresh()
                 toggleModal();
             } else {
                 throw new Error('Failed to demote admin.');
