@@ -1,5 +1,5 @@
 import Layout from '@/components/Layout/Layout';
-import { secureAdminServerRoute } from '@/lib/secureAdminRoute';
+import { secureAdminServerRoute } from '@/lib/secureAdminServerRoute';
 import React from 'react';
 import ApprConsole from './ApprConsole';
 import Link from 'next/link';

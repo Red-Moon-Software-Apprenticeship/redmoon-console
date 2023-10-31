@@ -3,9 +3,14 @@ import React from 'react';
 import ModalLayout from '@/components/ModalLayout/ModalLayout';
 import { useErrors } from '@/hooks';
 import { createReq } from '@/lib/createReqObj';
+import { useRouter } from 'next/navigation';
+import { secureSuperAdminClientFeature } from '@/lib/secureAdminClientFeature';
 
 const DeleteAdminModal = ({ userId, toggleModal }) => {
     const [errors, setErrors, clearErrorsEffect, Errors] = useErrors();
+    const {data: session} = useSession()
+    const router = useRouter()
+    secureSuperAdminClientFeature(router, session?.user)
 
     const handleDelete = async () => {
         const body = {

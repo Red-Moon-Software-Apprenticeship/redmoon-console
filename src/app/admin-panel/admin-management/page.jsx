@@ -22,7 +22,6 @@ const AdminManagement = async () => {
 
     const admins = await findAdmins(session?.user?.id)
     const apprs = await findApprsNamesEmails()
-    
 
     return (
         <Layout>

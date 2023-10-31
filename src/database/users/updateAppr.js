@@ -9,13 +9,14 @@ export const updateAppr = async (updatedFields, userId ) =>(
     })
 )
 
-export const updateUserRole =  async(userId, role) => (
+export const updateUserRole =  async(userId, role, subRole) => (
     await prisma.user.update({
         where: {
             id: userId
         },
         data:{
-            role
+            role,
+            subRole
         }
     })
 

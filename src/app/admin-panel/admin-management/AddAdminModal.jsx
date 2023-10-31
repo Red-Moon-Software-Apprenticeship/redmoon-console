@@ -41,7 +41,8 @@ const AddAdminModal = ({ apprs, toggleModal }) => {
 
         const body = {
             id: selectedApprentice,
-            role: 'admin'
+            role: 'admin', 
+            subRole: ''
         }
 
         try {

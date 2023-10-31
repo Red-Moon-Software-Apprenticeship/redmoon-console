@@ -3,21 +3,21 @@ import ModalLayout from '@/components/ModalLayout/ModalLayout';
 import { useErrors } from '@/hooks';
 import { createReq } from '@/lib/createReqObj';
 import { useSession } from 'next-auth/react';
+import { secureSuperAdminClientFeature } from '@/lib/secureAdminClientFeature';
+import { useRouter } from 'next/navigation';
 
 const DemoteAdminModal = ({ userId, toggleModal }) => {
     const [errors, setErrors, clearErrorsEffect, Errors] = useErrors();
-    // const {data: session} = useSession()
-    // const {subRole, role} = session?.user
-
-    // if(role !== 'admin' && subRole !== 'super admin') {
-    //     return <NotPermittedModal/>
-    // }
-
+    const {data: session} = useSession()
+    const router = useRouter()
+    secureSuperAdminClientFeature(router, session?.user)
+    
     const handleDemote = async () => {
         
         const body = {
             id: userId,
             role: 'apprentice',
+            subRole: ''
         }
         try {
             const response = await fetch(
