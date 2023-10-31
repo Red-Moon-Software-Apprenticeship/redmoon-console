@@ -1,3 +1,5 @@
+import { prisma } from "../db"
+
 export const updateAppr = async (updatedFields, userId ) =>(
     await prisma.apprentice.update({
         where:{
@@ -5,4 +7,17 @@ export const updateAppr = async (updatedFields, userId ) =>(
         },
         data: updatedFields
     })
+)
+
+export const updateUserRole =  async(userId, role, subRole) => (
+    await prisma.user.update({
+        where: {
+            id: userId
+        },
+        data:{
+            role,
+            subRole
+        }
+    })
+
 )

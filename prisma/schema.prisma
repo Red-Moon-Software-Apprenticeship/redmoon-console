@@ -86,7 +86,7 @@ model Apprentice {
   firstName              String
   lastName               String
   level                  Int            @default(1)
-  user                   User           @relation("ColsOfApprentice", fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  user                   User?          @relation("ColsOfApprentice", fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   apprenticeSubscription Subscription[] @relation("SubscribedToApprentice")
   githubIssue            ApprFirstPR?    @relation("PullAuthor")
 }
@@ -97,7 +97,7 @@ model Admin {
   userId    String @unique
   firstName String
   lastName  String
-  user      User   @relation("ColsOfAdmin", fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  user      User?   @relation("ColsOfAdmin", fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
 model Company {
@@ -106,7 +106,7 @@ model Company {
   address              String
   employerSubscription Subscription[] @relation("SubscribedEmployer")
   companyIssue         Issue[]        @relation("IssuedCompany")
-  user                 User           @relation("ColsOfCompany", fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  user                 User?        @relation("ColsOfCompany", fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
 model Issue {

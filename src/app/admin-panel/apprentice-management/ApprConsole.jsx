@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import DeleteApprModal from './DeleteApprModal';
 import EditApprModal from './EditApprModal';
+import ClipBoardCopyBtn from '@/components/ClipBoardCopyBtn';
 
 
 const ApprConsole = () => {
@@ -46,12 +47,12 @@ const ApprConsole = () => {
     return (<>
         {apprs.map((appr, idx) =>
             <tr key={idx}>
-                <td className='flex-left'>{appr.firstName} {appr.lastName}</td>
+                <td className='cursor-events'>{appr.name}</td>
                 <td className='cursor-events'
-                    onClick={e => handleEmailClick(e, appr.user.email)}>
-                    {appr.user.email}
+                    onClick={e => handleEmailClick(e, appr.email)}>
+                    {appr.email}
                 </td>
-                <td> {appr.level}</td>
+                <td> {appr.apprentice[0].level}</td>
                 <td>
                     <button onClick={e => handleDelete(e, appr)}>
                         Remove
@@ -61,6 +62,12 @@ const ApprConsole = () => {
                     <button onClick={e => handleEdit(e, appr)}>
                         Edit Info
                     </button>
+                </td>
+                <td>
+                    <ClipBoardCopyBtn
+                        value={'Verification code'}
+                        copiedValue={appr.verifToken[0]?.token}
+                    />
                 </td>
             </tr>
         )}

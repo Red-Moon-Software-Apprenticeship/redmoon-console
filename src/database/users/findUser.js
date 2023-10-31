@@ -104,3 +104,41 @@ export const findUserBySlugCheck = async (urlSlug) => (
   }) 
 
 )
+
+export const findAdmins = async (userId) => (
+  await prisma.user.findMany({
+      where: {
+          role: 'admin',
+          NOT: {
+              id: userId
+          }
+      },
+      select: {
+          id: true,
+          name: true,
+          email: true,
+          subRole: true,
+      }
+  })
+)
+
+export const findCompanies = async() => (
+  await prisma.user.findMany({
+    where: {
+      role: 'company'
+    },
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      subRole: true,
+      verifToken: {
+        select: {
+          token: true
+        }
+      }
+    }
+
+  })
+
+)
