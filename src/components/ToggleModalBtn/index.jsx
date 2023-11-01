@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from 'react';
 
-const ToggleModalBtn = ({innerText, ModalComponent, modalProps }) => {
+const ToggleModalBtn = ({innerText, ModalComponent, modalProps, className ='', id=''}) => {
     const [showModal, setShowModal] = useState(false);
 
     const toggleModal = () => {
@@ -16,7 +16,10 @@ const ToggleModalBtn = ({innerText, ModalComponent, modalProps }) => {
 
     return (
         <>
-            <button onClick={handleOnClick}>
+            <button 
+                id={id}
+                className={className}
+                 onClick={handleOnClick}>
                 {innerText}
             </button>
             {showModal && <ModalComponent {...modalProps} toggleModal={toggleModal}/>}

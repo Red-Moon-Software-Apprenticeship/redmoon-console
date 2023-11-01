@@ -1,5 +1,4 @@
 import React from 'react';
-import EndPartnershipBtn from './EndPartnershipBtn'
 import ClipBoardCopyBtn from '@/components/ClipBoardCopyBtn';
 import ToggleModalBtn from '@/components/ToggleModalBtn';
 import EndPartnershipModal from './EndPartnershipModal';

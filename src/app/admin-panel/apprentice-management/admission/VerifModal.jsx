@@ -45,8 +45,8 @@ const VerifModal = ({ toggleModal, userId  }) => {
             Exit
           </button>
         </div>
-        {successMsg && <OnSuccess successMsg={successMsg}/>}
-        {!!errors.length && <Errors errors={errors}/>} 
+        <OnSuccess successMsg={successMsg}/>
+        <Errors errors={errors}/>
       </dialog>
     </ModalLayout>
   );

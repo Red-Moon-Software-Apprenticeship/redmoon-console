@@ -65,6 +65,16 @@
     cursor: pointer;
 }
 
+#admin-page-table 
+.read-only-input {
+    
+    background-color: #f1f1f1; 
+    border: 1px solid #ccc;
+    pointer-events: none;     
+    color: #a9a9a9;
+}
+
+
 /* Responsive Design for admin-page-table */
 @media screen and (max-width: 600px) {
     #admin-page-table {
