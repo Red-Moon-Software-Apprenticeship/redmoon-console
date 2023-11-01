@@ -5,8 +5,9 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { redirect } from 'next/navigation';
 import { getApplicantApprs } from '@/database/users/findUsers';
 import ApproveButton from './ApproveButton'
-import VerifModalBtn from './VerifModalBtn';
-
+import ToggleModalBtn from '@/components/ToggleModalBtn';
+import VerifModal from '@/components/UserVerificationOverride';
+import '../../adminpanel.css'
 const Admission = async () => {
 
   const session = await getServerSession(authOptions)
@@ -15,14 +16,13 @@ const Admission = async () => {
     redirect('/')
   }
   const applicants = await getApplicantApprs()
-
   return (
     <Layout>
       <h1>Approve Git Pull Requests</h1>
 
       <div className="flex-center">
 
-        <table>
+        <table id='admin-page-table'>
           <tbody>
             <tr>
               <th>Name</th>
@@ -37,10 +37,15 @@ const Admission = async () => {
                 <td>{applicant.email}</td>
                 <td>{applicant?.apprentice[0]?.githubIssue?.url}</td>
                 <td><ApproveButton userId={applicant.id} /></td>
-                <td><VerifModalBtn
-                     userId={applicant.id}
-                     emailVerified={applicant.emailVerified ? applicant.emailVerified : ""}    
-                     />
+                <td>
+                  <ToggleModalBtn
+                    innerText = {`${applicant.emailVerified ? 'Verified' : "Unverified"}`}
+                    className = {`${ applicant.emailVerified? 'read-only-input': ''}`}
+                    ModalComponent={VerifModal}
+                    modalProps={{userId: applicant.id}}
+                  /> 
+
+
                 </td>
               </tr>
 

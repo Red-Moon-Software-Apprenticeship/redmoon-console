@@ -6,8 +6,9 @@ import '../adminpanel.css'
 import AdminTableItem from './AdminTableItem';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { findAdmins } from '@/database/users/findUser';
-import AddAdminBtn from './AddAdminBtn';
 import { findApprsNamesEmails } from '@/database/users/findUsers';
+import ToggleModalBtn from '@/components/ToggleModalBtn';
+import AddAdminModal from './AddAdminModal';
 
 const AdminManagement = async () => {
 
@@ -25,7 +26,13 @@ const AdminManagement = async () => {
 
     return (
         <Layout>
-            <AddAdminBtn apprs={apprs}/>
+            <ToggleModalBtn
+                innerText={'Add New Admin'}
+                ModalComponent={AddAdminModal}
+                modalProps = {{
+                    apprs: apprs
+                }}
+            />
             <table id="admin-page-table">
                 <thead>
                     <tr>

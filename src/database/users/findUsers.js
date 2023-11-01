@@ -62,7 +62,9 @@ export const getApplicantApprs = async() => (
 await prisma.user.findMany({
         where: {
             role: 'apprentice',
-            subRole: 'unmerged issue'
+            subRole: {
+                in: ['unmerged issue', 'unverified']
+        }
         },
         select: {
             id: true,

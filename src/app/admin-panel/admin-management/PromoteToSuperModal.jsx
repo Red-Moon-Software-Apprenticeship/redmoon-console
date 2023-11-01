@@ -1,3 +1,4 @@
+"use client"
 import React from 'react';
 import ModalLayout from '@/components/ModalLayout/ModalLayout';
 import { useErrors } from '@/hooks';
