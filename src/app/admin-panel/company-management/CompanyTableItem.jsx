@@ -1,6 +1,8 @@
 import React from 'react';
 import EndPartnershipBtn from './EndPartnershipBtn'
 import ClipBoardCopyBtn from '@/components/ClipBoardCopyBtn';
+import ToggleModalBtn from '@/components/ToggleModalBtn';
+import EndPartnershipModal from './EndPartnershipModal';
 const CompanyTableItem = async ({ company }) => {
     const {name, email, id, verifToken, subRole} = company;
     return (
@@ -8,7 +10,12 @@ const CompanyTableItem = async ({ company }) => {
             <td>{name}</td>
             <td>{email}</td>
             <td>
-                {subRole !== 'unpartnered' && <EndPartnershipBtn companyId={id} />}
+                {subRole !== 'unpartnered' && 
+                <ToggleModalBtn
+                    innerText={'End Partnership'}
+                    ModalComponent={EndPartnershipModal}
+                    modalProps={{companyId: id}} 
+                />}
                 <ClipBoardCopyBtn
                         value={'Verification code'}
                         copiedValue={verifToken[0]?.token}

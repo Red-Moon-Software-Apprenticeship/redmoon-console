@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from 'react';
 
-const AbstractModalBtn = ({innerText, ModalComponent, modalProps }) => {
+const ToggleModalBtn = ({innerText, ModalComponent, modalProps }) => {
     const [showModal, setShowModal] = useState(false);
 
     const toggleModal = () => {
@@ -24,4 +24,4 @@ const AbstractModalBtn = ({innerText, ModalComponent, modalProps }) => {
     );
 };
 
-export default AbstractModalBtn;
+export default ToggleModalBtn;

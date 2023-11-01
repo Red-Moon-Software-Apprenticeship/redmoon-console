@@ -1,19 +1,8 @@
-
 import React from 'react';
-
-const useModalFactory = (innerText, ModalComponent, ...modalProps) => {
-
-  return [<AbstractModalBtn innerText={innerText} modal={<ModalComponent />} modalProps={modalProps}/>]
-};
-
-export default useModalFactory;
-
-
-import React from 'react';
-
-const useModalFactory = (innerText, ModalComponent, ...modalProps) => {
-
-  return [<AbstractModalBtn innerText={innerText} modal={<ModalComponent {...modalProps}  />}]
+import ToggleModalBtn from '@/components/ToggleModalBtn';
+export const useModalFactory = (innerText, ModalComponent, ...modalProps) => {
+  
+  return [<ToggleModalBtn innerText={innerText} modal={<ModalComponent />} modalProps={modalProps}/>]
 };
 
 export default useModalFactory;
