@@ -131,6 +131,7 @@ export const findCompanies = async() => (
       id: true,
       name: true,
       email: true,
+      emailVerified: true,
       subRole: true,
       verifToken: {
         select: {

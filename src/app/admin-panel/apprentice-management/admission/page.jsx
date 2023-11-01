@@ -6,7 +6,7 @@ import { redirect } from 'next/navigation';
 import { getApplicantApprs } from '@/database/users/findUsers';
 import ApproveButton from './ApproveButton'
 import ToggleModalBtn from '@/components/ToggleModalBtn';
-import VerifModal from './VerifModal';
+import VerifModal from '@/components/UserVerificationOverride';
 import '../../adminpanel.css'
 const Admission = async () => {
 

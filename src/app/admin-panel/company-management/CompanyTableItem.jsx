@@ -2,6 +2,8 @@ import React from 'react';
 import ClipBoardCopyBtn from '@/components/ClipBoardCopyBtn';
 import ToggleModalBtn from '@/components/ToggleModalBtn';
 import EndPartnershipModal from './EndPartnershipModal';
+import UserVerificationOverride from '@/components/UserVerificationOverride'
+
 const CompanyTableItem = async ({ company }) => {
     const {name, email, id, verifToken, subRole} = company;
     return (
@@ -19,6 +21,12 @@ const CompanyTableItem = async ({ company }) => {
                         value={'Verification code'}
                         copiedValue={verifToken[0]?.token}
                     />
+                <ToggleModalBtn
+                    innerText = {`${company.emailVerified ? 'Verified' : "Verify"}`}
+                    className = {`${ company.emailVerified? 'read-only-input': ''}`}
+                    ModalComponent={UserVerificationOverride}
+                    modalProps={{userId: id}}
+                />                
             </td>
 
 
