@@ -1,0 +1,52 @@
+#new-issue-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 500px;
+    margin: 3rem auto;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f8f9fa;
+}
+
+#new-issue-form label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+#new-issue-form input[type="text"],
+#new-issue-form textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+#new-issue-form textarea {
+    height: 150px;
+    resize: vertical;
+}
+
+#new-issue-form input[type="text"]:focus,
+#new-issue-form textarea:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 5px #28a745;
+}
+
+#new-issue-form button[type="submit"] {
+    padding: 0.7rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #28a745;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    align-self: flex-end;
+}
+
+#new-issue-form button[type="submit"]:hover {
+    background-color: #218838;
+}

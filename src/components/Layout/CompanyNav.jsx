@@ -11,6 +11,11 @@ const CompanyNav = () => {
                     History
                 </Link>
             </li>
+            <li>
+                <Link href='/new-issue'>
+                    Issues
+                </Link>
+            </li>
         </>
     );
 };
