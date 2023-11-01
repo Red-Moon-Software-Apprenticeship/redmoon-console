@@ -1,16 +1,16 @@
 import React from 'react';
-import DeleteAdminBtn from './DeleteAdminBtn';
-import DemoteAdminBtn from './DemoteAdminBtn';
-import PromoteToSuperBtn from './PromoteToSuperBtn';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import AuthProvider from '@/components/AuthProvider';
-
+import ToggleModalBtn from '@/components/ToggleModalBtn';
+import DemoteAdminModal from './DemoteAdminModal';
+import DeleteAdminModal from './DeleteAdminModal';
+import PromoteToSuperModal from './PromoteToSuperModal';
 
 const AdminTableItem = async ({ admin }) => {
     const session = await getServerSession(authOptions)
     const { id, subRole } = session?.user
-    const adminId = admin?.id; 
+    const userId = admin?.id; 
 
     return (
         <tr>
@@ -23,10 +23,23 @@ const AdminTableItem = async ({ admin }) => {
                 ? 
                 <AuthProvider>
                     <td>
-                         <DemoteAdminBtn userId={adminId}/>
-                        <DeleteAdminBtn userId={adminId}/>
-                       <PromoteToSuperBtn userId={adminId}/>
-                    </td>
+                        <ToggleModalBtn
+                            innerText = {'Edit'}
+                            ModalComponent={DemoteAdminModal}
+                            modalProps={{userId}}
+                        />
+                        <ToggleModalBtn
+                            innerText = {'Delete'}
+                            ModalComponent={DeleteAdminModal}
+                            modalProps={{userId}}
+                        />
+                        <ToggleModalBtn
+                            innerText = {'Promote'}
+                            ModalComponent={PromoteToSuperModal}
+                            modalProps={{userId}}
+                        />
+
+                   </td>
                 </AuthProvider>
 
                 :<td/>
