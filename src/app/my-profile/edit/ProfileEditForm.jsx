@@ -2,7 +2,7 @@
 import React, {useState} from 'react';
 import { useErrors, useSuccess } from '@/hooks';
 import CompanySpecificFields from './CompanySpecificFields';
-import TechStackItem from './TechStackItem';
+import TechStackItem from '@/components/TechStackItem';
 import { combineFormEntries } from '@/lib/combineFormEntries';
 import { updateUserProfile } from '@/lib/serverActions/updateUserProfile';
 import USStatesDropdown from '@/components/USStatesDropdown';

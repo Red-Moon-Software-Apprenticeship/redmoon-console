@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import './newissueform.css'
 import { useErrors, useSuccess } from '@/hooks';
 import { useRouter } from 'next/navigation';
-
+import { createIssue } from '@/lib/serverActions/createIssue';
 const NewIssueForm = ({ companyId, techStack }) => {
     const [desc, setDesc] = useState('')
     const [title, setTitle] = useState('')
@@ -14,10 +14,10 @@ const NewIssueForm = ({ companyId, techStack }) => {
     const formAction = async (formData) => {
 
         const data = Object.fromEntries(formData);
-        data['']
+        data.techStack = techStack;
+        data.companyId = companyId;
 
-        
-        const res = await formAction();
+        const res = await createIssue(data);
 
         if (res?.errors) {
             setErrors(res.errors)

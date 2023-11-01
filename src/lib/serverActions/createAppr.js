@@ -5,7 +5,7 @@ import { createUserRoleToken } from "@/database/users/createUser"
 import { createUserErrors } from "../sharedErrors"
 import { createVerifToken } from "./_createVerifReq"
 import { generateUrlSlug } from "../generateUrlSlug"
-
+import { findUserBySlugCheck } from "@/database/users/findUser"
 export const createAppr = async (formData) => {
     const data = Object.fromEntries(formData);
     const errors = await validateNewAppr(data)
@@ -18,7 +18,7 @@ export const createAppr = async (formData) => {
     try {
         const hashedPassword = await hash(password, 11)
         const name = `${firstName} ${lastName}`
-        const urlSlug = await generateUrlSlug(name)
+        const urlSlug = await generateUrlSlug(name, findUserBySlugCheck)
         const role = 'apprentice'
 
         const userData = {
