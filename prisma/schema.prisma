@@ -116,7 +116,7 @@ model Issue {
   title       String
   description String
   techStack   String[]
-  urlSlug     String
+  urlSlug     String   @unique  
   company     Company  @relation("IssuedCompany", fields: [companyId], references: [id])
   issueInvites Invite[] @relation("IssueInvite")
 }

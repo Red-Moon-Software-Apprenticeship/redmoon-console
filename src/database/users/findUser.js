@@ -154,7 +154,7 @@ export const findCompany = async (id) => (
       id: true,
       user:{
         select:{
-          techStack: true
+           techStack: true
         }
       }
     }
