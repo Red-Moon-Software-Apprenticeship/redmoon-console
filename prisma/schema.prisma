@@ -89,6 +89,7 @@ model Apprentice {
   user                   User?          @relation("ColsOfApprentice", fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   apprenticeSubscription Subscription[] @relation("SubscribedToApprentice")
   githubIssue            ApprFirstPR?    @relation("PullAuthor")
+  invites                Invite[]       @relation("InvitedAppr")
 }
 
 //The following three tables will need left joins in order to be accessed appropriately.
@@ -105,7 +106,7 @@ model Company {
   userId               String         @unique
   address              String
   employerSubscription Subscription[] @relation("SubscribedEmployer")
-  companyIssue         Issue[]        @relation("IssuedCompany")
+  issue                Issue[]        @relation("IssuedCompany")
   user                 User?        @relation("ColsOfCompany", fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
@@ -115,8 +116,19 @@ model Issue {
   title       String
   description String
   techStack   String[]
+  urlSlug     String
   company     Company  @relation("IssuedCompany", fields: [companyId], references: [id])
+  issueInvites Invite[] @relation("IssueInvite")
 }
+model Invite{
+  id        String @id @default(cuid())
+  issuerId  String
+  issueId   String
+  invitedApprId String 
+  issue     Issue @relation("IssueInvite", fields: [issueId], references: [id], onDelete: Cascade)
+  appr      Apprentice @relation("InvitedAppr", fields:[issuerId], references: [id])
+}
+
 
 model Subscription {
   id           String     @id @default(cuid())
