@@ -27,7 +27,7 @@ const Issues = async () => {
             </div>
             <ul className="issue-list">
                 {usersIssues.map((issue, idx) => (
-                    <IssueItem key={idx} issue={issue} />
+                    <IssueItem key={idx} userId={userId} issue={issue} />
                 ))}
             </ul>
             {/* Placeholder for the list of applications */}

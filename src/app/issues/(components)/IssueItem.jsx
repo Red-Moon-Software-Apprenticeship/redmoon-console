@@ -4,12 +4,12 @@ import Link from 'next/link';
 import ToggleModalBtn from '@/components/ToggleModalBtn';
 import DeleteIssueModal from './DeleteIssueModal';
 
-const IssueItem = ({ issue }) => {
-  const { title, urlSlug } = issue;
-  
+const IssueItem = ({ userId, issue }) => {
+  const { title, companyId, urlSlug, id} = issue;
+   
   return (
     <li className="issue-item flex-between">
-      <p>{issue.title}</p>
+      <p>{title}</p>
       <div>
 
           <Link href={`issues/edit-issue/${urlSlug}`}>
@@ -21,9 +21,7 @@ const IssueItem = ({ issue }) => {
         <ToggleModalBtn
           innerText={'Delete'}
           ModalComponent={DeleteIssueModal}
-          modalProps={{}}
-          id={''}
-          className={''}
+          modalProps={{issueId: id, userId}}
         /> 
       </div>
     </li>

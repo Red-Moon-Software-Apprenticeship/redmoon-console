@@ -20,7 +20,7 @@ export const createNewIssue = async (formData, companyName) => {
         
         const newIssue = await createIssue(formData);
         
-        console.log(newIssue)
+        revalid
         return newIssue;
 
     } catch (error) {
