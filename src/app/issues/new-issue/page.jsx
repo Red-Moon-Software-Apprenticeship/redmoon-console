@@ -1,7 +1,7 @@
 import React from 'react';
 import { secureAgainstAppr } from '@/lib/secureAgainstAppr';
 import Layout from '@/components/Layout/Layout';
-import NewIssueForm from '../(components)/IssueForm';
+import IssueForm from '../(components)/IssueForm';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../../api/auth/[...nextauth]/route';
 import {secureAgainstUnpartnered} from '@/lib/secureAgainstUnpartnered';
@@ -15,7 +15,7 @@ const NewIssue = async () => {
     
     return (
         <Layout>
-            <NewIssueForm
+            <IssueForm
                 companyName={session?.user?.name}
                 companyId={company.id}
                 defaultTechStack={company.user.techStack}

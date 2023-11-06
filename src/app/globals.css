@@ -8,12 +8,13 @@
 .flex-left,
 .flex-right,
 .flex-evenly,
-.sb,
+.flex-between,
 .flex-around,
 .flex-row,
 .flex-col{
     display: flex;
 }
+
 
 .flex-center{
     justify-content: center;
@@ -22,6 +23,10 @@
 
 .flex-center-hori{
     justify-content: center;
+}
+
+.flex-between{
+  justify-content: space-between;
 }
 
 .flex-left{

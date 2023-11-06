@@ -14,7 +14,7 @@ export const createNewIssue = async (formData, companyName) => {
     }
 
     try {
-        const slugPrefix = `${companyName.toLowerCase().replace(' ', '-')}-issue`
+        const slugPrefix = `${companyName.toLowerCase().replaceAll(' ', '-')}-issue`
         const urlSlug = await generateUrlSlug(slugPrefix, findIssueBySlug);
         formData.urlSlug = urlSlug;
         

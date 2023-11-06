@@ -2,15 +2,18 @@
 import React, { useState } from 'react';
 import '../issues.css'
 import { useErrors, useSuccess } from '@/hooks';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { createNewIssue } from '@/lib/serverActions/createNewIssue';
 import TechStackItem from '@/components/TechStackItem';
+import { ISSUE_MADE_PATH, ISSUE_TERMINAL_PATH } from '@/lib/constants';
 
-const IssueForm = ({ companyId, defaultTechStack, companyName }) => {
-    const [desc, setDesc] = useState('')
-    const [title, setTitle] = useState('')
+const IssueForm = ({ companyId, defaultTechStack, companyName, issue= null}) => {
+    const pathname = usePathname();
+    const isEdit = pathname.includes('/edit-issue/');
+    const [desc, setDesc] = useState(isEdit ? issue?.description : '')
+    const [title, setTitle] = useState(isEdit ? issue?.title : '')
     const [techStackEntry, setTechStackEntry] = useState('')
-    const [techStack, setTechStack] = useState(defaultTechStack)
+    const [techStack, setTechStack] = useState(isEdit ? issue?.techStack : defaultTechStack)
     const [errors, setErrors, clearErrorsEffect, Errors] = useErrors()
     const [successMsg, setSuccessMsg, OnSuccess] = useSuccess()
 
@@ -31,22 +34,23 @@ const IssueForm = ({ companyId, defaultTechStack, companyName }) => {
         return data;
     }
 
-
     const formAction = async (formData) => {
 
         const data = createRequestBody(Object.fromEntries(formData));
         
-        const res = await createNewIssue(data, companyName);
+        const res = isEdit
+        ? await editIssue(data, issue?.issueId)   
+        : await createNewIssue(data, companyName);
 
         if (res?.errors) {
             setErrors(res.errors)
             return
 
         } else {
-            setSuccessMsg('Succesfully created your issue')
+            setSuccessMsg(`Succesfully ${isEdit ? 'edited' : 'created'} your issue`)
             setTimeout(() => {
-                router.push('/new-issue/next-steps')
-            }, 2000)
+                router.push(isEdit ? ISSUE_TERMINAL_PATH : ISSUE_MADE_PATH)
+            }, 1000)
         }
     };
 
@@ -65,7 +69,7 @@ const IssueForm = ({ companyId, defaultTechStack, companyName }) => {
                     value={title}
                     onChange={e => setTitle(e.target.value)}
                 />
-                <div>
+                <div onClick={e => e.stopPropagation()}>
                     {techStack.map((tech, idx) =>
                         <TechStackItem techStack={techStack} tech={tech}
                             key={idx}
@@ -100,8 +104,10 @@ const IssueForm = ({ companyId, defaultTechStack, companyName }) => {
                     onChange={e => setDesc(e.target.value)}
                 />
 
-
-                <button type="submit">Create Issue</button>
+                <button type="submit">
+                    {isEdit ? 'Edit ' : 'Create '}
+                     Issue
+                </button>
             </form>
             <OnSuccess successMsg={successMsg} />
             <Errors errors={errors} />

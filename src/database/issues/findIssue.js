@@ -19,3 +19,11 @@ export const findIssueBySlug = (urlSlug) => prisma.issue.findUnique({
         }
     }
 });
+
+export const findIssueForEdit = async (urlSlug) => 
+  await prisma.$queryRaw`
+  SELECT "Company"."id" AS "companyId", "Issue"."id", 
+  "Issue"."title", "Issue"."description", "Issue"."techStack"
+  FROM "Issue"
+  JOIN "Company" ON "Issue"."companyId" = "Company"."id"
+  WHERE "Issue"."urlSlug" = ${urlSlug};`
