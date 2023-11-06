@@ -12,7 +12,7 @@ const CompanyNav = () => {
                 </Link>
             </li>
             <li>
-                <Link href='/new-issue'>
+                <Link href='/issues'>
                     Issues
                 </Link>
             </li>

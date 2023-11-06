@@ -50,3 +50,38 @@
 #new-issue-form button[type="submit"]:hover {
     background-color: #218838;
 }
+
+.issue-list,
+.application-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.issue-item,
+.application-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 4px;
+}
+
+.issue-item button,
+.application-item button {
+    margin-right: 1rem;
+}
+
+.button-new-issue {
+    background-color: #007bff;
+    color: #fff;
+    padding: 0.7rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 2rem;
+}
+
+.button-new-issue:hover {
+    background-color: #0069d9;
+}

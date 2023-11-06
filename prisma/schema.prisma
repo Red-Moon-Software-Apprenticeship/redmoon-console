@@ -64,7 +64,7 @@ model User {
   urlSlug        String                @unique
   admin          Admin[]               @relation("ColsOfAdmin")
   apprentice     Apprentice[]          @relation("ColsOfApprentice")
-  company        Company[]             @relation("ColsOfCompany")
+  company        Company?             
   verifToken     VerificationRequest[] @relation("VerificationToken")
 }
 
@@ -107,7 +107,7 @@ model Company {
   address              String
   employerSubscription Subscription[] @relation("SubscribedEmployer")
   issue                Issue[]        @relation("IssuedCompany")
-  user                 User?        @relation("ColsOfCompany", fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  user                 User?        @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
 model Issue {

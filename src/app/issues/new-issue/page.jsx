@@ -1,9 +1,9 @@
 import React from 'react';
 import { secureAgainstAppr } from '@/lib/secureAgainstAppr';
 import Layout from '@/components/Layout/Layout';
-import NewIssueForm from './NewIssueForm';
+import NewIssueForm from '../(components)/IssueForm';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '../api/auth/[...nextauth]/route';
+import { authOptions } from '../../api/auth/[...nextauth]/route';
 import {secureAgainstUnpartnered} from '@/lib/secureAgainstUnpartnered';
 import { findCompany } from '@/database/users/findUser';
 

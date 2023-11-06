@@ -1,12 +1,12 @@
 "use client"
 import React, { useState } from 'react';
-import './newissueform.css'
+import '../issues.css'
 import { useErrors, useSuccess } from '@/hooks';
 import { useRouter } from 'next/navigation';
 import { createNewIssue } from '@/lib/serverActions/createNewIssue';
 import TechStackItem from '@/components/TechStackItem';
 
-const NewIssueForm = ({ companyId, defaultTechStack, companyName }) => {
+const IssueForm = ({ companyId, defaultTechStack, companyName }) => {
     const [desc, setDesc] = useState('')
     const [title, setTitle] = useState('')
     const [techStackEntry, setTechStackEntry] = useState('')
@@ -109,4 +109,4 @@ const NewIssueForm = ({ companyId, defaultTechStack, companyName }) => {
     );
 };
 
-export default NewIssueForm;
+export default IssueForm;
