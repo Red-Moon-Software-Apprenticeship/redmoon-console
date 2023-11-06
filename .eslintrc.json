@@ -1,6 +1,7 @@
 {
   "extends": "next/core-web-vitals",
   "rules": {
-    "quotes": "off"
+    "quotes": "off",
+    "no-useless-escape": "off"
   }
 }
