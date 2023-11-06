@@ -3,7 +3,7 @@ import OnSuccess from "@/components/OnSuccess"
 
 export const useSuccess = () => {
     const [successMsg, setSuccessMsg] = useState('')
-    const clearSuccess = (dependencies = [], time = 2000) => ( useEffect(()=>{
+    const useClearSuccess = (dependencies = [], time = 2000) => ( useEffect(()=>{
         const timeout = setTimeout(()=> { 
             successMsg('')
         }, time)
@@ -13,6 +13,6 @@ export const useSuccess = () => {
         }
     }, dependencies))
     
-    return [successMsg, setSuccessMsg, OnSuccess, clearSuccess]
+    return [successMsg, setSuccessMsg, OnSuccess, useClearSuccess]
 
 }

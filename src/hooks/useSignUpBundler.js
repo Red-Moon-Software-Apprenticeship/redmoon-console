@@ -9,7 +9,7 @@ export const useSignUpBundler = () => {
   const [stateState, setState] = useState('')
   const [city, setCity] = useState('')
   const [successMsg, setSuccessMsg] = useState('')
-  const clearSucessMsg = ()=> (useEffect(()=>{
+  const  useClearSuccessMsg = ()=> (useEffect(()=>{
     
     let timeout;
     if(successMsg){
@@ -30,7 +30,7 @@ export const useSignUpBundler = () => {
   return ({
           getters: [password, confirm, email, stateState, city],
         setters: [setPassword, setConfirm, setEmail, setState, setCity],
-        successState: [successMsg, setSuccessMsg, clearSucessMsg]
+        successState: [successMsg, setSuccessMsg, useClearSuccessMsg]
       }
 
   ) 
