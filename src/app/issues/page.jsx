@@ -21,8 +21,8 @@ const Issues = async () => {
                 Create New Issue
             </button>
             <ul className="issue-list">
-                {usersIssues.map((issue) => (
-                    <IssueItem key={issue.id} issue={issue} />
+                {usersIssues.map((issue, idx) => (
+                    <IssueItem key={idx} issue={issue} />
                 ))}
             </ul>
             {/* Placeholder for the list of applications */}

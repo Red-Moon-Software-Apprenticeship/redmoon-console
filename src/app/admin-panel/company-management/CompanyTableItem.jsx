@@ -19,7 +19,7 @@ const CompanyTableItem = async ({ company }) => {
                 />}
                 <ClipBoardCopyBtn
                         value={'Verification code'}
-                        copiedValue={verifToken[0]?.token}
+                        copiedValue={verifToken?.token}
                     />
                 <ToggleModalBtn
                     innerText = {`${company.emailVerified ? 'Verified' : "Verify"}`}

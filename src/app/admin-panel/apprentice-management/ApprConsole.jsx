@@ -52,7 +52,7 @@ const ApprConsole = () => {
                     onClick={e => handleEmailClick(e, appr.email)}>
                     {appr.email}
                 </td>
-                <td> {appr.apprentice[0].level}</td>
+                <td> {appr.apprentice.level}</td>
                 <td>
                     <button onClick={e => handleDelete(e, appr)}>
                         Remove
@@ -66,7 +66,7 @@ const ApprConsole = () => {
                 <td>
                     <ClipBoardCopyBtn
                         value={'Verification code'}
-                        copiedValue={appr.verifToken[0]?.token}
+                        copiedValue={appr.verifToken?.token}
                     />
                 </td>
             </tr>

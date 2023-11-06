@@ -62,10 +62,10 @@ model User {
   techStack      String[]              @default([])
   bio            String?
   urlSlug        String                @unique
-  admin          Admin[]               @relation("ColsOfAdmin")
-  apprentice     Apprentice[]          @relation("ColsOfApprentice")
+  admin          Admin?                 
+  apprentice     Apprentice?            
   company        Company?             
-  verifToken     VerificationRequest[] @relation("VerificationToken")
+  verifToken     VerificationRequest?
 }
 
 model VerificationRequest {
@@ -75,7 +75,7 @@ model VerificationRequest {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   userId    String   @unique
-  user      User     @relation("VerificationToken", fields: [userId], references: [id], onDelete: Cascade)
+  user      User     @relation( fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([id, token])
 }
@@ -86,7 +86,7 @@ model Apprentice {
   firstName              String
   lastName               String
   level                  Int            @default(1)
-  user                   User?          @relation("ColsOfApprentice", fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  user                   User?          @relation( fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   apprenticeSubscription Subscription[] @relation("SubscribedToApprentice")
   githubIssue            ApprFirstPR?    @relation("PullAuthor")
   invites                Invite[]       @relation("InvitedAppr")
@@ -98,7 +98,7 @@ model Admin {
   userId    String @unique
   firstName String
   lastName  String
-  user      User?   @relation("ColsOfAdmin", fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  user      User?   @relation( fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
 model Company {
