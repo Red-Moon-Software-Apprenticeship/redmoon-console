@@ -7,13 +7,14 @@ import { authOptions } from '../api/auth/[...nextauth]/route';
 import { secureAgainstAppr } from '@/lib/secureAgainstAppr';
 import { secureAgainstUnpartnered } from '@/lib/secureAgainstUnpartnered';
 import IssueItem from './(components)/IssueItem';
+import { findIssuesByUserId } from '@/database/issues';
 
 const Issues = async () => {
     const session = await getServerSession(authOptions);
     await secureAgainstAppr(session);
     await secureAgainstUnpartnered(session);
     const userId = session?.user?.id;
-    const userAndIssues = await prisma.user.findUnique({ where: { id: userId }, select: { company: { select: { issue: true } } } })
+    const userAndIssues = await findIssuesByUserId(userId)
     const usersIssues = userAndIssues?.company?.issue;
 
     return (

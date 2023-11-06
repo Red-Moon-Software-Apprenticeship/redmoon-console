@@ -50,6 +50,7 @@ const IssueForm = ({ companyId, defaultTechStack, companyName, issue= null}) => 
             setSuccessMsg(`Succesfully ${isEdit ? 'edited' : 'created'} your issue`)
             setTimeout(() => {
                 router.push(isEdit ? ISSUE_TERMINAL_PATH : ISSUE_MADE_PATH)
+                router.refresh()
             }, 1000)
         }
     };

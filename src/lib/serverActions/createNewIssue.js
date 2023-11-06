@@ -7,6 +7,7 @@ import { createIssue } from "@/database/issues/createIssue";
 
 export const createNewIssue = async (formData, companyName) => {
     await secureAgainstAppr()
+
     const errors = await validateIssue(formData);
 
     if (errors.length) {
@@ -20,7 +21,7 @@ export const createNewIssue = async (formData, companyName) => {
         
         const newIssue = await createIssue(formData);
         
-        revalid
+        
         return newIssue;
 
     } catch (error) {
