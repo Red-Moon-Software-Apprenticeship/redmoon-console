@@ -79,6 +79,7 @@ export const findApprBySlug = async (urlSlug) => (
       urlSlug
     },
     select: {
+      id: true,
       name: true,
       email: true,
       image: true,
