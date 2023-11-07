@@ -16,7 +16,7 @@ const VerifModal = ({ toggleModal, userId  }) => {
     try {
 
         const verifBody = {userId, emailVerified: new Date(Date.now())}
-        const response = await fetch('/api/user/admin-override/verify', createReq('PATCH', verifBody))
+        const response = await fetch('/api/users/admin-override/verify', createReq('PATCH', verifBody))
         
         if (response.ok) {
             setSuccessMsg("User succesfully verified")

@@ -17,7 +17,7 @@ const EndPartnershipModal = ({ companyId, toggleModal }) => {
         };
         try {
             const response = await fetch(
-                `/api/user/role`, 
+                `/api/users/role`, 
                 createReq('PATCH', body)
             );
                 

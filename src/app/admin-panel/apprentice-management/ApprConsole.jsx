@@ -13,7 +13,7 @@ const ApprConsole = () => {
     const apprsState = { apprs, setApprs };
 
     useEffect(() => {
-        fetch('/api/apprentice')
+        fetch('/api/apprentices')
             .then(response => response.json())
             .then(data => setApprs(data))
             .catch(error => console.error('Error fetching apprentices:', error));

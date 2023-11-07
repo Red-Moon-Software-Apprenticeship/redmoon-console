@@ -19,7 +19,7 @@ const DeleteAdminModal = ({ userId, toggleModal }) => {
         }
         try {
             const response = await fetch(
-                `/api/user`, 
+                `/api/users`, 
                 createReq('DELETE', body)
             );
 

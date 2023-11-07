@@ -17,7 +17,7 @@ const DeleteIssueModal = ({ userId, issueId, toggleModal }) => {
         const body = { issueId, userId }
 
         try {
-            const response = await fetch(`/api/issue`, createReq('DELETE', body ));
+            const response = await fetch(`/api/issues`, createReq('DELETE', body ));
 
             if (!response.ok) {
                 throw new Error(`Failed to delete the issue: ${response.statusText}`);
