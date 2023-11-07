@@ -5,9 +5,6 @@ import {
     PrismaClientUnknownRequestError,
     PrismaClientValidationError,
     PrismaClientConcurrencyError,
-    PrismaClientKnownRequestError,
-    PrismaClientUnknownRequestError,
-    PrismaClientValidationError,
 } from "@prisma/client/runtime/library";
 
 import { NON_EXISTANCE_CODE, UNIQUE_CONSTRAINT_FAILED_CODE, VALIDATION_FAILED_CODE } from "./errorCodes";

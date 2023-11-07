@@ -72,7 +72,8 @@ header span {
   transition: background-color 0.3s ease;
 }
 
-.nav-link:hover, .nav-link:focus {
+.navbar-nav > li > a:hover,
+.navbar-nav > li > a:focus{
   background-color: #555;
   outline: none;
 }

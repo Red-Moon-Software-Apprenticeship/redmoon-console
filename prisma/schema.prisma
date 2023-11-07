@@ -129,6 +129,8 @@ model Invite{
   inviter   Company @relation("InvitingCompany", fields: [inviterId], references: [id], onDelete: Cascade)
   issue     Issue @relation("IssueInvite", fields: [issueId], references: [id], onDelete: Cascade)
   invitee      Apprentice @relation("InvitedAppr", fields:[inviteeId], references: [id], onDelete: Cascade)
+
+  @@unique([inviteeId, issueId])
 }
 
 

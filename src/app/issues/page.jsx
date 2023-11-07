@@ -14,8 +14,7 @@ const Issues = async () => {
     await secureAgainstAppr(session);
     await secureAgainstUnpartnered(session);
     const userId = session?.user?.id;
-    const userAndIssues = await findIssuesByUserId(userId)
-    const usersIssues = userAndIssues?.company?.issue;
+    const issues = await findIssuesByUserId(userId)
 
     return (
         <Layout>
@@ -27,7 +26,7 @@ const Issues = async () => {
                 </Link>
             </div>
             <ul className="issue-list">
-                {usersIssues.map((issue, idx) => (
+                {issues.map((issue, idx) => (
                     <IssueItem key={idx} userId={userId} issue={issue} />
                 ))}
             </ul>

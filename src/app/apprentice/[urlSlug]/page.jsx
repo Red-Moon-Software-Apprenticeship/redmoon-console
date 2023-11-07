@@ -5,14 +5,17 @@ import { findApprBySlug } from '@/database/users/findUser';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import GoBackBtn from '@/components/GoBackBtn';
-import InviteBtn from './InviteBtn';
+import ToggleModalBtn from '@/components/ToggleModalBtn';
+import InviteModal from './(components)/InviteModal';
+import { findIssuesByUserId } from '@/database/issues';
 
 const Profile = async ({ params }) => {
     const session = await getServerSession(authOptions);
-    const {role, subRole} = session?.user;
+    const {id: userId, role, subRole} = session?.user;
     const appr = await findApprBySlug(params.urlSlug);
     const { image, name, email, city, state, techStack, bio, id } = appr;
-
+    const issues = await findIssuesByUserId(userId)
+    
     return (
         <Layout>
             <div className='flex-right'>
@@ -25,8 +28,12 @@ const Profile = async ({ params }) => {
                 <div className="profile-right">
                     <div className='flex-left flex-align-center'>
                         <h1>{name}</h1>
-                        { role === 'company' && subRole !== 'unpartnered' &&
-                            <InviteBtn apprId={id}/> 
+                        { role !== 'apprentice' && subRole !== 'unpartnered' &&
+                            <ToggleModalBtn 
+                                innerText={'Invite'}
+                                ModalComponent={InviteModal}
+                                modalProps = {{apprId: id, inviterId: userId, issues}}
+                            />
                         }
                     </div>
                 
