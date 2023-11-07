@@ -4,10 +4,11 @@ import '../issues.css'
 import { useErrors, useSuccess } from '@/hooks';
 import { usePathname, useRouter } from 'next/navigation';
 import { createNewIssue } from '@/lib/serverActions/createNewIssue';
+import { editIssue } from '@/lib/serverActions/editIssue';
 import TechStackItem from '@/components/TechStackItem';
 import { ISSUE_MADE_PATH, ISSUE_TERMINAL_PATH } from '@/lib/constants';
 
-const IssueForm = ({ companyId, defaultTechStack, companyName, issue= null}) => {
+const IssueForm = ({ companyId, defaultTechStack, companyName, userId, issue = null }) => {
     const pathname = usePathname();
     const isEdit = pathname.includes('/edit-issue/');
     const [desc, setDesc] = useState(isEdit ? issue?.description : '')
@@ -28,7 +29,7 @@ const IssueForm = ({ companyId, defaultTechStack, companyName, issue= null}) => 
     }
 
     const createRequestBody = (data) => {
-         data.techStack = techStack;
+        data.techStack = techStack;
         data.companyId = companyId;
         delete data.techStackEntry;
         return data;
@@ -37,11 +38,12 @@ const IssueForm = ({ companyId, defaultTechStack, companyName, issue= null}) => 
     const formAction = async (formData) => {
 
         const data = createRequestBody(Object.fromEntries(formData));
-        
-        const res = isEdit
-        ? await editIssue(data, issue?.issueId)   
-        : await createNewIssue(data, companyName);
 
+        const res = isEdit
+            ? await editIssue(data, userId, issue?.id)
+            : await createNewIssue(data, userId, companyName);
+
+            
         if (res?.errors) {
             setErrors(res.errors)
             return
@@ -107,7 +109,7 @@ const IssueForm = ({ companyId, defaultTechStack, companyName, issue= null}) => 
 
                 <button type="submit">
                     {isEdit ? 'Edit ' : 'Create '}
-                     Issue
+                    Issue
                 </button>
             </form>
             <OnSuccess successMsg={successMsg} />

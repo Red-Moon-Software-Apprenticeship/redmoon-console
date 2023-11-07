@@ -19,7 +19,7 @@ const NewIssue = async () => {
                 companyName={session?.user?.name}
                 companyId={company.id}
                 defaultTechStack={company.user.techStack}
-                
+                userId = {session?.user?.id} 
             />
 
         </Layout>
