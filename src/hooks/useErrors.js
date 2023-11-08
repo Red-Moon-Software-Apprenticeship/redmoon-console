@@ -6,10 +6,10 @@ export const useErrors = () =>{
     const [errors, setErrors] = useState([])
 
 
-    const clearErrorsEffect = (...depedencies)=> (useEffect(()=> { 
+    const useClearErrorsEffect = (...depedencies)=> (useEffect(()=> { 
         setErrors([])
     }, depedencies))
 
-   return [errors, setErrors, clearErrorsEffect, Errors]
+   return [errors, setErrors, useClearErrorsEffect, Errors]
 }
 

@@ -14,7 +14,7 @@ const ApprovalButton = ({userId}) => {
       subRole: ''
     }
     try {
-      const  response = await fetch('/api/user/admin-override/apprentice/approve', createReq('PATCH', body))
+      const  response = await fetch('/api/users/admin-override/apprentice/approve', createReq('PATCH', body))
       if (response.ok) setIsApproved(!isApproved)
 
     } catch (error) {

@@ -22,7 +22,7 @@ const DemoteAdminModal = ({ userId, toggleModal }) => {
         }
         try {
             const response = await fetch(
-                `/api/user/role`, 
+                `/api/users/role`, 
                 createReq('PATCH', body)
             );
 

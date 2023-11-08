@@ -1,7 +1,7 @@
 import { prisma } from '@/database/db';
 import { findUserByEmail } from '@/database/users/findUser';
 import NextAuth from 'next-auth/next';
-import { PrismaAdapter } from '@next-auth/prisma-adapter';
+import { PrismaAdapter } from '@auth/prisma-adapter';
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google"
 import GitHubProvider from "next-auth/providers/github"

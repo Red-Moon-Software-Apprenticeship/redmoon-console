@@ -19,7 +19,7 @@ const EditApprModal = ({ appr, toggleModal, apprsState }) => {
         };
 
         try {
-            const response = await fetch(`/api/apprentice/`, createReq('PATCH', editedData));
+            const response = await fetch(`/api/apprentices/`, createReq('PATCH', editedData));
             if (response.ok) {
                 const {updatedAppr} = await response.json();
                 const updatedApprs = apprs.map(a => a.userId === appr.userId ? {...a, ...updatedAppr} : a);

@@ -22,7 +22,7 @@ const PromoteToSuperModal = ({ userId, toggleModal }) => {
         };
         try {
             const response = await fetch(
-                `/api/user/subrole/super-admin`,
+                `/api/users/subrole/super-admin`,
                 createReq('PATCH', body)
             );
 

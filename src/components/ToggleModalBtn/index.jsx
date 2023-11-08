@@ -1,5 +1,6 @@
 "use client"
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 
 const ToggleModalBtn = ({innerText, ModalComponent, modalProps, className ='', id=''}) => {
     const [showModal, setShowModal] = useState(false);
@@ -22,7 +23,12 @@ const ToggleModalBtn = ({innerText, ModalComponent, modalProps, className ='', i
                  onClick={handleOnClick}>
                 {innerText}
             </button>
-            {showModal && <ModalComponent {...modalProps} toggleModal={toggleModal}/>}
+            {showModal && 
+                createPortal(
+                    <ModalComponent {...modalProps} toggleModal={toggleModal}/>, 
+                    document.body
+                )}
+
         </>
     );
 };

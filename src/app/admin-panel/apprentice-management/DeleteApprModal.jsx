@@ -11,7 +11,7 @@ const DeleteApprModal = ({ appr, toggleModal, apprsState }) => {
         const userId = appr.userId;
 
         try {
-            const response = await fetch(`/api/user/`, createReq('DELETE', {userId}));
+            const response = await fetch(`/api/users/`, createReq('DELETE', {userId}));
             if (response.ok) {
                 const updatedApprs = apprs.filter(a => a.userId !== userId);
                 setApprs(updatedApprs);

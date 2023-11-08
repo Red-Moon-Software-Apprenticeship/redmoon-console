@@ -16,6 +16,8 @@ const Admission = async () => {
     redirect('/')
   }
   const applicants = await getApplicantApprs()
+
+
   return (
     <Layout>
       <h1>Approve Git Pull Requests</h1>
@@ -35,7 +37,7 @@ const Admission = async () => {
               <tr key={idx}>
                 <td>{applicant.name}</td>
                 <td>{applicant.email}</td>
-                <td>{applicant?.apprentice[0]?.githubIssue?.url}</td>
+                <td>{applicant?.apprentice?.githubIssue?.url}</td>
                 <td><ApproveButton userId={applicant.id} /></td>
                 <td>
                   <ToggleModalBtn

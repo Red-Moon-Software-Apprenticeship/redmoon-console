@@ -8,7 +8,7 @@ export const updateUserVerif = async (data, userId) => {
     try {
         const {role, subRole, verifToken} = await findUsersVerifAttrs(userId); 
         
-        if (token !== verifToken[0].token){
+        if (token !== verifToken?.token){
             throw new Error('invalid token')    
 
         } else if (subRole !== 'unverified'){

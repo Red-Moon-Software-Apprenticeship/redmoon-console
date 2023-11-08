@@ -22,42 +22,42 @@ export const findUsersPassword = async (userId) => (
 
   }))
 
-export const findUserProfileData = async(userId, role) => {
+export const findUserProfileData = async (userId, role) => {
 
 
 
-  if (role === 'company')  {
-    const companyData =  await findCompanyProfileData(userId)
+  if (role === 'company') {
+    const companyData = await findCompanyProfileData(userId)
     const address = companyData.address
 
-    return { ...companyData.user,address } 
- } else {
+    return { ...companyData.user, address }
+  } else {
 
-    return  await prisma.user.findUnique({
-      select :  {
+    return await prisma.user.findUnique({
+      select: {
         state: true,
         city: true,
         techStack: true,
         bio: true
       }
       ,
-      where:{ 
-        id : userId
+      where: {
+        id: userId
       }
     })
-    
+
   }
 }
 
 
-export const findCompanyProfileData = async(userId) => {
+export const findCompanyProfileData = async (userId) => {
   return await prisma.company.findUnique({
     select: {
       address: true,
-      user:{
-        select:{
+      user: {
+        select: {
           city: true,
-          state: true,    
+          state: true,
           bio: true,
           techStack: true,
         }
@@ -68,17 +68,18 @@ export const findCompanyProfileData = async(userId) => {
       userId: userId
     }
   })
-  
+
 
 
 }
 
 export const findApprBySlug = async (urlSlug) => (
   await prisma.user.findUnique({
-    where:{
+    where: {
       urlSlug
     },
-    select:{
+    select: {
+      
       name: true,
       email: true,
       image: true,
@@ -87,6 +88,11 @@ export const findApprBySlug = async (urlSlug) => (
       city: true,
       techStack: true,
       bio: true,
+      apprentice:{
+        select: { 
+          id: true,
+        }
+      }
     }
   })
 
@@ -98,31 +104,31 @@ export const findUserBySlugCheck = async (urlSlug) => (
     where: {
       urlSlug
     },
-    select:{
+    select: {
       id: true
     }
-  }) 
+  })
 
 )
 
 export const findAdmins = async (userId) => (
   await prisma.user.findMany({
-      where: {
-          role: 'admin',
-          NOT: {
-              id: userId
-          }
-      },
-      select: {
-          id: true,
-          name: true,
-          email: true,
-          subRole: true,
+    where: {
+      role: 'admin',
+      NOT: {
+        id: userId
       }
+    },
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      subRole: true,
+    }
   })
 )
 
-export const findCompanies = async() => (
+export const findCompanies = async () => (
   await prisma.user.findMany({
     where: {
       role: 'company'
@@ -140,6 +146,24 @@ export const findCompanies = async() => (
       }
     }
 
+  })
+
+)
+
+
+export const findCompany = async (id) => (
+  await prisma.company.findUnique({
+    where: {
+      userId: id
+    },
+    select: {
+      id: true,
+      user:{
+        select:{
+           techStack: true
+        }
+      }
+    }
   })
 
 )

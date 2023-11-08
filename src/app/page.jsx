@@ -1,5 +1,6 @@
 import Layout from '@/components/Layout/Layout'
 import UnderConstruction from '@/components/UnderConstruction'
+
 const Home = () => {
 
   return (
@@ -9,4 +10,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Home;

@@ -62,10 +62,10 @@ model User {
   techStack      String[]              @default([])
   bio            String?
   urlSlug        String                @unique
-  admin          Admin[]               @relation("ColsOfAdmin")
-  apprentice     Apprentice[]          @relation("ColsOfApprentice")
-  company        Company[]             @relation("ColsOfCompany")
-  verifToken     VerificationRequest[] @relation("VerificationToken")
+  admin          Admin?                 
+  apprentice     Apprentice?            
+  company        Company?             
+  verifToken     VerificationRequest?
 }
 
 model VerificationRequest {
@@ -75,7 +75,7 @@ model VerificationRequest {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   userId    String   @unique
-  user      User     @relation("VerificationToken", fields: [userId], references: [id], onDelete: Cascade)
+  user      User     @relation( fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([id, token])
 }
@@ -86,9 +86,10 @@ model Apprentice {
   firstName              String
   lastName               String
   level                  Int            @default(1)
-  user                   User?          @relation("ColsOfApprentice", fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  user                   User?          @relation( fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   apprenticeSubscription Subscription[] @relation("SubscribedToApprentice")
   githubIssue            ApprFirstPR?    @relation("PullAuthor")
+  invites                Invite[]       @relation("InvitedAppr")
 }
 
 //The following three tables will need left joins in order to be accessed appropriately.
@@ -97,7 +98,7 @@ model Admin {
   userId    String @unique
   firstName String
   lastName  String
-  user      User?   @relation("ColsOfAdmin", fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  user      User?   @relation( fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
 model Company {
@@ -105,8 +106,9 @@ model Company {
   userId               String         @unique
   address              String
   employerSubscription Subscription[] @relation("SubscribedEmployer")
-  companyIssue         Issue[]        @relation("IssuedCompany")
-  user                 User?        @relation("ColsOfCompany", fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  issue                Issue[]        @relation("IssuedCompany")
+  user                 User?        @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  sentInvites          Invite[]     @relation("InvitingCompany")
 }
 
 model Issue {
@@ -115,8 +117,22 @@ model Issue {
   title       String
   description String
   techStack   String[]
+  urlSlug     String   @unique  
   company     Company  @relation("IssuedCompany", fields: [companyId], references: [id])
+  issueInvites Invite[] @relation("IssueInvite")
 }
+model Invite{
+  id        String @id @default(cuid())
+  inviterId  String
+  issueId   String
+  inviteeId String
+  inviter   Company @relation("InvitingCompany", fields: [inviterId], references: [id], onDelete: Cascade)
+  issue     Issue @relation("IssueInvite", fields: [issueId], references: [id], onDelete: Cascade)
+  invitee      Apprentice @relation("InvitedAppr", fields:[inviteeId], references: [id], onDelete: Cascade)
+
+  @@unique([inviteeId, issueId])
+}
+
 
 model Subscription {
   id           String     @id @default(cuid())

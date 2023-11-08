@@ -5,10 +5,10 @@ import './layout.css'
 const CompanyNav = () => {
   
     return (
-        <>
+        <> 
             <li>
-                <Link href='/history'>
-                    History
+                <Link href='/issues'>
+                    Issues
                 </Link>
             </li>
         </>
