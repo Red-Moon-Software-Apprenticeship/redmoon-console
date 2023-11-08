@@ -15,3 +15,18 @@ export const secureUserRoute = async(userId, session=null) =>{
     }
     
 }
+
+export const secureUserApiRoute = async(userId, session=null) =>{
+   
+
+    if (!session){
+         session= await getServerSession(authOptions)
+    }
+
+    if (userId !== session?.user?.id){
+        return false;     
+    }
+    
+    return true;
+}
+

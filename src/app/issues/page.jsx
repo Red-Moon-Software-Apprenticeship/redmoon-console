@@ -15,6 +15,7 @@ const Issues = async () => {
     await secureAgainstUnpartnered(session);
     const userId = session?.user?.id;
     const issues = await findIssuesByUserId(userId)
+    
 
     return (
         <Layout>
@@ -29,10 +30,6 @@ const Issues = async () => {
                 {issues.map((issue, idx) => (
                     <IssueItem key={idx} userId={userId} issue={issue} />
                 ))}
-            </ul>
-            {/* Placeholder for the list of applications */}
-            <ul className="application-list">
-                {/* Map through the applications here */}
             </ul>
         </Layout>
     );

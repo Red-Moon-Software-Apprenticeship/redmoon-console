@@ -6,7 +6,11 @@ export const findIssuesByCompanyId = (companyId) => prisma.issue.findMany({
 
 export const findIssuesByUserId = async (userId) => (
     await prisma.$queryRaw`
-    SELECT "Issue".* FROM "Issue"
+    SELECT "Issue".*, COUNT("Invite"."id") AS "numInvites" FROM "Issue"
     JOIN "Company" ON "Issue"."companyId" = "Company"."id"
-    WHERE "Company"."userId" = ${userId};`
+    JOIN "Invite" ON "Issue"."id" = "Invite"."issueId"
+    WHERE "Company"."userId" = ${userId}
+    GROUP BY "Issue"."id"
+    ;`
 )
+

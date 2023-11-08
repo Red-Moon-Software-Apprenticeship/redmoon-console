@@ -6,10 +6,10 @@ import { createReq } from '@/lib/createReqObj';
 import { useRouter } from 'next/navigation';
 import ExitButton from '@/components/ExitButton';
 
-const InviteModal = ({ apprId, inviterId, issues, toggleModal }) => {
+const InviteModal = ({ apprId, companyId, issues, toggleModal, userId}) => {
     const [selectedIssue, setSelectedIssue] = useState(null);
     const [errors, setErrors, _, Errors] = useErrors();
-    const [, setSuccessMsg, OnSuccess] = useSuccess();
+    const [successMsg, setSuccessMsg, OnSuccess] = useSuccess();
     const router = useRouter();
 
     const handleIssueSelect = (e) => {
@@ -31,9 +31,10 @@ const InviteModal = ({ apprId, inviterId, issues, toggleModal }) => {
         }
 
         const body = {
-            inviterId,
+            inviterId: companyId,
             inviteeId: apprId,
-            issueId: selectedIssue.id
+            issueId: selectedIssue.id,
+            userId
         };
 
         try {
@@ -67,6 +68,7 @@ const InviteModal = ({ apprId, inviterId, issues, toggleModal }) => {
                     ))}
                 </select>
                 <button onClick={handleOnClick}>Confirm</button>
+                <OnSuccess successMsg={successMsg}/>
                 <Errors errors={errors} />
             </dialog>
         </ModalLayout>

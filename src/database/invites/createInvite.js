@@ -1,10 +1,6 @@
 import { prisma } from "../db";
 
-export const createInvite = async (inviterId, issueId, inviteeId) =>
+export const createInvite = async (data) =>
   prisma.invite.create({
-    data: {
-      inviterId,
-      issueId,
-      inviteeId,
-    },
+    data 
   });

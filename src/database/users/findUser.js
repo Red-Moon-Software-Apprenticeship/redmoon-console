@@ -79,7 +79,7 @@ export const findApprBySlug = async (urlSlug) => (
       urlSlug
     },
     select: {
-      id: true,
+      
       name: true,
       email: true,
       image: true,
@@ -88,6 +88,11 @@ export const findApprBySlug = async (urlSlug) => (
       city: true,
       techStack: true,
       bio: true,
+      apprentice:{
+        select: { 
+          id: true,
+        }
+      }
     }
   })
 

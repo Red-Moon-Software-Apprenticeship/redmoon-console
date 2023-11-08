@@ -13,9 +13,11 @@ const Profile = async ({ params }) => {
     const session = await getServerSession(authOptions);
     const {id: userId, role, subRole} = session?.user;
     const appr = await findApprBySlug(params.urlSlug);
-    const { image, name, email, city, state, techStack, bio, id } = appr;
+    const { image, name, email, city, state, techStack, bio, apprentice } = appr;
+    const apprId = apprentice?.id;
     const issues = await findIssuesByUserId(userId)
-    
+    const companyId = issues[0].companyId;
+
     return (
         <Layout>
             <div className='flex-right'>
@@ -32,7 +34,8 @@ const Profile = async ({ params }) => {
                             <ToggleModalBtn 
                                 innerText={'Invite'}
                                 ModalComponent={InviteModal}
-                                modalProps = {{apprId: id, inviterId: userId, issues}}
+                                modalProps = {{apprId, companyId, issues, userId}}
+
                             />
                         }
                     </div>
