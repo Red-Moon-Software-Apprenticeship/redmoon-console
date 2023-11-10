@@ -21,6 +21,7 @@ const users = [{
     email: "lhovee@redmoon.com",
     hashedPassword: 'Password123',
     role: "admin",
+    subRole: "super admin",
     state: "California",
     city: "Los Angeles",
     techStack: ["JavaScript", "React", "Node.js"],

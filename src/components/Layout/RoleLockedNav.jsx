@@ -11,8 +11,8 @@ const RoleLockedNav = async () => {
     const session = await getServerSession(authOptions)
     const role = session?.user?.role;
     const mapComponent = {
-        'admin': <AdminNav />,
-        'apprentice': <ApprNav />,
+    'admin': <AdminNav />,
+    'apprentice': <ApprNav />,
         'company': <CompanyNav />
     }
 

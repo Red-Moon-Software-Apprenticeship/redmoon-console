@@ -1,6 +1,6 @@
 import Layout from '@/components/Layout/Layout';
 import React from 'react';
-import { secureAdminServerRoute } from '@/lib/secureAdminRoute';
+import { secureAdminServerRoute } from '@/lib/secureAdminServerRoute';
 import Link from 'next/link';
 
 //Have an apprentice portal that specifically queries all of the apprentices

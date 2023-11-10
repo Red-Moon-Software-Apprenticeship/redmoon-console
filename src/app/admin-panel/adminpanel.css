@@ -1,0 +1,134 @@
+/* General Table Styling based on admin-page-table ID */
+#admin-page-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 0.9em;
+}
+
+#admin-page-table th,
+#admin-page-table td {
+    padding: 10px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    vertical-align: middle;
+    max-width: 300px;
+    height: auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#admin-page-table th {
+    background-color: #f4f4f4;
+    color: #333;
+    font-weight: bold;
+}
+
+#admin-page-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#admin-page-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+#admin-page-table button,
+#admin-page-table a {
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 0.8em;
+    margin: 4px 2px;
+    transition: background-color 0.3s;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+#admin-page-table button:hover,
+#admin-page-table a:hover {
+    background-color: #45a049;
+}
+
+/* Flex and Cursor Helpers */
+#admin-page-table .flex-left {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+#admin-page-table .cursor-events {
+    cursor: pointer;
+}
+
+#admin-page-table 
+.read-only-input {
+    
+    background-color: #f1f1f1; 
+    border: 1px solid #ccc;
+    pointer-events: none;     
+    color: #a9a9a9;
+}
+
+
+/* Responsive Design for admin-page-table */
+@media screen and (max-width: 600px) {
+    #admin-page-table {
+        display: block;
+        overflow-x: auto;
+    }
+}
+
+
+.admin-modal {
+    width: 400px;
+    max-width: 100%;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #fff;
+    position: relative;
+    margin: 0 auto;
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.apprentice-dropdown {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.promote-button {
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.promote-button:hover {
+    background-color: #0056b3;
+}
+
+#promote-admin-modal  p{
+    max-width: 100%;
+    text-wrap: wrap;
+}
