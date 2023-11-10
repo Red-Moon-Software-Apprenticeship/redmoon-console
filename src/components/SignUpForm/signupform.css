@@ -4,7 +4,45 @@
     justify-content: space-between;
 }
 
+/* Common Styles for both forms */
+#sign-up-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 400px;
+    margin: 2rem auto;
+}
 
+form input[type="text"],
+form input[type="password"],
+form input[type="email"] {
+    width: 50%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+
+#sign-up-form input[type="text"]:focus,
+#sign-up-form input[type="password"]:focus {
+    border-color: #007BFF;
+    box-shadow: 0 0 5px #007BFF;
+}
+
+#sign-up-form input[type="submit"] {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF;
+    color: #fff;
+    cursor: pointer;
+}
+
+#sign-up-form input[type="submit"]:hover {
+    background-color: #0056b3;
+}
 
 #pw-match{
     height:1.5rem;

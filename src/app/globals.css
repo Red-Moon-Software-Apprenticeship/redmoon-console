@@ -8,12 +8,15 @@
 .flex-left,
 .flex-right,
 .flex-evenly,
-.sb,
+.flex-between,
 .flex-around,
 .flex-row,
-.flex-col{
+.flex-col,
+.flex-align-center
+{
     display: flex;
 }
+
 
 .flex-center{
     justify-content: center;
@@ -22,6 +25,10 @@
 
 .flex-center-hori{
     justify-content: center;
+}
+
+.flex-between{
+  justify-content: space-between;
 }
 
 .flex-left{
@@ -48,6 +55,10 @@
 
 .flex-col{
     flex-direction: column;
+}
+
+.flex-align-center{
+  align-items: center;
 }
 
 .cursor-events:hover{
@@ -126,4 +137,28 @@ button, a.button {
     background-color: #7f8c8d;
     transform: scale(1.05);
   }
+ 
   
+dialog[open] {
+  border: none; 
+  border-radius: 8px; 
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); 
+  padding: 20px; 
+  background: #fff; 
+
+}
+
+dialog button, select {
+  border: 1px solid #ccc;
+  border-radius: 4px;   
+  padding: 10px 15px;   
+  margin-top: 10px;   
+  cursor: pointer;   
+  background: #f7f7f7;   
+  transition: background-color 0.3s ease; }
+
+dialog button:hover, button:focus {
+  background-color: #e7e7e7; }
+
+dialog select {
+    margin-bottom: 10px; }

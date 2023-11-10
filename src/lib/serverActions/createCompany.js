@@ -18,7 +18,7 @@ export const createCompany = async (formData) => {
     const role = 'company';
 
     try {
-        const urlSlug = await generateUrlSlug(name)
+        const urlSlug = await generateUrlSlug(name, findUserBySlugCheck)
         const hashedPassword = await hash(password, 11)
         const userData = {
             name,

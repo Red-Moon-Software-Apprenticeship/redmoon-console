@@ -25,9 +25,10 @@ const SignUpDefaults = ({ signUpState }) => {
     return (
         <>
             <div>
-                <label>Email:</label>
+                <label htmlFor='email'>Email:</label>
                 <input
                     type="email"
+                    id='email'
                     name="email"
                     value={email}
                     onChange={e => setEmail(e.target.value)}

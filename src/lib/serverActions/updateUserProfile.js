@@ -17,7 +17,6 @@ export const updateUserProfile = async(data, userId) => {
 
 
     } catch (error) {
-        console.log(error)
         let errors = createUserErrors(error)
 
         return {errors: errors.errors}

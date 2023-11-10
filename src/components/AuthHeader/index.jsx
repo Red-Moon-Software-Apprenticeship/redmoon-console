@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 const AuthHeader = () => {
   const {data: session} = useSession()
-
+  
   return (
     <div>
         {(session && session.user) ? <LoggedIn name={session.user.name}/> : <LoggedOut/>}     

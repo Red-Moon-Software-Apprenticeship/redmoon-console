@@ -59,3 +59,13 @@ export const updateUserProfileData = async(userId, data)=> (
     })
 
 )
+
+
+
+export const updateUserSubrole = async (userId, subRole) => (
+
+    await prisma.user.update({
+        where: { id: userId },
+        data: { subRole: subRole },
+    })
+)

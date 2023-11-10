@@ -25,7 +25,7 @@
   },
   "devDependencies": {
     "faker": "^5.5.3",
-    "prisma": "^5.3.1"
+    "prisma": "^5.5.2"
   },
   "prisma": {
     "seed": "node prisma/seed.js"

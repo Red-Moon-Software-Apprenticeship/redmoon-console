@@ -3,31 +3,34 @@ import React from 'react';
 import ModalLayout from '@/components/ModalLayout/ModalLayout';
 import { useErrors } from '@/hooks';
 import { createReq } from '@/lib/createReqObj';
-import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 import { secureSuperAdminClientFeature } from '@/lib/secureAdminClientFeature';
-import {useSession} from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
-const DeleteAdminModal = ({ userId, toggleModal }) => {
+const DemoteAdminModal = ({ userId, toggleModal }) => {
     const [errors, setErrors, clearErrorsEffect, Errors] = useErrors();
     const {data: session} = useSession()
     const router = useRouter()
     secureSuperAdminClientFeature(router, session?.user)
-
-    const handleDelete = async () => {
+    
+    const handleDemote = async () => {
+        
         const body = {
-            userId
+            id: userId,
+            role: 'apprentice',
+            subRole: ''
         }
         try {
             const response = await fetch(
-                `/api/user`, 
-                createReq('DELETE', body)
+                `/api/users/role`, 
+                createReq('PATCH', body)
             );
 
             if (response.ok) {
                 router.refresh()
                 toggleModal();
             } else {
-                throw new Error('Failed to delete user.');
+                throw new Error('Failed to demote admin.');
             }
         } catch (error) {
             setErrors([error.message]);
@@ -36,14 +39,14 @@ const DeleteAdminModal = ({ userId, toggleModal }) => {
 
     return (
         <ModalLayout toggleModal={toggleModal}>
-            <dialog open id="delete-user-modal" className="admin-modal" onClick={e => e.stopPropagation()}>
-                <h2>Delete User Account</h2>
-                <p>Are you sure you want to permanently delete this user's account?</p>
-                <button onClick={handleDelete} className="delete-button">Delete</button>
+            <dialog open id="demote-admin-modal" className="admin-modal" onClick={e => e.stopPropagation()}>
+                <h2>Demote Admin to Apprentice</h2>
+                <p>Are you sure you want to demote this admin?</p>
+                <button onClick={handleDemote} className="demote-button">Demote</button>
                 <Errors errors={errors} />
             </dialog>
         </ModalLayout>
     );
 };
 
-export default DeleteAdminModal;
+export default DemoteAdminModal;
