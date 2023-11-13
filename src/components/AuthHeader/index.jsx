@@ -1,16 +1,19 @@
-"use client"
 import React from 'react';
-import {useSession} from 'next-auth/react';
 import LoggedIn from './LoggedIn'; 
 import LoggedOut from './LoggedOut';
 import Link from 'next/link';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import AuthProvider from '../AuthProvider';
 
-const AuthHeader = () => {
-  const {data: session} = useSession()
-  
+const AuthHeader = async () => {
+  const session = await getServerSession(authOptions) 
   return (
     <div>
-        {(session && session.user) ? <LoggedIn name={session.user.name}/> : <LoggedOut/>}     
+
+        <AuthProvider>
+          {(session && session.user) ? <LoggedIn name={session.user.name}/> : <LoggedOut/>}     
+        </AuthProvider>
         {(session && session.user && session.user.subRole === 'unverified') && 
            <button className="primary">
             <Link href='/auth/verify'>

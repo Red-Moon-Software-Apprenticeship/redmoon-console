@@ -11,11 +11,6 @@ const AdminNav = () => {
                     Admin Panel
                 </Link>
             </li>
-            <li>
-                <Link href='/issues'>
-                    In House Issues
-                </Link>
-            </li>
         </>
     );
 };

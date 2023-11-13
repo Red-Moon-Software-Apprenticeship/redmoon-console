@@ -1,11 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import './layout.css'
+import { useSession } from 'next-auth/react';
 
-const ApprNav = async () => {
-    const session = await getServerSession(authOptions)
+const ApprNav =  () => {
+    const {data: session} = useSession()
     const subRole = session?.user?.subRole
     return (
         <>

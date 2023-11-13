@@ -14,9 +14,7 @@ const Header = () => {
             Red Moon Apprenticeship
           </span>
         </Link>
-        <AuthProvider>
           <AuthHeader/>
-        </AuthProvider>
     </header>
   );
 };

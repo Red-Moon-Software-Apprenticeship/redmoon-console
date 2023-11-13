@@ -1,14 +1,14 @@
+"use client"
 import React from 'react';
-import { getServerSession } from 'next-auth'
 import AdminNav from './AdminNav';
 import ApprNav from './ApprNav';
 import CompanyNav from './CompanyNav';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import Link from 'next/link';
 import './layout.css'
+import { useSession } from 'next-auth/react';
 
-const RoleLockedNav = async () => {
-    const session = await getServerSession(authOptions)
+const RoleLockedNav = () => {
+    const {data: session} = useSession()
     const role = session?.user?.role;
     const mapComponent = {
     'admin': <AdminNav />,
