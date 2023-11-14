@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import SignUpDefaults from './SignUpDefaults';
 import { createAppr } from '@/lib/serverActions';
 import { clearForm } from '@/lib/clearForm';
-import { usePathname } from 'next/navigation';
+import { redirect, usePathname } from 'next/navigation';
 import { ADMIN_ADD_APPRENTICE_PATH } from '@/lib/constants';
 import './signupform.css'
 import { useSignUpBundler, useErrors } from '@/hooks';
@@ -29,7 +29,7 @@ const ApprSignUp = ({ }) => {
         setSuccessMsg(`Sucessfully added ${firstName} ${lastName} to the database.`)
         clearForm(setFirstName, setLastName, ...signUpState.setters)
       } else {
-        signUpSubmitSideEffects(res, password) 
+        redirect("/sign-up/thank-you-appr")
       }
     }
   }

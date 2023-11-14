@@ -29,7 +29,9 @@ const CompanySignUp = () => {
         setSuccessMsg(`Successfully registered the ${name}.`);
         clearForm(setName, setAddress, ...signUpState.setters);
       } else {
-       signUpSubmitSideEffects(res, password) 
+      //  signUpSubmitSideEffects(res, password) 
+        redirect("/sign-up/thank-you-company")
+
       }
 
     }
