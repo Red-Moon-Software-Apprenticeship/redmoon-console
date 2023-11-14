@@ -10,8 +10,9 @@ import { findApprsNamesEmails } from '@/database/users/findUsers';
 import ToggleModalBtn from '@/components/ToggleModalBtn';
 import AddAdminModal from './AddAdminModal';
 
-const AdminManagement = async () => {
+export const  dynamic ='force-dynamic'
 
+const AdminManagement = async () => {
 
     const session = await getServerSession(authOptions);
     if (!session || !session.user) {

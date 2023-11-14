@@ -29,7 +29,9 @@ const CompanySignUp = () => {
         setSuccessMsg(`Successfully registered the ${name}.`);
         clearForm(setName, setAddress, ...signUpState.setters);
       } else {
-       signUpSubmitSideEffects(res, password) 
+      //  signUpSubmitSideEffects(res, password) 
+        redirect("/sign-up/thank-you-company")
+
       }
 
     }
@@ -58,7 +60,7 @@ const CompanySignUp = () => {
         </div>
 
         <div className='flex-right'>
-          <button>Submit</button>
+          <button className='sign-up-btn'>Submit</button>
         </div>
 
         <Errors errors={errors}/>

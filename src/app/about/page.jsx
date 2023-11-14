@@ -4,12 +4,11 @@ import UnderConstruction from '@/components/UnderConstruction';
 
 const About = () => {
 
-
   return (
-        <Layout>
-            <UnderConstruction/>
-        </Layout>
-  );
+    <Layout> 
+        <UnderConstruction/>
+    </Layout>
+    );
 };
 
 export default About;

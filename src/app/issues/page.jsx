@@ -9,6 +9,8 @@ import { secureAgainstUnpartnered } from '@/lib/secureAgainstUnpartnered';
 import IssueItem from './(components)/IssueItem';
 import { findIssuesByUserId } from '@/database/issues';
 
+export const dynamic = 'force-dynamic';
+
 const Issues = async () => {
     const session = await getServerSession(authOptions);
     await secureAgainstAppr(session);

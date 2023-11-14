@@ -22,13 +22,18 @@ const SignupForm = ({}) => {
         <>  
             { 
                 <>
-                    <div id='' className='flex-center flex-col'>
+                    <div id='sign-up-cont' className='flex-center flex-col'>
                         <h3>
                             You are a:
                         </h3>
                         <div>
-                            <button id='apprentice' onClick={handleSwapForm}>Apprentice</button>
-                            <button id='company' onClick={handleSwapForm}>Company</button>
+                            <button id='apprentice'
+                                className={`swap-form-btn ${role==='apprentice' && 'read-only-input'}`}
+                                onClick={handleSwapForm}>Apprentice</button>
+                            <button id='company' 
+                            className={`swap-form-btn ${role==='company' && 'read-only-input'}`}
+
+                            onClick={handleSwapForm}>Company</button>
                         </div>
                     </div>
                 

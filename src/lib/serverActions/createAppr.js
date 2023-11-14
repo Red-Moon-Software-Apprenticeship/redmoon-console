@@ -43,7 +43,10 @@ export const createAppr = async (formData) => {
         return newAppr;
 
     } catch (error) {
+        
+        console.log(error)
         const { errors } = createUserErrors(error)
+
         return { errors }
 
     }

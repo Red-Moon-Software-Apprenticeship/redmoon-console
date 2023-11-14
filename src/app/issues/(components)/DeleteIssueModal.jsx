@@ -5,6 +5,7 @@ import React from 'react';
 import { createReq } from '@/lib/createReqObj';
 import { useRouter } from 'next/navigation';
 
+
 const DeleteIssueModal = ({ userId, issueId, toggleModal }) => {
 
     const [errors, setErrors, _ , Errors] = useErrors()
@@ -44,7 +45,7 @@ const DeleteIssueModal = ({ userId, issueId, toggleModal }) => {
                     No
                 </button>
 
-                {!!errors.length && <Error errors={errors}/>}
+                {!!errors.length && <Errors errors={errors}/>}
 
             </dialog>
 

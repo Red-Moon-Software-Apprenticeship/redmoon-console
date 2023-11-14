@@ -46,7 +46,7 @@ const SignUpDefaults = ({ signUpState }) => {
                 />
             </div>
             <div className='flex-right'>
-                <button onClick={handleOnClick}>
+                <button className='sign-up-btn' onClick={handleOnClick}>
                     Show Password
                 </button>
             </div>

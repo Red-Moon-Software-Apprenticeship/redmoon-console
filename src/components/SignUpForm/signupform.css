@@ -1,4 +1,20 @@
 
+.sign-up-btn{
+    font-size: 18px;;
+
+}
+
+.swap-form-btn{
+    min-width: 10rem;
+    min-height: 1.5rem;
+    font-size: 20px;
+}
+
+#sign-up-cont h3{
+    font-size: 3rem;
+    font-weight: 300;
+}
+
 #sign-up-form div{
     display: flex;
     justify-content: space-between;

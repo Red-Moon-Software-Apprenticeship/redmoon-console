@@ -1,19 +1,18 @@
 "use client"
 import React from 'react';
-import Link from 'next/link';
 import { signIn } from 'next-auth/react';
-
+import "./authheader.css"
+import { useRouter } from 'next/navigation';
 const LoggedOut = () => {
+    const router = useRouter();
 
     return (
         <>
-            <button onClick={() => signIn()} className="primary">
+            <button onClick={() => signIn()} className="auth-button">
                 Sign in
             </button>
-            <button className="secondary">
-                <Link href='/sign-up'>
-                    Sign up
-                </Link>
+            <button className="auth-button" onClick={() => router.push('/sign-up')}>
+                Sign up
             </button>
         </>
     );

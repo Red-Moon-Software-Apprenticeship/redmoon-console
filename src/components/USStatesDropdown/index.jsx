@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './usstatesdropdown.css'
 const USStatesDropdown = ({ state, setState }) => {
     const states = [
         { code: "AL", name: "Alabama" },

@@ -8,6 +8,8 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { findCompanies } from '@/database/users/findUser';
 import Link from 'next/link';
 
+export const  dynamic ='force-dynamic'
+
 const CompanyManagement = async () => {
     const session = await getServerSession(authOptions);
     if (!session || !session.user) {

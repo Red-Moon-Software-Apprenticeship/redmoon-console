@@ -8,6 +8,9 @@ import ApproveButton from './ApproveButton'
 import ToggleModalBtn from '@/components/ToggleModalBtn';
 import VerifModal from '@/components/UserVerificationOverride';
 import '../../adminpanel.css'
+
+export const  dynamic ='force-dynamic'
+
 const Admission = async () => {
 
   const session = await getServerSession(authOptions)

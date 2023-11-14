@@ -5,7 +5,11 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  // uncomment the following two for prod
+  url = env("POSTGRES_PRISMA_URL") 
+  directUrl = env("POSTGRES_URL_NON_POOLING")
+  //uncomment for local
+  // url = env("DATABASE_URL")
 }
 
 //For Account, Session, and User, Verification Request tables explanation, see here:  https://next-auth.js.org/v3/adapters/prisma

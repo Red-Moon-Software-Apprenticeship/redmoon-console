@@ -1,0 +1,16 @@
+#home{
+    width:100%;
+}
+
+#home-photo{
+    max-width:70%;
+    max-height:80%;
+}
+
+@media screen and (max-width: 600px){
+    
+    #home-photo{
+        min-width: 90%;
+        height: auto;
+    }
+}
