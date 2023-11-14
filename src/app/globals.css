@@ -81,11 +81,14 @@ button, a.button {
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    font-weight: bold;
     cursor: pointer;
     text-decoration: none;
     transition: background-color 0.3s, transform 0.2s;
     margin: 5px;
+    border: 1px solid white;
+    color: white;
+    background-color: black;
+
   }
   
   /* Muted Button (For actions that you want to be less prominent) */
@@ -96,6 +99,5 @@ button, a.button {
   
   button.muted:hover, a.button.muted:hover {
     background-color: #7f8c8d;
-    transform: scale(1.05);
   }
   

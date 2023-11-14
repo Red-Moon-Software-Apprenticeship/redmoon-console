@@ -13,7 +13,7 @@ const NavBar = () => {
     const top = window.scrollY;
 
     if(top > navBarRef.current.offsetTop) 
-      setIsSticky(true); 
+      setIsSticky(true)
     else
       setIsSticky(false)
   };
@@ -26,9 +26,7 @@ const NavBar = () => {
     };
   }, []);
   
-  
-  console.log(window.scrollY)
-
+   
   return (
     <nav className={`navbar ${isSticky && ' sticky'}`} ref={navBarRef}>
         <ul className="navbar-nav">

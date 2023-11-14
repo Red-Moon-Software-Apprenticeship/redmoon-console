@@ -1,13 +1,12 @@
 import React from 'react';
 import './layout.css';
 import AuthHeader from '../AuthHeader';
-import AuthProvider from '../AuthProvider';
 import Link from 'next/link';
 
 const Header = () => {
 
   return (
-    <header className='flex-around'>
+    <header className='flex-between'>
         <Link href='/'>
 
           <span>

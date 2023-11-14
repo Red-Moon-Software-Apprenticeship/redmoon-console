@@ -9,7 +9,7 @@ import AuthProvider from '../AuthProvider';
 const AuthHeader = async () => {
   const session = await getServerSession(authOptions) 
   return (
-    <div>
+    <div id='auth-header-cont'>
 
         <AuthProvider>
           {(session && session.user) ? <LoggedIn name={session.user.name}/> : <LoggedOut/>}     

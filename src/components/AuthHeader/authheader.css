@@ -1,18 +1,15 @@
-
-.auth-button{
-
-  background-color: grey;
-  color: white;
-  border-radius: 50%;
-
+#auth-header-cont{
+  padding: 0;
 }
 
-.auth-button a{
-    all: unset;
+@media screen and (max-width:600px){
+    #auth-header-cont{
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+    }
+
 }
-
-/* sign-in-sign-out */
-
 .auth-button {
   position: relative;
   padding: 10px 20px;

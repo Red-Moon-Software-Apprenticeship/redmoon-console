@@ -10,16 +10,12 @@ const Home = () => {
     <Layout>
       <div id='home' className='flex-center-vert flex-col '>
         <Image
-
+          id='home-photo'
           src='/redMoonApprenticeship.png'
           alt='Graphic for the Redmoon Apprenticeship'
           width={800}
           height={750}
-          style={{
-            width: '70%',
-            height: 'auto'
-          }}
-        />
+                  />
         <UnderConstruction />
       </div>
     </Layout>

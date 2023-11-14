@@ -7,7 +7,7 @@ body, h1, h2, h3, p, ul, li {
 }
 
 main{
-  height: 85vh;
+  height: 80vh;
 }
 
 
@@ -23,7 +23,7 @@ a:hover {
 
 /* Header styles */
 header {
-  padding: 0.5rem 1rem;
+  padding: 1rem 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -125,7 +125,7 @@ footer {
   text-align: center;
   padding: 1rem 0;
   font-size: 0.875rem;
-  height: 15vh;
+  height: 10vh;
 }
 
 /* Auth styles */
